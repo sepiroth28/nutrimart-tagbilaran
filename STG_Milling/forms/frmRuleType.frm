@@ -1,11 +1,11 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmRuleType 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Rule type"
    ClientHeight    =   6585
-   ClientLeft      =   45
-   ClientTop       =   675
+   ClientLeft      =   150
+   ClientTop       =   780
    ClientWidth     =   4665
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
