@@ -422,7 +422,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim newruletype As New rule_type
-Dim newpricerule As New price_rule
+Public newpricerule As New price_rule
 
 Private Sub cboRule_type_Click()
 newruletype.load_rule_type_id (cboRule_type)

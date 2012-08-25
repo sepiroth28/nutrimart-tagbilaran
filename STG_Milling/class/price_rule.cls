@@ -30,8 +30,8 @@ Private mvarauto_apply As Integer 'local copy
 'local variable(s) to hold property value(s)
 Private mvarlast_insert_id As Integer 'local copy
 'local variable(s) to hold property value(s)
-Private mvaraffected_items As Collection 'local copy
-Private mvaraffected_customer As Collection 'local copy
+Private mvaraffected_items As New Collection 'local copy
+Private mvaraffected_customer As New Collection 'local copy
 Public Property Set affected_customer(ByVal vData As Collection)
 'used when assigning an Object to the property, on the left side of a Set statement.
 'Syntax: Set x.affected_customer = Form1
