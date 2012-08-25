@@ -17,3 +17,15 @@ Sub load_charge_type(cbo As ComboBox)
 cbo.AddItem "fixed amount"
 cbo.AddItem "percentage"
 End Sub
+
+Sub addThisCustomerToPriceRule(rule_id As Integer, customer_id As Integer)
+Dim insert As String
+insert = "INSERT INTO pricerule_customer VALUES (" & rule_id & "," & customer_id & ")"
+db.execute insert
+End Sub
+
+Sub addThisItemToPriceRule(rule_id As Integer, item_id As Integer)
+Dim insert As String
+insert = "INSERT INTO pricerule_product VALUES (" & rule_id & "," & item_id & ")"
+db.execute insert
+End Sub

@@ -161,6 +161,17 @@ sql = "INSERT INTO price_rule " & _
 db.execute (sql)
 
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
+If Me.affected_items.Count Then
+    For Each items In Me.affected_customer
+        Call addThisCustomerToPriceRule(Me.last_insert_id, items)
+    Next
+End If
+
+If Me.affected_customer.Count Then
+    For Each items In Me.affected_items
+        Call addThisItemToPriceRule(Me.last_insert_id, items)
+    Next
+End If
 End Sub
 
 Public Property Let active(ByVal vData As Boolean)
