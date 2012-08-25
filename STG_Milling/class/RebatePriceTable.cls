@@ -30,10 +30,10 @@ sql = "SELECT * FROM rebate_price_table WHERE id = " & id & " LIMIT 1"
 Set rs = db.execute(sql)
 
 If rs.RecordCount > 0 Then
-    Me.id = rs.Fields(0).Value
-    Me.qtyFrom = Val(rs.Fields("qty_from").Value)
-    Me.qtyTo = Val(rs.Fields("qty_to").Value)
-    Me.priceApplied = Val(rs.Fields("applied_price").Value)
+    Me.id = rs.Fields(0).value
+    Me.qtyFrom = Val(rs.Fields("qty_from").value)
+    Me.qtyTo = Val(rs.Fields("qty_to").value)
+    Me.priceApplied = Val(rs.Fields("applied_price").value)
 End If
 
 Set rs = Nothing

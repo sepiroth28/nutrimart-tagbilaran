@@ -22,8 +22,8 @@ Public Sub load_item_category(item_code As String)
     sql = "SELECT * FROM item_category WHERE item_code = '" & item_code & "'"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        Me.item_code = rs.Fields(0).Value
-        Me.category = rs.Fields(1).Value
+        Me.item_code = rs.Fields(0).value
+        Me.category = rs.Fields(1).value
     End If
 End Sub
 Public Sub update()

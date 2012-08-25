@@ -31,7 +31,7 @@ insert = "INSERT INTO stock_in " & _
             "" & Me.items.item_id & "," & _
             "" & Me.QtyToBeAdd & ")"
 db.execute insert
-last_id = db.execute("select last_insert_id()").Fields(0).Value
+last_id = db.execute("select last_insert_id()").Fields(0).value
 End Sub
 
 Public Property Let QtyToBeAdd(ByVal vData As Double)

@@ -14,7 +14,8 @@ Attribute VB_Exposed = False
 Attribute VB_Description = "item class"
 Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
 Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
-Attribute VB_Ext_KEY = "Member0" ,"item_category"
+Attribute VB_Ext_KEY = "Member0" ,"item_with_tracking"
+Attribute VB_Ext_KEY = "Member1" ,"item_category"
 'local variable(s) to hold property value(s)
 Private mvaritem_code As String 'local copy
 Private mvaritem_qty As Double 'local copy
@@ -203,25 +204,25 @@ Public Function load_item(item_id As Integer) As items
 '    Me.setItemId (rs.Fields("item_id").Value)
 On Error Resume Next
     With Me
-       .item_id = rs.Fields("item_id").Value
-        .item_code = rs.Fields("item_code").Value
-        .temp_item_code = rs.Fields("item_code").Value
-        .item_qty = rs.Fields("item_qty").Value
-        .date_added = rs.Fields("date_added").Value
-        .date_modified = rs.Fields("date_modified").Value
-        .manufacturers_id = rs.Fields("manufacturers_id").Value
-        .reorder_point = rs.Fields("reorder_point").Value
-        .include_in_rebate = rs.Fields("include_in_rebate").Value
-        .item_name = rs.Fields("item_name").Value
-        .item_description = rs.Fields("item_description").Value
-        .item_status = rs.Fields("status").Value
-        .unit_of_measure = rs.Fields("unit_of_measure").Value
-        .item_price = rs.Fields("item_price").Value
-        .dealers_price = rs.Fields("dealers_price").Value
+       .item_id = rs.Fields("item_id").value
+        .item_code = rs.Fields("item_code").value
+        .temp_item_code = rs.Fields("item_code").value
+        .item_qty = rs.Fields("item_qty").value
+        .date_added = rs.Fields("date_added").value
+        .date_modified = rs.Fields("date_modified").value
+        .manufacturers_id = rs.Fields("manufacturers_id").value
+        .reorder_point = rs.Fields("reorder_point").value
+        .include_in_rebate = rs.Fields("include_in_rebate").value
+        .item_name = rs.Fields("item_name").value
+        .item_description = rs.Fields("item_description").value
+        .item_status = rs.Fields("status").value
+        .unit_of_measure = rs.Fields("unit_of_measure").value
+        .item_price = rs.Fields("item_price").value
+        .dealers_price = rs.Fields("dealers_price").value
         .manufacturer.load_manufacturers (.manufacturers_id)
         .item_category.load_item_category (.item_code)
-        .item_with_tracking = rs.Fields("with_tracking").Value
-        .item_with_half_tracking = rs.Fields("with_half").Value
+        .item_with_tracking = rs.Fields("with_tracking").value
+        .item_with_half_tracking = rs.Fields("with_half").value
         '.item_with_tracking.load_item_with_tracking (.item_code)
     End With
     Set rs = Nothing
@@ -298,7 +299,7 @@ Public Sub insert()
     
     db.execute tbl_item_insert
     Dim last_id As Integer
-    last_id = Val(db.execute("select last_insert_id()").Fields(0).Value)
+    last_id = Val(db.execute("select last_insert_id()").Fields(0).value)
     
     db.execute tbl_item_desc
     db.execute tbl_items_with_tracking

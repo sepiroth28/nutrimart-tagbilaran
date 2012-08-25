@@ -1,0 +1,8 @@
+﻿SELECT sot.sales_order_no,c.customers_name,so.price,so.qty_out,so.tracking_price,sot.grand_total,sot.net_total FROM `stock_out_transaction` sot
+LEFT JOIN stock_out_transaction_stock_out_items sotsot
+ON sot.sales_order_no = sotsot.sales_order_no
+LEFT JOIN stock_out so
+ON sotsot.stockout_id = so.stockout_id
+LEFT JOIN customers c
+ON c.customers_id = responsible_customer
+where date_format(sot.delivery_date,"%Y-%m-%d") = current_date() AND so.item_id = 83

@@ -32,10 +32,10 @@ Public Function load_manufacturers(id As Integer) As manufacturers
     
     If Not rs.EOF Then
         With Me
-            .manufacturers_id = rs.Fields("manufacturers_id").Value
-            .manufacturers_name = rs.Fields("manufacturers_name").Value
-            .manufacturers_add = rs.Fields("manufacturers_add").Value
-            .manufacturers_number = rs.Fields("manufacturers_number").Value
+            .manufacturers_id = rs.Fields("manufacturers_id").value
+            .manufacturers_name = rs.Fields("manufacturers_name").value
+            .manufacturers_add = rs.Fields("manufacturers_add").value
+            .manufacturers_number = rs.Fields("manufacturers_number").value
         End With
     End If
    ' Set load_manufacturers = man

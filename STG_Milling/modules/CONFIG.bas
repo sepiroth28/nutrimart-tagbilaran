@@ -16,6 +16,9 @@ Public Const CONSUMER As String = "consumer"
 Public Const ADMIN As String = "admin"
 Public Const USER As String = "user"
 
+Public Const PRICERULE_ACTIVE_ITEM As String = "item"
+Public Const PRICERULE_ACTIVE_CUSTOMER As String = "customer"
+
 Sub initializedConfig()
 Dim file_name As String
 Dim intEmpFileNbr As Integer

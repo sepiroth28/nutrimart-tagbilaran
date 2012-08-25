@@ -409,23 +409,23 @@ Sub loadSalesOrder(sales_order_no As String)
     sql = "SELECT * from stock_out_transaction WHERE sales_order_no = '" & sales_order_no & "'"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-            Me.transaction_id = rs.Fields("sales_order_no").Value
-            Me.items_sold.load_cart (rs.Fields("sales_order_no").Value)
+            Me.transaction_id = rs.Fields("sales_order_no").value
+            Me.items_sold.load_cart (rs.Fields("sales_order_no").value)
             
         On Error Resume Next
-            If Val(rs.Fields("responsible_customer").Value) = 0 Then
+            If Val(rs.Fields("responsible_customer").value) = 0 Then
                 Me.isSoldToWalkIn = True
             Else
-                Me.sold_to.load_customers (rs.Fields("responsible_customer").Value)
+                Me.sold_to.load_customers (rs.Fields("responsible_customer").value)
             End If
             
-            Me.tendered_amount = rs.Fields("tendered_amount").Value
-            Me.change = rs.Fields("change").Value
-            Me.date_transact = rs.Fields("delivery_date").Value
-            Me.info_grand_total = rs.Fields("grand_total").Value
-            Me.info_net_total = rs.Fields("net_total").Value
-            Me.info_discount = rs.Fields("discount").Value
-            Me.prepared_by = rs.Fields("prepared_by").Value
+            Me.tendered_amount = rs.Fields("tendered_amount").value
+            Me.change = rs.Fields("change").value
+            Me.date_transact = rs.Fields("delivery_date").value
+            Me.info_grand_total = rs.Fields("grand_total").value
+            Me.info_net_total = rs.Fields("net_total").value
+            Me.info_discount = rs.Fields("discount").value
+            Me.prepared_by = rs.Fields("prepared_by").value
         Me.hasDiscount = True
     Else
         Me.hasRecord = False
@@ -447,7 +447,7 @@ Function getLastRerefenceNo() As Long
     Dim sql As String
     sql = "SELECT * FROM stock_out_reference"
     On Error Resume Next
-    getLastRerefenceNo = Val(db.execute(sql).Fields(0).Value)
+    getLastRerefenceNo = Val(db.execute(sql).Fields(0).value)
 End Function
 
 Sub printSalesReport(strpayment_type As String)

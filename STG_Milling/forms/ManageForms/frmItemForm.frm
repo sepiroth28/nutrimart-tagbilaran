@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmItemForm 
    Appearance      =   0  'Flat
    BackColor       =   &H8000000D&
@@ -123,7 +123,9 @@ Begin VB.Form frmItemForm
       End
       Begin VB.ComboBox cboCategory 
          Height          =   288
+         ItemData        =   "frmItemForm.frx":058A
          Left            =   4920
+         List            =   "frmItemForm.frx":058C
          TabIndex        =   26
          Top             =   540
          Width           =   1872
@@ -619,10 +621,10 @@ Dim new_item As New items
 Dim edit_item As New items
 
 Private Sub chkConvertibleToRetail_Click()
-    fraConvertContainer.Enabled = chkConvertibleToRetail.Value
+    fraConvertContainer.Enabled = chkConvertibleToRetail.value
 End Sub
 Function validateConversion() As Boolean
-    If chkConvertibleToRetail.Value Then
+    If chkConvertibleToRetail.value Then
         If txtAssociatedConvertedProduct.Text = "" Or txtEquivQty.Text = "" Then
             validateConversion = True
         Else
@@ -663,7 +665,7 @@ If validated Then
         .reorder_point = txtReorderPoint.Text
        
 '        .manufacturers_id = lsvManufacturers.SelectedItem.Text
-        .item_status = chkStatus.Value
+        .item_status = chkStatus.value
         
         '#####checkSql is for debugging use, this displays the sql insert statement on items and items_description table
         
@@ -681,7 +683,7 @@ If validated Then
                     .item_category.item_code = .item_code
                     .item_category.category = cboCategory.Text
                     .item_category.update
-                    If chkConvertibleToRetail.Value Then
+                    If chkConvertibleToRetail.value Then
                         Call addConvertionDetails(.item_code, txtAssociatedConvertedProduct.Text, Val(txtEquivQty.Text))
                     Else
                         Call removeConversionDetails(.item_code)
@@ -698,7 +700,7 @@ If validated Then
             .item_category.category = cboCategory.Text
             .item_category.save
             
-            If chkConvertibleToRetail.Value Then
+            If chkConvertibleToRetail.value Then
                Call addConvertionDetails(.item_code, txtAssociatedConvertedProduct.Text, Val(txtEquivQty.Text))
             End If
             
@@ -768,10 +770,10 @@ cboCategory.AddItem "Accessories"
         Dim rs As New ADODB.Recordset
         Set rs = getAssociatedItemToConvert(edit_item.item_code)
         If rs.RecordCount Then
-            chkConvertibleToRetail.Value = 1
-            activeAssociatedItemCode = rs.Fields("associated_id").Value
+            chkConvertibleToRetail.value = 1
+            activeAssociatedItemCode = rs.Fields("associated_id").value
             txtAssociatedConvertedProduct.Text = activeAssociatedItemCode
-            txtEquivQty.Text = rs.Fields("qty").Value
+            txtEquivQty.Text = rs.Fields("qty").value
         End If
         
     End If

@@ -126,7 +126,7 @@ Function Check_UserType(ByVal username As String) As String
     Set rs = db.execute(sql)
     
     If rs.RecordCount > 0 Then
-         Check_UserType = rs.Fields("user_type").Value
+         Check_UserType = rs.Fields("user_type").value
     End If
    
     
@@ -142,9 +142,9 @@ Function loadUserAccount(ByVal username As String) As User_Account
     
     Set rs = db.execute(sql)
     
-    Me.username = rs.Fields(0).Value
-    Me.Password = rs.Fields(1).Value
-    Me.user_type = rs.Fields(2).Value
+    Me.username = rs.Fields(0).value
+    Me.Password = rs.Fields(1).value
+    Me.user_type = rs.Fields(2).value
     
 End Function
 

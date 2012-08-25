@@ -89,6 +89,12 @@ Begin VB.MDIForm mdi_Inventory
       Begin VB.Menu mnu_admin_customer_visible 
          Caption         =   "Customer Visibility"
       End
+      Begin VB.Menu mnuRuletype 
+         Caption         =   "Creat Rule type"
+      End
+      Begin VB.Menu mnuprice_rule 
+         Caption         =   "Price rule"
+      End
       Begin VB.Menu mnuConvertToRetail 
          Caption         =   "Convert to Retail"
       End
@@ -112,6 +118,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub MDIForm_Load()
+'    mnuRuletype.Enabled = False
+'    mnuprice_rule.Enabled = False
     Call prepareNewTransaction
     frmMenu.Show
    ' Form1.Show
@@ -297,6 +305,14 @@ Private Sub mnuMunicipality_Click()
     editmode = False
     frmMunicipality.txtMunicipality.Enabled = False
     frmMunicipality.Show
+End Sub
+
+Private Sub mnuprice_rule_Click()
+    frmPricerule.Show 1
+End Sub
+
+Private Sub mnuRuletype_Click()
+  frmRuleType.Show 1
 End Sub
 
 Private Sub mnuSOResponsible_Click()

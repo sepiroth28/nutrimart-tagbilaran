@@ -61,7 +61,7 @@ Public Function countPaymentOfThisSale() As Integer
     sql = "SELECT COUNT(*) FROM payment_records WHERE sales_order_no = '" & Me.sales_order_no & "'"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        countPaymentOfThisSale = rs.Fields(0).Value
+        countPaymentOfThisSale = rs.Fields(0).value
     Else
         countPaymentOfThisSale = 0
     End If
@@ -103,10 +103,10 @@ Public Sub loadRemarksToListview(lsv As ListView)
         On Error Resume Next
         Do Until rs.EOF
             Set list = lsv.ListItems.Add(, , ctr)
-            list.SubItems(1) = FormatNumber(rs.Fields("amount").Value, 2)
-            list.SubItems(2) = FormatNumber(rs.Fields("balance").Value, 2)
-            list.SubItems(3) = rs.Fields("payment_date").Value
-            list.SubItems(4) = rs.Fields("received_by").Value
+            list.SubItems(1) = FormatNumber(rs.Fields("amount").value, 2)
+            list.SubItems(2) = FormatNumber(rs.Fields("balance").value, 2)
+            list.SubItems(3) = rs.Fields("payment_date").value
+            list.SubItems(4) = rs.Fields("received_by").value
         ctr = ctr + 1
         rs.MoveNext
         Loop
@@ -125,7 +125,7 @@ Function getTotalPaidOfThisSalesOrder() As Double
             "GROUP BY sales_order_no"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getTotalPaidOfThisSalesOrder = rs.Fields(0).Value
+        getTotalPaidOfThisSalesOrder = rs.Fields(0).value
     End If
 End Function
 Public Sub savePayment()
@@ -142,13 +142,13 @@ Public Sub loadPayment(id As Integer)
     sql = "SELECT * from payment_records WHERE id = " & id
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        Me.sales_order_no = rs.Fields("sales_order_no").Value
-        Me.payment_id = rs.Fields("id").Value
-        Me.amount = rs.Fields("amount").Value
-        Me.balance = rs.Fields("balance").Value
-        Me.remarks = rs.Fields("remarks").Value
-        Me.received_by = rs.Fields("received_by").Value
-        Me.active_sales.loadSalesOrder (rs.Fields("sales_order_no").Value)
+        Me.sales_order_no = rs.Fields("sales_order_no").value
+        Me.payment_id = rs.Fields("id").value
+        Me.amount = rs.Fields("amount").value
+        Me.balance = rs.Fields("balance").value
+        Me.remarks = rs.Fields("remarks").value
+        Me.received_by = rs.Fields("received_by").value
+        Me.active_sales.loadSalesOrder (rs.Fields("sales_order_no").value)
     End If
 End Sub
 
