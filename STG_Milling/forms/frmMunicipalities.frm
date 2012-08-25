@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMunicipalities 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Municipalities"
@@ -212,15 +212,15 @@ Dim sql As String
 Dim rs As New ADODB.Recordset
 Dim list As ListItem
 
-sql = "SELECT * FROM `municipalities`;"
+sql = "SELECT * FROM `municipalities`"
 Set rs = db.execute(sql)
 lsvMunicipalities.ListItems.Clear
 On Error Resume Next
 If rs.RecordCount > 0 Then
     Do Until rs.EOF
-        Set list = lsvMunicipalities.ListItems.Add(, , rs.Fields(0).Value)
-        list.SubItems(1) = rs.Fields(1).Value
-        list.SubItems(2) = rs.Fields(2).Value
+        Set list = lsvMunicipalities.ListItems.Add(, , rs.Fields(0).value)
+        list.SubItems(1) = rs.Fields(1).value
+        list.SubItems(2) = rs.Fields(2).value
     rs.MoveNext
     Loop
 End If
@@ -243,8 +243,8 @@ Set rs = db.execute(sql)
 On Error Resume Next
 If rs.RecordCount > 0 Then
     Do Until rs.EOF
-        txtMunicipalName.Text = rs.Fields(1).Value
-        txtTrackingPrice.Text = rs.Fields(2).Value
+        txtMunicipalName.Text = rs.Fields(1).value
+        txtTrackingPrice.Text = rs.Fields(2).value
     rs.MoveNext
     Loop
 End If

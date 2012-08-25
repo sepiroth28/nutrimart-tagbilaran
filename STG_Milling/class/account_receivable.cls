@@ -22,8 +22,8 @@ Public Sub load_account_receivable(sales_order_no As String)
     sql = "SELECT * from account_receivable WHERE sales_order_no = '" & sales_order_no & "' LIMIT 1"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        Me.sales_order_no = rs.Fields("sales_order_no").Value
-        Me.remarks = rs.Fields("remarks").Value
+        Me.sales_order_no = rs.Fields("sales_order_no").value
+        Me.remarks = rs.Fields("remarks").value
     End If
 End Sub
 

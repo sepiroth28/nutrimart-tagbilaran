@@ -73,7 +73,7 @@ Function insert() As Integer
     tbl_insert_customer = "INSERT INTO customers VALUES(" & Me.customers_id & ",'" & Replace(Me.customers_name, "'", "''") & "', " & _
                             "'" & Me.customers_add & "', '" & Me.customers_number & "','" & Me.dealers_type & "',0,1)"
     db.execute tbl_insert_customer
-    insert = db.execute("select last_insert_id()").Fields(0).Value
+    insert = db.execute("select last_insert_id()").Fields(0).value
 End Function
 
 Public Sub updateData()
@@ -109,18 +109,18 @@ Public Function load_customers(customers_id As Integer) As Customers
     'setCustomersID (rs.Fields("customers_id").Value)
     Set rs = db.execute(sql)
     'On Error Resume Next
-    Me.customers_id = rs.Fields(0).Value
-    Me.customers_name = rs.Fields(1).Value
-    Me.customers_add = rs.Fields(2).Value
-    Me.customers_number = rs.Fields(3).Value
-    Me.dealers_type = rs.Fields(5).Value
-    If rs.Fields(4).Value Then
-        mvaragent.load_agent (Val(rs.Fields(4).Value))
+    Me.customers_id = rs.Fields(0).value
+    Me.customers_name = rs.Fields(1).value
+    Me.customers_add = rs.Fields(2).value
+    Me.customers_number = rs.Fields(3).value
+    Me.dealers_type = rs.Fields(5).value
+    If rs.Fields(4).value Then
+        mvaragent.load_agent (Val(rs.Fields(4).value))
     Else
         Set mvaragent = Nothing
         Set mvaragent = New agent
     End If
-    Me.credit_limit = rs.Fields("credit_limit").Value
+    Me.credit_limit = rs.Fields("credit_limit").value
     
 End Function
 

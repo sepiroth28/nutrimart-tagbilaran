@@ -54,10 +54,10 @@ Public Function load_discount(discount_id As Integer) As Customers_Discount
     
     Set rs = db.execute(sql)
     
-    Me.discount_id = rs.Fields(0).Value
-    Me.discount_code = rs.Fields(1).Value
-    Me.discount_name = rs.Fields(2).Value
-    Me.discount_amount = rs.Fields(3).Value
+    Me.discount_id = rs.Fields(0).value
+    Me.discount_code = rs.Fields(1).value
+    Me.discount_name = rs.Fields(2).value
+    Me.discount_amount = rs.Fields(3).value
     
     Set rs = Nothing
     

@@ -109,3 +109,8 @@ Sub resetReturnItemsVariables()
 returnQty = 0
 AmountToDeductPerItem = 0
 End Sub
+
+Private Sub Form_Load()
+Me.Top = frmAdjustSaleTransaction.Top + 2000
+Me.Left = frmAdjustSaleTransaction.Left + 2000
+End Sub

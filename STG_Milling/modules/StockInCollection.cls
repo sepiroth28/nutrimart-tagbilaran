@@ -83,7 +83,7 @@ insert = "INSERT INTO stock_in_transaction " & _
             "'" & Me.received_by & "')"
 
 db.execute insert
-last_id = db.execute("select last_insert_id()").Fields(0).Value
+last_id = db.execute("select last_insert_id()").Fields(0).value
 
 End Sub
 
@@ -259,6 +259,6 @@ Function getLastRerefenceNo() As Integer
     sql = "SELECT * FROM stock_in_reference"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getLastRerefenceNo = Val(rs.Fields(0).Value)
+        getLastRerefenceNo = Val(rs.Fields(0).value)
     End If
 End Function

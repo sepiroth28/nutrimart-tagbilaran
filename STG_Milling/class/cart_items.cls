@@ -62,12 +62,12 @@ Sub load_cart_item(stockout_id)
     Set rs = db.execute(sql)
     On Error Resume Next
     If rs.RecordCount > 0 Then
-        Me.Item.load_item (rs.Fields("item_id").Value)
-        Me.item_price = rs.Fields("price").Value
-        Me.discount = rs.Fields("discount").Value
-        Me.tracking_price = rs.Fields("tracking_price").Value
-        Me.qty_purchased = rs.Fields("qty_out").Value
-        Me.total_price = rs.Fields("amount").Value
+        Me.Item.load_item (rs.Fields("item_id").value)
+        Me.item_price = rs.Fields("price").value
+        Me.discount = rs.Fields("discount").value
+        Me.tracking_price = rs.Fields("tracking_price").value
+        Me.qty_purchased = rs.Fields("qty_out").value
+        Me.total_price = rs.Fields("amount").value
     End If
 End Sub
 
@@ -76,7 +76,7 @@ Function saveStockout() As Integer
     Dim sql As String
     sql = "INSERT INTO stock_out VALUES (null," & Me.Item.item_id & "," & Me.qty_purchased & "," & Me.get_total_price & "," & Me.discount & "," & Me.tracking_price & "," & Me.item_price & ")"
     db.execute sql
-    saveStockout = db.execute("select last_insert_id()").Fields(0).Value
+    saveStockout = db.execute("select last_insert_id()").Fields(0).value
 End Function
 
 Public Function get_total_price() As Double

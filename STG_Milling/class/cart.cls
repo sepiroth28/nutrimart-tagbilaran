@@ -29,7 +29,7 @@ Sub load_cart(sales_order_no As String)
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
             Dim items As New cart_items
-            items.load_cart_item (rs.Fields("stockout_id").Value)
+            items.load_cart_item (rs.Fields("stockout_id").value)
             Me.Add items
         rs.MoveNext
         Loop

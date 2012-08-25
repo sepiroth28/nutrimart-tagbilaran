@@ -86,8 +86,8 @@ Public Function loadUnAssignedMunicipalities(lsv As ListView) As Boolean
     If rs.RecordCount > 0 Then
         loadUnAssignedMunicipalities = True
         Do Until rs.EOF
-           Set lst = lsv.ListItems.Add(, , rs.Fields(0).Value)
-           lst.SubItems(1) = rs.Fields(1).Value
+           Set lst = lsv.ListItems.Add(, , rs.Fields(0).value)
+           lst.SubItems(1) = rs.Fields(1).value
            
         rs.MoveNext
         Loop
@@ -107,8 +107,8 @@ Public Sub loadAssignedMunicipalities(lsv As ListView)
     Set rs = db.execute(sql)
     
         Do Until rs.EOF
-           Set lst = lsv.ListItems.Add(, , rs.Fields(0).Value)
-           lst.SubItems(1) = rs.Fields(1).Value
+           Set lst = lsv.ListItems.Add(, , rs.Fields(0).value)
+           lst.SubItems(1) = rs.Fields(1).value
         rs.MoveNext
         Loop
     
@@ -168,7 +168,7 @@ Public Function InsertAgent() As Integer
                        "'" & Me.agent_address & "')"
     
     db.execute tbl_Insert_Agent
-  Me.agent_id = db.execute("select last_insert_id()").Fields(0).Value
+  Me.agent_id = db.execute("select last_insert_id()").Fields(0).value
 End Function
 
 
@@ -186,10 +186,10 @@ Public Function load_agent(agent_id As Integer) As agent
 '    Me.setItemId (rs.Fields("item_id").Value)
 On Error Resume Next
     With Me
-        .agent_id = rs.Fields("agent_id").Value
-        .agent_name = rs.Fields("name").Value
-        .agent_address = rs.Fields("address").Value
-        .agent_contact_number = rs.Fields("mobile").Value
+        .agent_id = rs.Fields("agent_id").value
+        .agent_name = rs.Fields("name").value
+        .agent_address = rs.Fields("address").value
+        .agent_contact_number = rs.Fields("mobile").value
            
     End With
     Set rs = Nothing

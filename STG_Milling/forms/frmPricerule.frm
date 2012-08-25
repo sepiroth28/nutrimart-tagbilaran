@@ -1,23 +1,23 @@
 VERSION 5.00
 Begin VB.Form frmPricerule 
    Caption         =   "Price Rule"
-   ClientHeight    =   6165
+   ClientHeight    =   6810
    ClientLeft      =   120
    ClientTop       =   450
    ClientWidth     =   8565
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6165
+   ScaleHeight     =   6810
    ScaleWidth      =   8565
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   6195
+      Height          =   6915
       Left            =   0
-      ScaleHeight     =   6165
+      ScaleHeight     =   6885
       ScaleWidth      =   8535
-      TabIndex        =   0
+      TabIndex        =   14
       Top             =   0
       Width           =   8565
       Begin VB.CommandButton cmdCancel 
@@ -32,9 +32,9 @@ Begin VB.Form frmPricerule
             Strikethrough   =   0   'False
          EndProperty
          Height          =   735
-         Left            =   4800
-         TabIndex        =   24
-         Top             =   5190
+         Left            =   4830
+         TabIndex        =   13
+         Top             =   5910
          Width           =   1755
       End
       Begin VB.Frame Frame1 
@@ -49,14 +49,33 @@ Begin VB.Form frmPricerule
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00000080&
-         Height          =   4575
+         Height          =   4965
          Left            =   150
-         TabIndex        =   3
-         Top             =   480
+         TabIndex        =   16
+         Top             =   840
          Width           =   8235
+         Begin VB.CheckBox chkActive 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            Caption         =   "Active"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Left            =   180
+            TabIndex        =   25
+            Top             =   1950
+            Width           =   2115
+         End
          Begin VB.TextBox txtValue 
             Appearance      =   0  'Flat
-            Enabled         =   0   'False
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   9.75
@@ -68,27 +87,46 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   360
             Left            =   3930
-            TabIndex        =   15
+            TabIndex        =   4
             Top             =   1410
             Width           =   1785
          End
-         Begin VB.ComboBox cboActive 
-            Height          =   315
+         Begin VB.ComboBox cboRule_type 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Left            =   180
-            TabIndex        =   14
+            TabIndex        =   2
             Top             =   1410
             Width           =   1695
          End
          Begin VB.ComboBox cboChargetype 
-            Height          =   315
-            Left            =   2010
-            TabIndex        =   13
-            Top             =   1410
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            ItemData        =   "frmPricerule.frx":0000
+            Left            =   1980
+            List            =   "frmPricerule.frx":0002
+            TabIndex        =   3
+            Top             =   1440
             Width           =   1695
          End
          Begin VB.TextBox txtDescription 
             Appearance      =   0  'Flat
-            Enabled         =   0   'False
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   9.75
@@ -100,13 +138,12 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   435
             Left            =   3930
-            TabIndex        =   12
+            TabIndex        =   1
             Top             =   540
             Width           =   3735
          End
          Begin VB.TextBox txtName 
             Appearance      =   0  'Flat
-            Enabled         =   0   'False
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   9.75
@@ -118,13 +155,12 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   435
             Left            =   180
-            TabIndex        =   11
+            TabIndex        =   0
             Top             =   540
             Width           =   3615
          End
-         Begin VB.TextBox Text4 
+         Begin VB.TextBox txtNo_of_use 
             Appearance      =   0  'Flat
-            Enabled         =   0   'False
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   9.75
@@ -136,7 +172,7 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   360
             Left            =   5880
-            TabIndex        =   10
+            TabIndex        =   5
             Top             =   1410
             Width           =   1785
          End
@@ -144,8 +180,8 @@ Begin VB.Form frmPricerule
             Caption         =   "..."
             Height          =   492
             Left            =   3120
-            TabIndex        =   9
-            Top             =   2730
+            TabIndex        =   8
+            Top             =   3000
             Width           =   672
          End
          Begin VB.CheckBox chkAllitems 
@@ -164,8 +200,8 @@ Begin VB.Form frmPricerule
             ForeColor       =   &H80000008&
             Height          =   255
             Left            =   1410
-            TabIndex        =   8
-            Top             =   2340
+            TabIndex        =   6
+            Top             =   2610
             Width           =   2115
          End
          Begin VB.CheckBox chkSelecteditems 
@@ -185,15 +221,15 @@ Begin VB.Form frmPricerule
             Height          =   255
             Left            =   1410
             TabIndex        =   7
-            Top             =   2820
+            Top             =   3090
             Width           =   1815
          End
          Begin VB.CommandButton cmdbrowseselectedcustomers 
             Caption         =   "..."
             Height          =   495
             Left            =   3600
-            TabIndex        =   6
-            Top             =   3930
+            TabIndex        =   11
+            Top             =   4200
             Width           =   672
          End
          Begin VB.CheckBox chkAllcustomers 
@@ -212,8 +248,8 @@ Begin VB.Form frmPricerule
             ForeColor       =   &H80000008&
             Height          =   255
             Left            =   1440
-            TabIndex        =   5
-            Top             =   3510
+            TabIndex        =   9
+            Top             =   3780
             Width           =   2325
          End
          Begin VB.CheckBox chkselectedcustomers 
@@ -232,8 +268,8 @@ Begin VB.Form frmPricerule
             ForeColor       =   &H80000008&
             Height          =   255
             Left            =   1410
-            TabIndex        =   4
-            Top             =   4050
+            TabIndex        =   10
+            Top             =   4320
             Width           =   2205
          End
          Begin VB.Label txtNumberofUse 
@@ -250,7 +286,7 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   225
             Left            =   5910
-            TabIndex        =   23
+            TabIndex        =   24
             Top             =   1170
             Width           =   1485
          End
@@ -268,7 +304,7 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   225
             Left            =   3960
-            TabIndex        =   22
+            TabIndex        =   23
             Top             =   1170
             Width           =   1575
          End
@@ -286,13 +322,13 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   255
             Left            =   2010
-            TabIndex        =   21
+            TabIndex        =   22
             Top             =   1170
             Width           =   1305
          End
          Begin VB.Label Label3 
             BackStyle       =   0  'Transparent
-            Caption         =   "Active:"
+            Caption         =   "Rule type:"
             BeginProperty Font 
                Name            =   "Arial"
                Size            =   9.75
@@ -304,9 +340,9 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   225
             Left            =   180
-            TabIndex        =   20
+            TabIndex        =   21
             Top             =   1170
-            Width           =   705
+            Width           =   1005
          End
          Begin VB.Label Label2 
             BackStyle       =   0  'Transparent
@@ -322,7 +358,7 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   315
             Left            =   3960
-            TabIndex        =   19
+            TabIndex        =   20
             Top             =   300
             Width           =   1365
          End
@@ -340,7 +376,7 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   315
             Left            =   180
-            TabIndex        =   18
+            TabIndex        =   19
             Top             =   300
             Width           =   705
          End
@@ -348,8 +384,8 @@ Begin VB.Form frmPricerule
             BorderColor     =   &H00000080&
             X1              =   150
             X2              =   7680
-            Y1              =   2130
-            Y2              =   2130
+            Y1              =   2400
+            Y2              =   2400
          End
          Begin VB.Label Label9 
             BackStyle       =   0  'Transparent
@@ -365,16 +401,16 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   315
             Left            =   150
-            TabIndex        =   17
-            Top             =   2310
+            TabIndex        =   18
+            Top             =   2580
             Width           =   705
          End
          Begin VB.Line Line4 
             BorderColor     =   &H00000080&
             X1              =   150
             X2              =   7680
-            Y1              =   3330
-            Y2              =   3330
+            Y1              =   3630
+            Y2              =   3630
          End
          Begin VB.Label Label10 
             BackStyle       =   0  'Transparent
@@ -390,8 +426,8 @@ Begin VB.Form frmPricerule
             EndProperty
             Height          =   315
             Left            =   150
-            TabIndex        =   16
-            Top             =   3510
+            TabIndex        =   17
+            Top             =   3780
             Width           =   1305
          End
       End
@@ -408,16 +444,16 @@ Begin VB.Form frmPricerule
          EndProperty
          Height          =   735
          Left            =   6630
-         TabIndex        =   1
-         Top             =   5190
+         TabIndex        =   12
+         Top             =   5910
          Width           =   1755
       End
       Begin VB.Line Line1 
          BorderColor     =   &H00C0C0C0&
          X1              =   180
          X2              =   8370
-         Y1              =   420
-         Y2              =   420
+         Y1              =   540
+         Y2              =   540
       End
       Begin VB.Label Label1 
          BackStyle       =   0  'Transparent
@@ -431,10 +467,11 @@ Begin VB.Form frmPricerule
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         ForeColor       =   &H00000080&
          Height          =   495
          Left            =   180
-         TabIndex        =   2
-         Top             =   120
+         TabIndex        =   15
+         Top             =   240
          Width           =   2955
       End
    End
@@ -444,5 +481,27 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub Picture1_Click()
+Dim newruletype As New rule_type
+Private Sub cboRule_type_Click()
+newruletype.load_rule_type_id (cboRule_type)
+'MsgBox (newruletype.ruletype_id)
+End Sub
+
+Private Sub cmdSave_Click()
+Dim newpricerule As New price_rule
+    With newpricerule
+         .rule_name = txtName.Text
+         .description = txtDescription.Text
+         .rule_type_id = newruletype.ruletype_id
+         .charge_type = cboChargetype.Text
+         .value = txtValue.Text
+         .number_of_use = txtNo_of_use.Text
+         .active = chkActive.value
+         .save_price_rule
+    End With
+End Sub
+
+Private Sub Form_Load()
+Call load_rule_type(cboRule_type)
+Call load_charge_type(cboChargetype)
 End Sub
