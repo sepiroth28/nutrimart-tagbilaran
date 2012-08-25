@@ -1,4 +1,4 @@
 Line 46: Class MSComctlLib.ListView of control lsvCODList was not a loaded control class.
 Line 107: Class MSComctlLib.ListView of control lsvAffectedItems was not a loaded control class.
-Line 481: Class MSComctlLib.ListView of control lsvCustomerList was not a loaded control class.
-Line 534: Class MSComctlLib.ListView of control lsvSales was not a loaded control class.
+Line 496: Class MSComctlLib.ListView of control lsvCustomerList was not a loaded control class.
+Line 549: Class MSComctlLib.ListView of control lsvSales was not a loaded control class.
