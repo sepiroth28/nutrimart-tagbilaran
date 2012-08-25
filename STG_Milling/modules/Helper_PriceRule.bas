@@ -4,7 +4,7 @@ Dim sql As String
 Dim rs As ADODB.Recordset
 sql = "select * from rule_type order by name"
 Set rs = db.execute(sql)
-rs.MoveFirst
+
 cbo.Clear
     Do Until rs.EOF
     cbo.AddItem rs.Fields("name").value

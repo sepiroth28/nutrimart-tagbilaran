@@ -25,6 +25,73 @@ Private mvaruse_coupon_code As Boolean 'local copy
 Private mvarvalid_until As String 'local copy
 Private mvarnumber_of_use As Integer 'local copy
 Private mvaractive As Boolean 'local copy
+'local variable(s) to hold property value(s)
+Private mvarauto_apply As Integer 'local copy
+'local variable(s) to hold property value(s)
+Private mvarlast_insert_id As Integer 'local copy
+'local variable(s) to hold property value(s)
+Private mvaraffected_items As Collection 'local copy
+Private mvaraffected_customer As Collection 'local copy
+Public Property Set affected_customer(ByVal vData As Collection)
+'used when assigning an Object to the property, on the left side of a Set statement.
+'Syntax: Set x.affected_customer = Form1
+    Set mvaraffected_customer = vData
+End Property
+
+
+Public Property Get affected_customer() As Collection
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.affected_customer
+    Set affected_customer = mvaraffected_customer
+End Property
+
+
+
+Public Property Set affected_items(ByVal vData As Collection)
+'used when assigning an Object to the property, on the left side of a Set statement.
+'Syntax: Set x.affected_items = Form1
+    Set mvaraffected_items = vData
+End Property
+
+
+Public Property Get affected_items() As Collection
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.affected_items
+    Set affected_items = mvaraffected_items
+End Property
+
+
+
+Public Property Let last_insert_id(ByVal vData As Integer)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.last_insert_id = 5
+    mvarlast_insert_id = vData
+End Property
+
+
+Public Property Get last_insert_id() As Integer
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.last_insert_id
+    Set last_insert_id = mvarlast_insert_id
+End Property
+
+
+
+Public Property Let auto_apply(ByVal vData As Integer)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.auto_apply = 5
+    mvarauto_apply = vData
+End Property
+
+
+Public Property Get auto_apply() As Integer
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.auto_apply
+     auto_apply = mvarauto_apply
+End Property
+
+
+
 Public Sub enable_price_rule()
 End Sub
 
@@ -46,6 +113,7 @@ With Me
     .valid_until = rs.Fields("valid_until").value
     .number_of_use = rs.Fields("number_of_use").value
     .active = rs.Fields("active").value
+    .auto_apply = rs.Fields("auto_apply").value
 End With
 Set rs = Nothing
 End Sub
@@ -53,7 +121,6 @@ End Sub
 Public Sub update_price_rule()
 Dim update_tblprice_rule As String
  update_tblprice_rule = "UPDATE price_rule " & _
- "SET price_id=" & Me.price_id & ", " & _
  "rule_type_id=" & Me.rule_type_id & "," & _
  "name ='" & Me.rule_name & "'," & _
  "description= '" & Me.description & "'," & _
@@ -63,7 +130,8 @@ Dim update_tblprice_rule As String
  "use_coupon_code='" & Me.use_coupon_code & "'," & _
  "valid_until='" & Me.valid_until & "'," & _
  "number_of_use=" & Me.number_of_use & "," & _
- "active= " & Me.active & " where price_id=" & Me.price_id & ""
+ "auto_apply=" & Me.auto_apply & "," & _
+ "active= " & Me.active & " where pricerule_id=" & Me.price_id & ""
  
  db.execute (update_tblprice_rule)
 
@@ -77,7 +145,6 @@ End Sub
 
 Public Sub save_price_rule()
 Dim sql As String
-Dim lastInsertId As Integer
 sql = "INSERT INTO price_rule " & _
 " VALUES(NULL," & _
 "" & Me.rule_type_id & "," & _
@@ -89,10 +156,11 @@ sql = "INSERT INTO price_rule " & _
 "'" & Me.use_coupon_code & "'," & _
 "'" & Me.valid_until & "'," & _
 "" & Me.number_of_use & "," & _
-"" & Me.active & ")"
+"" & Me.active & "," & _
+"" & Me.auto_apply & ")"
 db.execute (sql)
 
-'lastInsertId = "select last_insert_id()"
+Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
 End Sub
 
 Public Property Let active(ByVal vData As Boolean)

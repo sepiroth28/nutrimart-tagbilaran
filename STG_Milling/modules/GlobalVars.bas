@@ -45,6 +45,10 @@ Public quick_create_new_customer As Boolean
 Public returnQty As Double
 Public AmountToDeductPerItem As Double
 
+'price rule
+Public active_affected_pricerule_list As String
+
+
 
 Sub resetAllGlobalVars()
 Set activeSales = New Sales

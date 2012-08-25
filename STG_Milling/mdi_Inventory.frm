@@ -118,6 +118,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub MDIForm_Load()
+'    mnuRuletype.Enabled = False
+'    mnuprice_rule.Enabled = False
     Call prepareNewTransaction
     frmMenu.Show
    ' Form1.Show
