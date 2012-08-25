@@ -90,7 +90,22 @@ Next
 End Sub
 
 Private Sub cmdSelect_Click()
+Dim list As ListItem
 
+    For Each list In lsvItemList.ListItems
+        If list.Checked = True Then
+            If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
+                frmPricerule.newpricerule.affected_items.Add list.Text
+            Else
+                frmPricerule.newpricerule.affected_customer.Add list.Text
+            End If
+        End If
+    Next
+    
+'Dim str As String
+For Each str In frmPricerule.newpricerule.affected_items
+    MsgBox str
+Next
 End Sub
 
 Private Sub Form_Load()
