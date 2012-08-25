@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManageItem 
    Appearance      =   0  'Flat
    BackColor       =   &H00000000&
@@ -99,7 +99,7 @@ Begin VB.Form frmManageItem
          Height          =   6255
          Left            =   180
          TabIndex        =   2
-         Top             =   1680
+         Top             =   1710
          Width           =   13755
          _ExtentX        =   24262
          _ExtentY        =   11033

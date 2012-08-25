@@ -17,3 +17,8 @@ Sub load_charge_type(cbo As ComboBox)
 cbo.AddItem "fixed amount"
 cbo.AddItem "percentage"
 End Sub
+
+
+Sub populate_price_rule(lsv As ListView)
+
+End Sub

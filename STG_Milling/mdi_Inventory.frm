@@ -306,7 +306,7 @@ Private Sub mnuMunicipality_Click()
 End Sub
 
 Private Sub mnuprice_rule_Click()
-    frmPricerule.Show 1
+    frmManagePriceRule.Show
 End Sub
 
 Private Sub mnuRuletype_Click()

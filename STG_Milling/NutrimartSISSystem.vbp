@@ -129,6 +129,7 @@ Form=forms\frmRuleType.frm
 Module=Helper_ruletype; modules\Helper_ruletype.bas
 Form=forms\frmPricerule_affected.frm
 Module=Helper_PriceRule; modules\Helper_PriceRule.bas
+Form=forms\frmManagePriceRule.frm
 IconForm="mdi_Inventory"
 Startup="Sub Main"
 HelpFile=""
