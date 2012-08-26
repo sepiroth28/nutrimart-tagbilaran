@@ -39,7 +39,7 @@ Function searchIfCurrentSalesIncludeInPriceRule(activeSales As Sales) As Integer
     
 End Function
 
-Sub applyActiveAutoPriceRule(so As Sales)
+Sub applyActiveAutoPriceRule()
 Dim items As New cart_items
 Dim item_rules As New Collection
 Dim customer_rules As New Collection
@@ -48,14 +48,14 @@ Set item_rules = isItemsHasPriceRule(activeSales.items_sold)
 Set customer_rules = isCustomerHasPriceRule(activeSales.sold_to.customers_id)
 
 If customer_rules.Count Then
-    For Each items In so.items_sold
+    For Each items In activeSales.items_sold
        
         Dim pricerule_ids As New Collection
         Set pricerule_ids = getPriceRuleOfThisItem(items.Item.item_id)
         If pricerule_ids.Count Then
             If pricerule_ids.Count = 1 Then
                  Dim pricerule As New price_rule
-                 pricerule.load_price_rule (Val(pricerule_ids.Item(0)))
+                 pricerule.load_price_rule (Val(pricerule_ids.Item(1)))
                  If pricerule.auto_apply Then
                     items.discount = pricerule.value
                  End If
@@ -72,9 +72,10 @@ Function isCustomerHasPriceRule(customer_id As Integer) As Collection
 Dim sql As String
 Dim rs As New ADODB.Recordset
 
-sql = "SELECT * pricerule_customer WHERE customer_id = " & customer_id & " GROUP BY price_id"
+sql = "SELECT * FROM pricerule_customer WHERE cutomer_id = " & customer_id & " GROUP BY price_id"
 Set rs = db.execute(sql)
 If rs.RecordCount Then
+    Set isCustomerHasPriceRule = New Collection
     Do Until rs.EOF
         isCustomerHasPriceRule.Add "" & rs.Fields(0).value
     rs.MoveNext
@@ -94,9 +95,10 @@ Function getPriceRuleOfThisItem(item_id As Integer) As Collection
     sql = "SELECT * FROM `pricerule_product` WHERE item_code = '" & item_id & "'"
     Set rs = db.execute(sql)
     If rs.RecordCount Then
-    getPriceRuleOfThisItem = New Collection
+    Set getPriceRuleOfThisItem = New Collection
         Do Until rs.EOF
             getPriceRuleOfThisItem.Add "" & rs.Fields(0).value
+        rs.MoveNext
         Loop
     End If
     

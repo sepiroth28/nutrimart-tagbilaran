@@ -639,7 +639,7 @@ done = False
 tenderedAmount = 0
 lblReferenceNo.Caption = activeSales.transaction_id
 
-Call applyActiveAutoPriceRule(activeSales)
+Call applyActiveAutoPriceRule
 
 Call loadActiveCartItems(lsvItems)
 lblGrandTotal.Caption = FormatCurrency(activeSales.get_total_amount + activeSales.get_discount_total, 2)
