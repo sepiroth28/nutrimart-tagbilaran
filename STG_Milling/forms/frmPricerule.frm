@@ -456,6 +456,17 @@ Private Sub cmdSave_Click()
 End Sub
 
 Private Sub Form_Load()
-Call load_rule_type(cboRule_type)
-Call load_charge_type(cboChargetype)
+If edit_price_rule = True Then
+    txtName.Text = ToEditPriceRule.rule_name
+    txtDescription.Text = ToEditPriceRule.description
+    cboRule_type.Text = ToEditPriceRule.rule_type_id
+    cboChargetype.Text = ToEditPriceRule.charge_type
+    txtValue.Text = ToEditPriceRule.value
+    txtNo_of_use.Text = ToEditPriceRule.number_of_use
+    chkActive.value = ToEditPriceRule.active
+    chkAutoApply.value = ToEditPriceRule.auto_apply
+Else
+    Call load_rule_type(cboRule_type)
+    Call load_charge_type(cboChargetype)
+End If
 End Sub

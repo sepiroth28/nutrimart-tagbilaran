@@ -24,7 +24,7 @@ Private mvarcreated_at As String 'local copy
 Private mvaruse_coupon_code As Boolean 'local copy
 Private mvarvalid_until As String 'local copy
 Private mvarnumber_of_use As Integer 'local copy
-Private mvaractive As Boolean 'local copy
+Private mvaractive As Integer 'local copy
 'local variable(s) to hold property value(s)
 Private mvarauto_apply As Integer 'local copy
 'local variable(s) to hold property value(s)
@@ -72,7 +72,7 @@ End Property
 Public Property Get last_insert_id() As Integer
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.last_insert_id
-    Set last_insert_id = mvarlast_insert_id
+    last_insert_id = mvarlast_insert_id
 End Property
 
 
@@ -99,10 +99,10 @@ Public Sub load_price_rule(price_rule_id As Integer)
 Dim sql As String
 Dim rs As ADODB.Recordset
 
-sql = "SELECT * FROM price_rule WHERE price_id=" & price_rule_id
+sql = "SELECT * FROM price_rule WHERE pricerule_id=" & price_rule_id
 Set rs = db.execute(sql)
 With Me
-    .price_id = rs.Fields("price_id").value
+    .price_id = rs.Fields("pricerule_id").value
     .rule_type_id = rs.Fields("rule_type_id").value
     .rule_name = rs.Fields("name").value
     .description = rs.Fields("description").value
@@ -163,25 +163,25 @@ db.execute (sql)
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
 If Me.affected_items.Count Then
     For Each items In Me.affected_customer
-        Call addThisCustomerToPriceRule(Me.last_insert_id, items)
+        Call addThisCustomerToPriceRule(Me.last_insert_id, Val(items))
     Next
 End If
 
 If Me.affected_customer.Count Then
     For Each items In Me.affected_items
-        Call addThisItemToPriceRule(Me.last_insert_id, items)
+        Call addThisItemToPriceRule(Me.last_insert_id, Val(items))
     Next
 End If
 End Sub
 
-Public Property Let active(ByVal vData As Boolean)
+Public Property Let active(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.active = 5
     mvaractive = vData
 End Property
 
 
-Public Property Get active() As Boolean
+Public Property Get active() As Integer
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.active
     active = mvaractive

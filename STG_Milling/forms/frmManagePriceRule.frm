@@ -229,3 +229,10 @@ If rs.RecordCount > 0 Then
     Loop
 End If
 End Sub
+
+
+Private Sub lsvPriceRuleList_DblClick()
+        ToEditPriceRule.load_price_rule (lsvPriceRuleList.SelectedItem.Text)
+    edit_price_rule = True
+    frmPricerule.Show 1
+End Sub
