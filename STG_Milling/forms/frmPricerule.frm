@@ -54,31 +54,62 @@ Begin VB.Form frmPricerule
          TabIndex        =   12
          Top             =   840
          Width           =   7905
-         Begin VB.CommandButton cmdGenerateCode 
+         Begin VB.PictureBox picCouponCode 
             Appearance      =   0  'Flat
-            Caption         =   "generate code"
-            Height          =   405
-            Left            =   6360
-            TabIndex        =   25
-            Top             =   2070
-            Width           =   1365
-         End
-         Begin VB.TextBox txtCouponCode 
-            Appearance      =   0  'Flat
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Left            =   3900
+            BackColor       =   &H00E0E0E0&
+            ForeColor       =   &H80000008&
+            Height          =   795
+            Left            =   3930
+            ScaleHeight     =   765
+            ScaleWidth      =   3765
             TabIndex        =   23
-            Top             =   2100
-            Width           =   2415
+            Top             =   1860
+            Visible         =   0   'False
+            Width           =   3795
+            Begin VB.TextBox txtCouponCode 
+               Appearance      =   0  'Flat
+               BeginProperty Font 
+                  Name            =   "MS Sans Serif"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   360
+               Left            =   90
+               TabIndex        =   25
+               Top             =   300
+               Width           =   2115
+            End
+            Begin VB.CommandButton cmdGenerateCode 
+               Appearance      =   0  'Flat
+               Caption         =   "generate code"
+               Height          =   405
+               Left            =   2310
+               TabIndex        =   24
+               Top             =   270
+               Width           =   1365
+            End
+            Begin VB.Label Label4 
+               BackStyle       =   0  'Transparent
+               Caption         =   "Coupon code"
+               BeginProperty Font 
+                  Name            =   "Arial"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   225
+               Left            =   90
+               TabIndex        =   26
+               Top             =   30
+               Width           =   1575
+            End
          End
          Begin VB.CheckBox chkAutoApply 
             Appearance      =   0  'Flat
@@ -223,38 +254,20 @@ Begin VB.Form frmPricerule
             Width           =   1785
          End
          Begin VB.CommandButton cmdbowseselecteditems 
-            Caption         =   "..."
+            Caption         =   "browse items"
             Height          =   492
-            Left            =   150
+            Left            =   1020
             TabIndex        =   6
-            Top             =   2880
-            Width           =   672
+            Top             =   2850
+            Width           =   1695
          End
          Begin VB.CommandButton cmdbrowseselectedcustomers 
-            Caption         =   "..."
+            Caption         =   "browse customer"
             Height          =   495
-            Left            =   3900
+            Left            =   4110
             TabIndex        =   7
             Top             =   2850
-            Width           =   672
-         End
-         Begin VB.Label Label4 
-            BackStyle       =   0  'Transparent
-            Caption         =   "Coupon code"
-            BeginProperty Font 
-               Name            =   "Arial"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   225
-            Left            =   3930
-            TabIndex        =   24
-            Top             =   1860
-            Width           =   1575
+            Width           =   1665
          End
          Begin VB.Label txtNumberofUse 
             BackStyle       =   0  'Transparent
@@ -368,8 +381,8 @@ Begin VB.Form frmPricerule
             BorderColor     =   &H00000080&
             X1              =   150
             X2              =   7680
-            Y1              =   2520
-            Y2              =   2520
+            Y1              =   2730
+            Y2              =   2730
          End
          Begin VB.Label Label9 
             BackStyle       =   0  'Transparent
@@ -386,7 +399,7 @@ Begin VB.Form frmPricerule
             Height          =   315
             Left            =   150
             TabIndex        =   14
-            Top             =   2580
+            Top             =   2910
             Width           =   705
          End
          Begin VB.Line Line4 
@@ -409,9 +422,9 @@ Begin VB.Form frmPricerule
                Strikethrough   =   0   'False
             EndProperty
             Height          =   315
-            Left            =   3900
+            Left            =   2910
             TabIndex        =   13
-            Top             =   2580
+            Top             =   2910
             Width           =   1305
          End
       End
@@ -474,6 +487,10 @@ newruletype.load_rule_type_id (cboRule_type)
 End Sub
 
 
+Private Sub chkAutoApply_Click()
+picCouponCode.Visible = chkAutoApply.value
+End Sub
+
 Private Sub cmdbowseselecteditems_Click()
 active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM
 frmPricerule_affected.Show 1
@@ -484,6 +501,20 @@ active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER
 frmPricerule_affected.Show 1
 End Sub
 
+Private Sub cmdGenerateCode_Click()
+txtCouponCode.Text = generateCode
+End Sub
+
+Function generateCode() As String
+Dim strL As String
+    N = 6
+    StrLetters = ""
+    For i = 1 To N
+      strL = strL + Chr(Int(Rnd() * 26) + 65 + Int(Rnd() * 2) * 32)
+    Next i
+ generateCode = strL
+End Function
+
 Private Sub cmdSave_Click()
 
     With newpricerule
@@ -492,7 +523,11 @@ Private Sub cmdSave_Click()
          .rule_type_id = newruletype.ruletype_id
          .charge_type = cboChargetype.Text
          .value = txtValue.Text
-         .use_coupon_code = txtCouponCode.Text
+         
+            If chkAutoApply.value Then
+               .use_coupon_code = txtCouponCode.Text
+            End If
+            
          .number_of_use = txtNo_of_use.Text
          .active = chkActive.value
          .auto_apply = chkAutoApply.value

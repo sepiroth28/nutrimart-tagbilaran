@@ -39,6 +39,23 @@ Public info_discount As Double
 Public hasRecord As Boolean
 'local variable(s) to hold property value(s)
 Private mvarprepared_by As String 'local copy
+'local variable(s) to hold property value(s)
+Private mvarappliedRule As Collection 'local copy
+Public Property Set appliedRule(ByVal vData As Collection)
+'used when assigning an Object to the property, on the left side of a Set statement.
+'Syntax: Set x.appliedRule = Form1
+    Set mvarappliedRule = vData
+End Property
+
+
+Public Property Get appliedRule() As Collection
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.appliedRule
+    Set appliedRule = mvarappliedRule
+End Property
+
+
+
 Public Property Let prepared_by(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.prepared_by = 5

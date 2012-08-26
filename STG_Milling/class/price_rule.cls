@@ -77,7 +77,7 @@ End Property
 Public Property Get last_insert_id() As Integer
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.last_insert_id
-    Set last_insert_id = mvarlast_insert_id
+    last_insert_id = mvarlast_insert_id
 End Property
 
 
@@ -121,6 +121,7 @@ With Me
     .auto_apply = rs.Fields("auto_apply").value
 End With
 Set rs = Nothing
+
 End Sub
 
 Public Sub update_price_rule()
@@ -166,15 +167,15 @@ sql = "INSERT INTO price_rule " & _
 db.execute (sql)
 
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
-If Me.affected_items.Count Then
+If Me.affected_customer.Count Then
     For Each items In Me.affected_customer
-        Call addThisCustomerToPriceRule(Me.last_insert_id, items)
+        Call addThisCustomerToPriceRule(Me.last_insert_id, "" & items)
     Next
 End If
 
-If Me.affected_customer.Count Then
+If Me.affected_items.Count Then
     For Each items In Me.affected_items
-        Call addThisItemToPriceRule(Me.last_insert_id, items)
+        Call addThisItemToPriceRule(Me.last_insert_id, "" & items)
     Next
 End If
 End Sub
