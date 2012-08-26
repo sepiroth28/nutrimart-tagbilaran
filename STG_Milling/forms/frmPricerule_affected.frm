@@ -110,6 +110,7 @@ Unload Me
 End Sub
 
 Private Sub Form_Load()
+Dim Item As ListItem
 If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
     Call setItemsDescriptionColumns(lsvItemList)
     lsvItemList.ColumnHeaders(1).width = 300
@@ -124,6 +125,11 @@ If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
     lsvItemList.ColumnHeaders(8).width = 0
     lsvItemList.ColumnHeaders(9).width = 0
     Call loadAllItemsToListview(lsvItemList, "item_code")
+    
+    
+    For Each Item In lsvItemList.ListItems
+        Call checkIfSelected(Item)
+    Next
 Else
     Call setCustomersColumns(lsvItemList)
     lsvItemList.ColumnHeaders(1).width = 300
@@ -135,9 +141,8 @@ Else
 
     Call loadAllCustomersToListview(lsvItemList)
 
-    Dim item As ListItem
-    For Each item In lsvItemList.ListItems
-        Call checkIfSelected(item)
+    For Each Item In lsvItemList.ListItems
+        Call checkIfSelected(Item)
     Next
 
 End If
@@ -149,6 +154,7 @@ If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
     For Each items In frmPricerule.newpricerule.affected_items
         If items = list.Text Then
             list.Checked = True
+            Exit Sub
         Else
             list.Checked = False
         End If
@@ -157,6 +163,7 @@ ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
     For Each items In frmPricerule.newpricerule.affected_customer
         If items = list.Text Then
             list.Checked = True
+            Exit Sub
         Else
             list.Checked = False
         End If
