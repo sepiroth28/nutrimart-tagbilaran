@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePriceRule 
    Caption         =   "Price Rule"
    ClientHeight    =   8385
@@ -18,23 +18,6 @@ Begin VB.Form frmManagePriceRule
       TabIndex        =   0
       Top             =   0
       Width           =   12645
-      Begin MSComctlLib.ListView lsvPriceRuleList 
-         Height          =   6195
-         Left            =   270
-         TabIndex        =   5
-         Top             =   1920
-         Width           =   12165
-         _ExtentX        =   21458
-         _ExtentY        =   10927
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   0
-         NumItems        =   0
-      End
       Begin VB.TextBox txtSearchPriceRuleName 
          Appearance      =   0  'Flat
          BeginProperty Font 
@@ -68,6 +51,95 @@ Begin VB.Form frmManagePriceRule
          TabIndex        =   1
          Top             =   1170
          Width           =   2685
+      End
+      Begin MSComctlLib.ListView lsvPriceRuleList 
+         Height          =   6255
+         Left            =   240
+         TabIndex        =   5
+         Top             =   1980
+         Width           =   12165
+         _ExtentX        =   21458
+         _ExtentY        =   11033
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         GridLines       =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   12
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "pricerule_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "rule_type_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "name"
+            Object.Width           =   2646
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "description"
+            Object.Width           =   3175
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "charge_type"
+            Object.Width           =   2646
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "value"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "create_at"
+            Object.Width           =   2822
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   7
+            Text            =   "use_coupon_code"
+            Object.Width           =   2999
+         EndProperty
+         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   8
+            Text            =   "valid_until"
+            Object.Width           =   2822
+         EndProperty
+         BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   9
+            Text            =   "number_of_use"
+            Object.Width           =   2646
+         EndProperty
+         BeginProperty ColumnHeader(11) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   10
+            Text            =   "active"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(12) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   11
+            Text            =   "auto_apply"
+            Object.Width           =   2540
+         EndProperty
       End
       Begin VB.Label Label1 
          BackStyle       =   0  'Transparent
