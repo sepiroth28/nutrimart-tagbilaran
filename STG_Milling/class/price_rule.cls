@@ -101,10 +101,10 @@ End Sub
 
 Public Sub load_price_rule(price_rule_id As Integer)
 Dim sql As String
-Dim rs As ADODB.recordset
+Dim rs As ADODB.Recordset
 
 Dim query_affected_customer As String
-Dim rs2 As ADODB.recordset
+Dim rs2 As ADODB.Recordset
 
 
 sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr inner join rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
@@ -126,15 +126,50 @@ With Me
     .number_of_use = rs.Fields("number_of_use").value
     .active = rs.Fields("active").value
     .auto_apply = rs.Fields("auto_apply").value
-    Do Until rs2.EOF
-    .affected_customer.Add (rs2.Fields("price_id").value)
-    rs2.MoveNext
-    Loop
+   
+    Set .affected_items = getAffectedItems(price_rule_id)
+    Set .affected_customer = getAffectedCustomer(price_rule_id)
 End With
 Set rs2 = Nothing
 Set rs = Nothing
+
 End Sub
 
+Function getAffectedItems(pricerule_id As Integer) As Collection
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    
+    sql = "SELECT * FROM `pricerule_product` where price_id = " & pricerule_id
+    Set rs = db.execute(sql)
+    
+    If rs.RecordCount Then
+    Set getAffectedItems = New Collection
+        Do Until rs.EOF
+            getAffectedItems.Add "" & rs.Fields(1).value
+        rs.MoveNext
+        Loop
+    End If
+    
+    Set rs = Nothing
+End Function
+
+Function getAffectedCustomer(pricerule_id As Integer) As Collection
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    
+    sql = "SELECT * FROM `pricerule_customer` where price_id = " & pricerule_id
+    Set rs = db.execute(sql)
+    
+    If rs.RecordCount Then
+    Set getAffectedCustomer = New Collection
+        Do Until rs.EOF
+            getAffectedCustomer.Add "" & rs.Fields(1).value
+        rs.MoveNext
+        Loop
+    End If
+    
+    Set rs = Nothing
+End Function
 Public Sub update_price_rule()
 Dim update_tblprice_rule As String
  update_tblprice_rule = "UPDATE price_rule " & _
@@ -179,17 +214,19 @@ db.execute (sql)
 
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
 
+If Me.affected_customer.Count Then
+    For Each items In Me.affected_customer
+        Call addThisCustomerToPriceRule(Me.last_insert_id, "" & items)
+        Next
+End If
+
 If Me.affected_items.Count Then
     For Each items In Me.affected_customer
         Call addThisCustomerToPriceRule(Me.last_insert_id, Val(items))
+
     Next
 End If
 
-If Me.affected_customer.Count Then
-    For Each items In Me.affected_items
-        Call addThisItemToPriceRule(Me.last_insert_id, Val(items))
-    Next
-End If
 End Sub
 
 Public Property Let active(ByVal vData As Integer)

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePriceRule 
    Caption         =   "Price Rule"
    ClientHeight    =   8385
@@ -204,7 +204,7 @@ End Sub
 
 Sub load_price_rule_list()
 Dim sql As String
-Dim rs As New ADODB.recordset
+Dim rs As New ADODB.Recordset
 Dim list As ListItem
 
 sql = "SELECT * FROM price_rule order by name"
@@ -236,6 +236,4 @@ Private Sub lsvPriceRuleList_DblClick()
         edit_price_rule = True
         ToEditPriceRule.load_price_rule (lsvPriceRuleList.SelectedItem.Text)
         frmPricerule.Show 1
-    
-    
 End Sub
