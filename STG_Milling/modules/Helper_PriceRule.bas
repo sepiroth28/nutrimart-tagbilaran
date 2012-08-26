@@ -39,7 +39,7 @@ Function searchIfCurrentSalesIncludeInPriceRule(activeSales As Sales) As Integer
     
 End Function
 
-Sub applyActiveAutoPriceRule(activeSales As Sales)
+Sub applyActiveAutoPriceRule(so As Sales)
 Dim items As New cart_items
 Dim item_rules As New Collection
 Dim customer_rules As New Collection
@@ -47,8 +47,21 @@ Dim customer_rules As New Collection
 Set item_rules = isItemsHasPriceRule(activeSales.items_sold)
 Set customer_rules = isCustomerHasPriceRule(activeSales.sold_to.customers_id)
 
-If item_rules.Count And customer_rules.Count Then
-   
+If customer_rules.Count Then
+    For Each items In so.items_sold
+       
+        Dim pricerule_ids As New Collection
+        Set pricerule_ids = getPriceRuleOfThisItem(items.Item.item_id)
+        If pricerule_ids.Count Then
+            If pricerule_ids.Count = 1 Then
+                 Dim pricerule As New price_rule
+                 pricerule.load_price_rule (Val(pricerule_ids.Item(0)))
+                 If pricerule.auto_apply Then
+                    items.discount = pricerule.value
+                 End If
+            End If
+        End If
+    Next
 End If
 
 End Sub
@@ -72,6 +85,22 @@ End If
 
 Set rs = Nothing
 
+End Function
+
+Function getPriceRuleOfThisItem(item_id As Integer) As Collection
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    
+    sql = "SELECT * FROM `pricerule_product` WHERE item_code = '" & item_id & "'"
+    Set rs = db.execute(sql)
+    If rs.RecordCount Then
+    getPriceRuleOfThisItem = New Collection
+        Do Until rs.EOF
+            getPriceRuleOfThisItem.Add "" & rs.Fields(0).value
+        Loop
+    End If
+    
+    Set rs = Nothing
 End Function
 
 Function isItemsHasPriceRule(items_id As cart) As Collection
