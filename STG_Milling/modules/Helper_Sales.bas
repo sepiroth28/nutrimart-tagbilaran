@@ -10,9 +10,9 @@ Public Sub loadActiveCartItems(lsv As ListView)
     lsv.ListItems.Clear
     For Each items In cart
         Set list = lsv.ListItems.Add(, , ctr)
-        list.SubItems(1) = items.item.item_name
+        list.SubItems(1) = items.Item.item_name
         list.SubItems(2) = items.qty_purchased
-        list.SubItems(3) = FormatCurrency((items.item_price - items.discount) + items.tracking_price, 2)
+        list.SubItems(3) = FormatCurrency((items.item_price), 2)
         list.SubItems(4) = FormatCurrency(items.get_total_price, 2)
         list.SubItems(5) = FormatCurrency(items.discount, 2)
         list.SubItems(6) = FormatCurrency(items.tracking_price, 2)
@@ -38,7 +38,7 @@ Sub prepareNewTransaction()
         .lblTotalAmount.Caption = "0.00"
         .cmdCancelTransaction.Visible = False
         .chkWalkInCustomer.Visible = False
-        .chkWalkInCustomer.Value = 0
+        .chkWalkInCustomer.value = 0
         '.cmdProcess.Enabled = False
          .cmdAddDiscount.Visible = False
          .cmdAddTracking.Visible = False
@@ -125,17 +125,17 @@ Sub loadAllSalesToListview(lsv As ListView, today As Boolean, payment_type As In
    
     On Error Resume Next
         Do Until rs.EOF
-            Set list = lsv.ListItems.Add(, , rs.Fields(0).Value)
-            list.SubItems(1) = rs.Fields(1).Value
-            list.SubItems(2) = rs.Fields(2).Value
-            list.SubItems(3) = rs.Fields(3).Value
-            list.SubItems(4) = FormatNumber(rs.Fields(4).Value, 2)
-            list.SubItems(5) = FormatNumber(rs.Fields(5).Value, 2)
-            list.SubItems(6) = FormatNumber(rs.Fields(6).Value, 2)
-            list.SubItems(7) = rs.Fields(7).Value
-            list.SubItems(8) = rs.Fields(8).Value
-            list.SubItems(9) = rs.Fields(9).Value
-            list.SubItems(10) = rs.Fields(10).Value
+            Set list = lsv.ListItems.Add(, , rs.Fields(0).value)
+            list.SubItems(1) = rs.Fields(1).value
+            list.SubItems(2) = rs.Fields(2).value
+            list.SubItems(3) = rs.Fields(3).value
+            list.SubItems(4) = FormatNumber(rs.Fields(4).value, 2)
+            list.SubItems(5) = FormatNumber(rs.Fields(5).value, 2)
+            list.SubItems(6) = FormatNumber(rs.Fields(6).value, 2)
+            list.SubItems(7) = rs.Fields(7).value
+            list.SubItems(8) = rs.Fields(8).value
+            list.SubItems(9) = rs.Fields(9).value
+            list.SubItems(10) = rs.Fields(10).value
         rs.MoveNext
         Loop
    End If
@@ -292,7 +292,7 @@ Function getTotalDiscountAsOfTodaySales(payment_type As Integer) As Double
     Dim rs As New ADODB.Recordset
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getTotalDiscountAsOfTodaySales = rs.Fields(0).Value
+        getTotalDiscountAsOfTodaySales = rs.Fields(0).value
     Else
         getTotalDiscountAsOfTodaySales = FormatNumber(0, 2)
     End If
@@ -317,7 +317,7 @@ Function getGrandTotalAsOfTodaySales(payment_type As Integer) As Double
      Dim rs As New ADODB.Recordset
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getGrandTotalAsOfTodaySales = rs.Fields(0).Value
+        getGrandTotalAsOfTodaySales = rs.Fields(0).value
     Else
         getGrandTotalAsOfTodaySales = FormatNumber(0, 2)
     End If
@@ -343,7 +343,7 @@ Function getNetTotalAsOfTodaySales(payment_type As Integer) As Double
      Dim rs As New ADODB.Recordset
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getNetTotalAsOfTodaySales = rs.Fields(0).Value
+        getNetTotalAsOfTodaySales = rs.Fields(0).value
     Else
         getNetTotalAsOfTodaySales = FormatNumber(0, 2)
     End If
@@ -362,9 +362,9 @@ Sub loadAllCODToListview(lsv As ListView)
     lsv.ListItems.Clear
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
-            Set list = lsv.ListItems.Add(, , rs.Fields(0).Value)
-            list.SubItems(1) = rs.Fields(1).Value
-            list.SubItems(2) = rs.Fields(2).Value
+            Set list = lsv.ListItems.Add(, , rs.Fields(0).value)
+            list.SubItems(1) = rs.Fields(1).value
+            list.SubItems(2) = rs.Fields(2).value
             
         rs.MoveNext
         Loop
@@ -381,18 +381,18 @@ Sub loadSalesOrderOfCustomerToListview(customer_id As Integer, lsv As ListView)
     On Error Resume Next
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
-            Set list = lsv.ListItems.Add(, , rs.Fields(0).Value)
-            list.SubItems(1) = FormatNumber(rs.Fields(1).Value, 2)
-            list.SubItems(2) = rs.Fields(2).Value
-            list.SubItems(3) = FormatDateTime(rs.Fields(3).Value, vbGeneralDate)
-            If rs.Fields(2).Value = "unsettled" Then
+            Set list = lsv.ListItems.Add(, , rs.Fields(0).value)
+            list.SubItems(1) = FormatNumber(rs.Fields(1).value, 2)
+            list.SubItems(2) = rs.Fields(2).value
+            list.SubItems(3) = FormatDateTime(rs.Fields(3).value, vbGeneralDate)
+            If rs.Fields(2).value = "unsettled" Then
                 list.ForeColor = vbRed
                 
             End If
-            If rs.Fields(2).Value = "fully paid" Then
-                list.SubItems(4) = getPaymentDateOfThisSO(rs.Fields(0).Value)
+            If rs.Fields(2).value = "fully paid" Then
+                list.SubItems(4) = getPaymentDateOfThisSO(rs.Fields(0).value)
             End If
-            list.SubItems(5) = rs.Fields("prepared_by").Value
+            list.SubItems(5) = rs.Fields("prepared_by").value
         rs.MoveNext
         Loop
         
@@ -444,7 +444,7 @@ Function getTotalAmountOfAccountReceivableOfThisCustomer(customer_id As Integer)
           "  GROUP BY responsible_customer"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getTotalAmountOfAccountReceivableOfThisCustomer = rs.Fields(0).Value
+        getTotalAmountOfAccountReceivableOfThisCustomer = rs.Fields(0).value
     End If
 End Function
 Function getReceiverRemit(sales_date As Date) As String
@@ -453,7 +453,7 @@ Function getReceiverRemit(sales_date As Date) As String
     sql = "SELECT * FROM cod_remitted WHERE sales_date = '" & Format(sales_date, "yyyy-mm-dd") & "'"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getReceiverRemit = rs.Fields("remit_by").Value
+        getReceiverRemit = rs.Fields("remit_by").value
     Else
         getReceiverRemit = ""
     End If
@@ -465,7 +465,7 @@ Function getAcceptByRemit(sales_date As Date) As String
     sql = "SELECT * FROM cod_remitted WHERE sales_date = '" & Format(sales_date, "yyyy-mm-dd") & "'"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getAcceptByRemit = rs.Fields("received_by").Value
+        getAcceptByRemit = rs.Fields("received_by").value
     Else
         getAcceptByRemit = ""
     End If
@@ -483,66 +483,66 @@ Function checkCODIfRemitted(sales_date As Date) As Boolean
     End If
 End Function
 
-Function getPaymentDateOfThisSO(SO As String) As String
+Function getPaymentDateOfThisSO(so As String) As String
 Dim sql As String
 Dim rs As ADODB.Recordset
 
-sql = "SELECT * FROM `payment_records` where sales_order_no = '" & SO & "' ORDER BY payment_date DESC LIMIT 1"
+sql = "SELECT * FROM `payment_records` where sales_order_no = '" & so & "' ORDER BY payment_date DESC LIMIT 1"
 
 Set rs = db.execute(sql)
 If rs.RecordCount > 0 Then
-    getPaymentDateOfThisSO = Format(rs.Fields("payment_date").Value, "mm/dd/yyyy")
+    getPaymentDateOfThisSO = Format(rs.Fields("payment_date").value, "mm/dd/yyyy")
 End If
 
 Set rs = Nothing
 End Function
 ' return stock functions
-Function returnQty_to_stock(SO As String, item_id As Integer) As Double
+Function returnQty_to_stock(so As String, item_id As Integer) As Double
     Dim sql As String
     Dim rs As ADODB.Recordset
-    sql = "SELECT s.*,soti.*,sot.sales_order_no FROM stock_out s inner join stock_out_transaction_stock_out_items soti on s.stockout_id=soti.stockout_id inner join stock_out_transaction sot on sot.sales_order_no=soti.sales_order_no where sot.sales_order_no='" & SO & "' and s.item_id='" & item_id & "'"
+    sql = "SELECT s.*,soti.*,sot.sales_order_no FROM stock_out s inner join stock_out_transaction_stock_out_items soti on s.stockout_id=soti.stockout_id inner join stock_out_transaction sot on sot.sales_order_no=soti.sales_order_no where sot.sales_order_no='" & so & "' and s.item_id='" & item_id & "'"
     Set rs = db.execute(sql)
-    returnQty_to_stock = rs.Fields("qty_out").Value
+    returnQty_to_stock = rs.Fields("qty_out").value
 End Function
 Function getStockout_id(item_id As Integer) As Double
     Dim sql As String
     Dim rs As ADODB.Recordset
     sql = "select * from stock_out where item_id='" & item_id & "'"
     Set rs = db.execute(sql)
-    getStockout_id = rs.Fields("stockout_id").Value
+    getStockout_id = rs.Fields("stockout_id").value
 End Function
 
-Function addReturnStock(SO As String, item_id As Integer)
+Function addReturnStock(so As String, item_id As Integer)
     Dim return_item As New items
     return_item.load_item (item_id)
-    Call returnQty_to_stock(SO, item_id)
-    return_item.addStock (returnQty_to_stock(SO, item_id))
-    Call delete_stockout_transaction_of_this_return_item(SO, item_id)
+    Call returnQty_to_stock(so, item_id)
+    return_item.addStock (returnQty_to_stock(so, item_id))
+    Call delete_stockout_transaction_of_this_return_item(so, item_id)
     
 End Function
-Function addReturnStockPartial(SO As String, item_id As Integer)
+Function addReturnStockPartial(so As String, item_id As Integer)
     Dim return_item As New items
     return_item.load_item (item_id)
     return_item.addStock (returnQty)
-    Call update_stockout_transaction_of_this_return_item(SO, item_id)
+    Call update_stockout_transaction_of_this_return_item(so, item_id)
 End Function
-Function delete_stockout_transaction_of_this_return_item(SO As String, item_id)
+Function delete_stockout_transaction_of_this_return_item(so As String, item_id)
     Dim sql As String
     Dim delete_from_stockout As String
     Dim delete_from_stock_out_transaction_stock_out_items As String
     Dim getStockout_id_of_this_item As Integer
     Dim rs As ADODB.Recordset
     
-    sql = "SELECT s.*,soti.*,sot.sales_order_no FROM stock_out s inner join stock_out_transaction_stock_out_items soti on s.stockout_id=soti.stockout_id inner join stock_out_transaction sot on sot.sales_order_no=soti.sales_order_no where sot.sales_order_no='" & SO & "' and s.item_id='" & item_id & "'"
+    sql = "SELECT s.*,soti.*,sot.sales_order_no FROM stock_out s inner join stock_out_transaction_stock_out_items soti on s.stockout_id=soti.stockout_id inner join stock_out_transaction sot on sot.sales_order_no=soti.sales_order_no where sot.sales_order_no='" & so & "' and s.item_id='" & item_id & "'"
     Set rs = db.execute(sql)
 
-    getStockout_id_of_this_item = rs.Fields("stockout_id").Value
+    getStockout_id_of_this_item = rs.Fields("stockout_id").value
     delete_from_stockout = "delete from stock_out where stockout_id='" & getStockout_id_of_this_item & "'"
     db.execute (delete_from_stockout)
     delete_from_stock_out_transaction_stock_out_items = "delete from stock_out_transaction_stock_out_items where stockout_id='" & getStockout_id_of_this_item & "'"
     db.execute (delete_from_stock_out_transaction_stock_out_items)
 End Function
-Function update_stockout_transaction_of_this_return_item(SO As String, item_id)
+Function update_stockout_transaction_of_this_return_item(so As String, item_id)
     Dim sql As String
     Dim update_stockout_qty As String
     Dim getStockout_id_of_this_item As Integer
@@ -556,25 +556,25 @@ Function update_stockout_transaction_of_this_return_item(SO As String, item_id)
     
     Dim rs As ADODB.Recordset
     
-    sql = "SELECT s.*,soti.*,sot.sales_order_no FROM stock_out s inner join stock_out_transaction_stock_out_items soti on s.stockout_id=soti.stockout_id inner join stock_out_transaction sot on sot.sales_order_no=soti.sales_order_no where sot.sales_order_no='" & SO & "' and s.item_id='" & item_id & "'"
+    sql = "SELECT s.*,soti.*,sot.sales_order_no FROM stock_out s inner join stock_out_transaction_stock_out_items soti on s.stockout_id=soti.stockout_id inner join stock_out_transaction sot on sot.sales_order_no=soti.sales_order_no where sot.sales_order_no='" & so & "' and s.item_id='" & item_id & "'"
     Set rs = db.execute(sql)
 
-    getStockout_id_of_this_item = rs.Fields("stockout_id").Value
-    getqty = rs.Fields("qty_out").Value
-    gettracking = rs.Fields("tracking_price").Value
-    getprice = rs.Fields("price").Value
-    getdiscount = rs.Fields("discount").Value
+    getStockout_id_of_this_item = rs.Fields("stockout_id").value
+    getqty = rs.Fields("qty_out").value
+    gettracking = rs.Fields("tracking_price").value
+    getprice = rs.Fields("price").value
+    getdiscount = rs.Fields("discount").value
     newqty = getqty - returnQty
     newamount = newqty * ((getprice + gettracking) - getdiscount)
     update_stockout_qty = "update stock_out set qty_out='" & newqty & "',amount='" & newamount & "' where stockout_id='" & getStockout_id_of_this_item & "'"
     db.execute (update_stockout_qty)
 End Function
 
-Function updateSONetTotal(SO As String, amountToBeDeduct As Double)
+Function updateSONetTotal(so As String, amountToBeDeduct As Double)
     Dim sql As String
     Dim rs As ADODB.Recordset
   '  Call getNettotal(SO)
-    sql = "UPDATE stock_out_transaction SET net_total= net_total - '" & amountToBeDeduct & "' ,grand_total=grand_total - '" & amountToBeDeduct & "' where sales_order_no='" & SO & "'"
+    sql = "UPDATE stock_out_transaction SET net_total= net_total - '" & amountToBeDeduct & "' ,grand_total=grand_total - '" & amountToBeDeduct & "' where sales_order_no='" & so & "'"
     db.execute sql
 End Function
 

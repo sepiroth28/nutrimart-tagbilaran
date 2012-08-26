@@ -39,29 +39,32 @@ Function searchIfCurrentSalesIncludeInPriceRule(activeSales As Sales) As Integer
     
 End Function
 
-Sub applyActiveAutoPriceRule()
+Sub getAndApplyActiveAutoPriceRule()
 Dim items As New cart_items
 Dim item_rules As New Collection
 Dim customer_rules As New Collection
-
+Dim price_id_to_add As Integer
 Set item_rules = isItemsHasPriceRule(activeSales.items_sold)
 Set customer_rules = isCustomerHasPriceRule(activeSales.sold_to.customers_id)
 
 If customer_rules.Count Then
+    Set activeSales.appliedRule = New Collection
     For Each items In activeSales.items_sold
        
         Dim pricerule_ids As New Collection
         Set pricerule_ids = getPriceRuleOfThisItem(items.Item.item_id)
         If pricerule_ids.Count Then
-            If pricerule_ids.Count = 1 Then
-                 Dim pricerule As New price_rule
-                 pricerule.load_price_rule (Val(pricerule_ids.Item(1)))
-                 If pricerule.auto_apply Then
-                    items.discount = pricerule.value
-                 End If
-            End If
+            For Each id In pricerule_ids
+                Dim pricerule As New price_rule
+                pricerule.load_price_rule (Val(id))
+                If pricerule.auto_apply Then
+                   items.discount = pricerule.value
+                End If
+                activeSales.appliedRule.Add "" & id
+            Next
         End If
     Next
+    
 End If
 
 End Sub

@@ -635,30 +635,70 @@ End If
 End Sub
 
 Private Sub Form_Load()
-done = False
-tenderedAmount = 0
-lblReferenceNo.Caption = activeSales.transaction_id
-
-Call applyActiveAutoPriceRule
-
-Call loadActiveCartItems(lsvItems)
-lblGrandTotal.Caption = FormatCurrency(activeSales.get_total_amount + activeSales.get_discount_total, 2)
-
-If activeSales.hasDiscount Then
-    lblNetTotal.Caption = FormatCurrency(activeSales.get_total_amount, 2)
-Else
-    lblDiscount.Caption = FormatCurrency(activeSales.get_discount_total, 2)
-    lblTrackingPrice.Caption = FormatCurrency(activeSales.get_tracking_total, 2)
-    lblNetTotal.Caption = FormatCurrency(activeSales.get_total_amount, 2)
-End If
-
-If activeSales.payment_type = PAYMENT_COD Then
-    txtTenderedAmount.Enabled = True
-Else
-    done = True
-    txtTenderedAmount.Enabled = False
-End If
+    Call getAndApplyActiveAutoPriceRule
+    Call prepareSalesSummary
 End Sub
+
+Sub prepareSalesSummary()
+    done = False
+    tenderedAmount = 0
+    lblReferenceNo.Caption = activeSales.transaction_id
+    
+    'this apply the auto apply price rule
+   
+    
+    'load applied rule to listview
+    If activeSales.appliedRule.Count Then
+        For Each r In activeSales.appliedRule
+          If Not isRuleDisplayAlready(Val(r)) Then
+            Dim rule As New price_rule
+            Dim list As ListItem
+            rule.load_price_rule (Val(r))
+            
+            If rule.auto_apply Then
+                Set list = lsvAppliedRule.ListItems.Add(, , rule.price_id)
+            Else
+                Set list = lsvApplyRule.ListItems.Add(, , rule.price_id)
+            End If
+            
+            list.SubItems(1) = rule.rule_type_id
+            list.SubItems(2) = rule.rule_name
+            list.SubItems(3) = rule.description
+            list.SubItems(4) = rule.charge_type
+            list.SubItems(5) = rule.value
+            list.Checked = True
+           End If
+        Next
+    End If
+    
+    Call loadActiveCartItems(lsvItems)
+    lblGrandTotal.Caption = FormatCurrency(activeSales.get_total_amount + activeSales.get_discount_total, 2)
+    
+    If activeSales.hasDiscount Then
+        lblNetTotal.Caption = FormatCurrency(activeSales.get_total_amount, 2)
+    Else
+        lblDiscount.Caption = FormatCurrency(activeSales.get_discount_total, 2)
+        lblTrackingPrice.Caption = FormatCurrency(activeSales.get_tracking_total, 2)
+        lblNetTotal.Caption = FormatCurrency(activeSales.get_total_amount, 2)
+    End If
+    
+    If activeSales.payment_type = PAYMENT_COD Then
+        txtTenderedAmount.Enabled = True
+    Else
+        done = True
+        txtTenderedAmount.Enabled = False
+    End If
+End Sub
+
+Function isRuleDisplayAlready(id As Integer) As Boolean
+    isRuleDisplayAlready = False
+    For Each items In lsvAppliedRule.ListItems
+        If items.Text = id Then
+            isRuleDisplayAlready = True
+            Exit Function
+        End If
+    Next
+End Function
 
 Private Sub txtTenderedAmount_KeyPress(KeyAscii As Integer)
 If KeyAscii = 13 Then
