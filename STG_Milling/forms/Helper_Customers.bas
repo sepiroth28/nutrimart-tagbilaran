@@ -38,13 +38,13 @@ Function getAllCustomersCollectionHidden() As CustomersCollection
     On Error Resume Next
     Do Until data.EOF
         With temp_customers
-            .customers_id = data.Fields("customers_id").Value
-            .customers_name = data.Fields("customers_name").Value
-            .customers_add = data.Fields("customers_add").Value
-            .customers_number = data.Fields("customers_number").Value
-            .dealers_type = data.Fields("dealers_type").Value
+            .customers_id = data.Fields("customers_id").value
+            .customers_name = data.Fields("customers_name").value
+            .customers_add = data.Fields("customers_add").value
+            .customers_number = data.Fields("customers_number").value
+            .dealers_type = data.Fields("dealers_type").value
         End With
-         customers_col.Add temp_customers, data.Fields("customers_id").Value
+         customers_col.Add temp_customers, data.Fields("customers_id").value
          data.MoveNext
     Loop
    
@@ -61,13 +61,13 @@ Function getAllCustomersCollection() As CustomersCollection
     On Error Resume Next
     Do Until data.EOF
         With temp_customers
-            .customers_id = data.Fields("customers_id").Value
-            .customers_name = data.Fields("customers_name").Value
-            .customers_add = data.Fields("customers_add").Value
-            .customers_number = data.Fields("customers_number").Value
-            .dealers_type = data.Fields("dealers_type").Value
+            .customers_id = data.Fields("customers_id").value
+            .customers_name = data.Fields("customers_name").value
+            .customers_add = data.Fields("customers_add").value
+            .customers_number = data.Fields("customers_number").value
+            .dealers_type = data.Fields("dealers_type").value
         End With
-         customers_col.Add temp_customers, data.Fields("customers_id").Value
+         customers_col.Add temp_customers, data.Fields("customers_id").value
          data.MoveNext
     Loop
    
@@ -93,11 +93,11 @@ Dim list As ListItem
 lsv.ListItems.Clear
     Do Until rs.EOF
         'customers_id, customers_name, customers_add, customers_number
-        Set list = lsv.ListItems.Add(, , rs.Fields("customers_id").Value)
-            list.SubItems(1) = rs.Fields("customers_name").Value
-            list.SubItems(2) = rs.Fields("customers_add").Value
-            list.SubItems(3) = rs.Fields("customers_number").Value
-            list.SubItems(4) = rs.Fields("dealers_type").Value
+        Set list = lsv.ListItems.Add(, , rs.Fields("customers_id").value)
+            list.SubItems(1) = rs.Fields("customers_name").value
+            list.SubItems(2) = rs.Fields("customers_add").value
+            list.SubItems(3) = rs.Fields("customers_number").value
+            list.SubItems(4) = rs.Fields("dealers_type").value
         rs.MoveNext
     Loop
 End Sub
@@ -114,9 +114,9 @@ Dim rs As New ADODB.Recordset
 Dim sql As String
 sql = "select m.municipal_id,m.municipal_name,ma.agent_id,ma.municipal_id,a.agent_id,a.Name from municipalities m inner join municipal_agent ma on m.municipal_id=ma.municipal_id inner join agent a on ma.agent_id=a.agent_id where m.municipal_name='" & cbomunicipality & "'"
 Set rs = db.execute(sql)
-txtagent = rs.Fields("Name").Value
-lsvAgent.SelectedItem.Text = rs.Fields("agent_id").Value
-MsgBox (lsvAgent.SelectedItem.Text)
+txtagent = rs.Fields("Name").value
+lsvAgent.SelectedItem.Text = rs.Fields("agent_id").value
+'MsgBox (lsvAgent.SelectedItem.Text)
 'Set list = lsvAgent.ListItems.Add(, , rs.Fields("agent_id").Value)
 '            'list.SubItems(1) = rs.Fields("Name").Value
 

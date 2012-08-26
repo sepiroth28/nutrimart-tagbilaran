@@ -88,7 +88,8 @@ Public Sub printPaymentInfoAndNewBalance()
     remarks = remarks & "AMT PAID: P" & FormatNumber(Me.amount, 2) & " BAL: P" & (Me.getActualBalance) & vbCrLf & FormatDateTime(Date, vbShortDate)
     dtaSalesOrder.Sections(1).Controls("lblRemarks").Caption = remarks
     dtaSalesOrder.Sections(1).Controls("lblRemarks").Visible = True
-    dtaSalesOrder.Show 1
+    MsgBox ("SUCCESSFULLY PROCESS PAYMNET")
+    'dtaSalesOrder.Show 1
 End Sub
 Public Sub loadRemarksToListview(lsv As ListView)
     Dim sql As String

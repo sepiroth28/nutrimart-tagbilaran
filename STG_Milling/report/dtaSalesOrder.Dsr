@@ -4,9 +4,9 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
    ClientHeight    =   10950
    ClientLeft      =   225
    ClientTop       =   555
-   ClientWidth     =   15135
+   ClientWidth     =   20250
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   26696
+   _ExtentX        =   35719
    _ExtentY        =   19315
    _Version        =   393216
    _DesignerVersion=   100684101
@@ -32,14 +32,14 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
    BeginProperty Section0 {1C13A8E0-A0B6-11D0-848E-00A0C90DC8A9} 
       _Version        =   393216
       Name            =   "Section4"
-      Object.Height          =   6405
-      NumControls     =   51
+      Object.Height          =   6765
+      NumControls     =   52
       ItemType0       =   6
       BeginProperty Item0 {1C13A8E4-A0B6-11D0-848E-00A0C90DC8A9} 
          _Version        =   393216
          Name            =   "Shape3"
          Object.Left            =   7632
-         Object.Top             =   3600
+         Object.Top             =   4032
          Object.Width           =   3315
          Object.Height          =   2520
          BorderColor     =   8421504
@@ -49,7 +49,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "paidBorder"
          Object.Left            =   9144
-         Object.Top             =   3672
+         Object.Top             =   4104
          Object.Width           =   1725
          Object.Height          =   648
          Object.BorderStyle     =   5
@@ -59,7 +59,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Shape2"
          Object.Left            =   144
-         Object.Top             =   3600
+         Object.Top             =   4032
          Object.Width           =   7416
          Object.Height          =   1446
          Shape           =   4
@@ -69,7 +69,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblref"
          Object.Left            =   216
-         Object.Top             =   288
+         Object.Top             =   720
          Object.Width           =   1440
          Object.Height          =   240
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -88,7 +88,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblSalesOrderNo"
          Object.Left            =   1728
-         Object.Top             =   216
+         Object.Top             =   648
          Object.Width           =   2016
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -107,7 +107,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label1"
          Object.Left            =   216
-         Object.Top             =   504
+         Object.Top             =   936
          Object.Width           =   1440
          Object.Height          =   240
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -126,7 +126,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblAgentName"
          Object.Left            =   1728
-         Object.Top             =   504
+         Object.Top             =   936
          Object.Width           =   5184
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -145,7 +145,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblCustomerName"
          Object.Left            =   216
-         Object.Top             =   864
+         Object.Top             =   1296
          Object.Width           =   8496
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -164,7 +164,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblAddress"
          Object.Left            =   360
-         Object.Top             =   1152
+         Object.Top             =   1584
          Object.Width           =   5400
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -183,7 +183,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lbl"
          Object.Left            =   288
-         Object.Top             =   1584
+         Object.Top             =   2016
          Object.Width           =   1152
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -202,7 +202,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label2"
          Object.Left            =   1728
-         Object.Top             =   1584
+         Object.Top             =   2016
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -221,7 +221,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label3"
          Object.Left            =   4320
-         Object.Top             =   1584
+         Object.Top             =   2016
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -240,7 +240,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label4"
          Object.Left            =   7488
-         Object.Top             =   1584
+         Object.Top             =   2016
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -260,7 +260,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label5"
          Object.Left            =   9360
-         Object.Top             =   1584
+         Object.Top             =   2016
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -280,7 +280,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Line1"
          Object.Left            =   144
-         Object.Top             =   1800
+         Object.Top             =   2232
          Object.Width           =   10800
       EndProperty
       ItemType15      =   3
@@ -288,7 +288,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblQty"
          Object.Left            =   72
-         Object.Top             =   1872
+         Object.Top             =   2304
          Object.Width           =   870
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -308,7 +308,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblUnit"
          Object.Left            =   1728
-         Object.Top             =   1872
+         Object.Top             =   2304
          Object.Width           =   867
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -327,7 +327,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblDescription"
          Object.Left            =   2880
-         Object.Top             =   1872
+         Object.Top             =   2304
          Object.Width           =   4320
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -346,7 +346,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblUnitPrice"
          Object.Left            =   7488
-         Object.Top             =   1872
+         Object.Top             =   2304
          Object.Width           =   1158
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -366,7 +366,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblAmount"
          Object.Left            =   9360
-         Object.Top             =   1872
+         Object.Top             =   2304
          Object.Width           =   1152
          Object.Height          =   276
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -386,7 +386,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Line2"
          Object.Left            =   144
-         Object.Top             =   2304
+         Object.Top             =   2736
          Object.Width           =   10800
       EndProperty
       ItemType21      =   3
@@ -394,7 +394,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblTotalItems"
          Object.Left            =   360
-         Object.Top             =   2376
+         Object.Top             =   2808
          Object.Width           =   2592
          Object.Height          =   276
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -412,7 +412,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblTotalAmount"
          Object.Left            =   8640
-         Object.Top             =   2376
+         Object.Top             =   2808
          Object.Width           =   1860
          Object.Height          =   276
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -432,7 +432,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblDiscount"
          Object.Left            =   8640
-         Object.Top             =   2736
+         Object.Top             =   3168
          Object.Width           =   1863
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -452,7 +452,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label6"
          Object.Left            =   6696
-         Object.Top             =   2736
+         Object.Top             =   3168
          Object.Width           =   1860
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -472,7 +472,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Shape1"
          Object.Left            =   7848
-         Object.Top             =   3096
+         Object.Top             =   3528
          Object.Width           =   2664
          Object.Height          =   72
          BackColor       =   0
@@ -483,7 +483,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label7"
          Object.Left            =   6696
-         Object.Top             =   3240
+         Object.Top             =   3672
          Object.Width           =   1875
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -503,7 +503,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblNetTotal"
          Object.Left            =   8640
-         Object.Top             =   3240
+         Object.Top             =   3672
          Object.Width           =   1860
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -523,7 +523,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label8"
          Object.Left            =   360
-         Object.Top             =   3744
+         Object.Top             =   4176
          Object.Width           =   1152
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -542,7 +542,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label9"
          Object.Left            =   2304
-         Object.Top             =   3744
+         Object.Top             =   4176
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -561,7 +561,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label10"
          Object.Left            =   360
-         Object.Top             =   4320
+         Object.Top             =   4752
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -580,7 +580,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label11"
          Object.Left            =   2304
-         Object.Top             =   4320
+         Object.Top             =   4752
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -599,7 +599,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblprepared_by"
          Object.Left            =   360
-         Object.Top             =   4032
+         Object.Top             =   4464
          Object.Width           =   1440
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -617,7 +617,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblchecked_by"
          Object.Left            =   2304
-         Object.Top             =   4032
+         Object.Top             =   4464
          Object.Width           =   1584
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -635,7 +635,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblposted_by"
          Object.Left            =   360
-         Object.Top             =   4608
+         Object.Top             =   5040
          Object.Width           =   1800
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -653,7 +653,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lbldelivered_by"
          Object.Left            =   2304
-         Object.Top             =   4608
+         Object.Top             =   5040
          Object.Width           =   1800
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -671,7 +671,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label16"
          Object.Left            =   4680
-         Object.Top             =   3744
+         Object.Top             =   4176
          Object.Width           =   2295
          Object.Height          =   645
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -690,7 +690,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Line3"
          Object.Left            =   360
-         Object.Top             =   4320
+         Object.Top             =   4752
          Object.Width           =   1440
       EndProperty
       ItemType38      =   5
@@ -698,7 +698,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Line4"
          Object.Left            =   2304
-         Object.Top             =   4320
+         Object.Top             =   4752
          Object.Width           =   1584
       EndProperty
       ItemType39      =   5
@@ -706,7 +706,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Line5"
          Object.Left            =   360
-         Object.Top             =   4896
+         Object.Top             =   5328
          Object.Width           =   1800
       EndProperty
       ItemType40      =   5
@@ -714,7 +714,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Line6"
          Object.Left            =   2304
-         Object.Top             =   4896
+         Object.Top             =   5328
          Object.Width           =   1800
       EndProperty
       ItemType41      =   3
@@ -722,7 +722,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label17"
          Object.Left            =   216
-         Object.Top             =   5112
+         Object.Top             =   5544
          Object.Width           =   1950
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -741,7 +741,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label18"
          Object.Left            =   288
-         Object.Top             =   5400
+         Object.Top             =   5832
          Object.Width           =   7272
          Object.Height          =   864
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -760,7 +760,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblDate"
          Object.Left            =   8424
-         Object.Top             =   288
+         Object.Top             =   720
          Object.Width           =   2520
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -780,7 +780,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label20"
          Object.Left            =   6912
-         Object.Top             =   288
+         Object.Top             =   720
          Object.Width           =   1440
          Object.Height          =   240
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -819,7 +819,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "Label12"
          Object.Left            =   7776
-         Object.Top             =   3672
+         Object.Top             =   4104
          Object.Width           =   1155
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -838,7 +838,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblStatus"
          Object.Left            =   9288
-         Object.Top             =   3744
+         Object.Top             =   4176
          Object.Width           =   1455
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -858,7 +858,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblDatePaid"
          Object.Left            =   9288
-         Object.Top             =   4032
+         Object.Top             =   4464
          Object.Width           =   1455
          Object.Height          =   210
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -878,7 +878,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblRemarks"
          Object.Left            =   7704
-         Object.Top             =   3960
+         Object.Top             =   4392
          Object.Width           =   3168
          Object.Height          =   288
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -897,7 +897,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          _Version        =   393216
          Name            =   "lblRemarkshere"
          Object.Left            =   7704
-         Object.Top             =   4536
+         Object.Top             =   4968
          Object.Width           =   3165
          Object.Height          =   1440
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -910,6 +910,26 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
             Strikethrough   =   0   'False
          EndProperty
          CanGrow         =   -1  'True
+      EndProperty
+      ItemType51      =   3
+      BeginProperty Item51 {1C13A8E1-A0B6-11D0-848E-00A0C90DC8A9} 
+         _Version        =   393216
+         Name            =   "Label13"
+         Object.Left            =   1440
+         Object.Top             =   288
+         Object.Width           =   7992
+         Object.Height          =   285
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Object.Caption         =   "NUTRIMART-CALAPE"
+         Alignment       =   2
       EndProperty
    EndProperty
    SectionCode1    =   2

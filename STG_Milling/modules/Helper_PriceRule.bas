@@ -20,7 +20,7 @@ End Sub
 
 
 
-Sub populate_price_rule(lsv As ListView)
+'Sub populate_price_rule(lsv As ListView)
 
 Sub addThisCustomerToPriceRule(rule_id As Integer, customer_id As String)
 Dim insert As String
