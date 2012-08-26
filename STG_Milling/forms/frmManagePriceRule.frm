@@ -193,6 +193,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cmdAddNewPriceRule_Click()
+    edit_price_rule = False
     frmPricerule.Show 1
 End Sub
 
@@ -203,7 +204,7 @@ End Sub
 
 Sub load_price_rule_list()
 Dim sql As String
-Dim rs As New ADODB.Recordset
+Dim rs As New ADODB.recordset
 Dim list As ListItem
 
 sql = "SELECT * FROM price_rule order by name"
@@ -232,7 +233,9 @@ End Sub
 
 
 Private Sub lsvPriceRuleList_DblClick()
+        edit_price_rule = True
         ToEditPriceRule.load_price_rule (lsvPriceRuleList.SelectedItem.Text)
-    edit_price_rule = True
-    frmPricerule.Show 1
+        frmPricerule.Show 1
+    
+    
 End Sub
