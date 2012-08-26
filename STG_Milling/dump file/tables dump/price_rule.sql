@@ -13,4 +13,4 @@ CREATE TABLE  `dbinventory`.`price_rule` (
   `active` int(10) unsigned DEFAULT '1',
   `auto_apply` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`pricerule_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;

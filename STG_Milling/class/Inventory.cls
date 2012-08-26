@@ -94,9 +94,9 @@ Public Function getTodaysInventoryForPrinting(item_category As String) As ADODB.
     Dim sql As String
     
     If item_category = "All" Then
-        sql = "SELECT inv.*,id.item_description from last_inventory inv LEFT JOIN items_description id ON inv.item_code = id.item_code order by inv.item_code"
+        sql = "SELECT inv.*,id.item_name from last_inventory inv LEFT JOIN items_description id ON inv.item_code = id.item_code order by inv.item_code"
     Else
-        sql = "SELECT inv.*,id.item_description from " & _
+        sql = "SELECT inv.*,id.item_name from " & _
               "  last_inventory inv " & _
               "  LEFT JOIN item_category itc " & _
               "  ON inv.item_code = itc.item_code " & _

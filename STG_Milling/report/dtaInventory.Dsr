@@ -316,7 +316,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaInventory
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         DataField       =   "item_description"
+         DataField       =   "item_name"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
