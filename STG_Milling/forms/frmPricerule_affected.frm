@@ -84,28 +84,29 @@ Private Sub chkSelectAll_Click()
 Dim list As ListItem
 
 For Each list In lsvItemList.ListItems
-    list.Checked = True
+    list.Checked = chkSelectAll.value
 Next
 
 End Sub
 
 Private Sub cmdSelect_Click()
 Dim list As ListItem
-
+If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
+    Set frmPricerule.newpricerule.affected_items = New Collection
     For Each list In lsvItemList.ListItems
         If list.Checked = True Then
-            If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
                 frmPricerule.newpricerule.affected_items.Add list.Text
-            Else
-                frmPricerule.newpricerule.affected_customer.Add list.Text
-            End If
         End If
     Next
-    
-'Dim str As String
-For Each str In frmPricerule.newpricerule.affected_items
-    MsgBox str
-Next
+ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
+    Set frmPricerule.newpricerule.affected_customer = New Collection
+     For Each list In lsvItemList.ListItems
+        If list.Checked = True Then
+            frmPricerule.newpricerule.affected_customer.Add list.Text
+        End If
+     Next
+End If
+Unload Me
 End Sub
 
 Private Sub Form_Load()
@@ -124,7 +125,41 @@ If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
     lsvItemList.ColumnHeaders(9).width = 0
     Call loadAllItemsToListview(lsvItemList, "item_code")
 Else
+    Call setCustomersColumns(lsvItemList)
+    lsvItemList.ColumnHeaders(1).width = 300
+    lsvItemList.ColumnHeaders(1).Text = ""
     
+    lsvItemList.ColumnHeaders(2).width = 3000
+    lsvItemList.ColumnHeaders(3).width = 5000
+    lsvItemList.ColumnHeaders(4).width = 2000
+
+    Call loadAllCustomersToListview(lsvItemList)
+
+    Dim item As ListItem
+    For Each item In lsvItemList.ListItems
+        Call checkIfSelected(item)
+    Next
+
 End If
 
+End Sub
+
+Sub checkIfSelected(list As ListItem)
+If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
+    For Each items In frmPricerule.newpricerule.affected_items
+        If items = list.Text Then
+            list.Checked = True
+        Else
+            list.Checked = False
+        End If
+    Next
+ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
+    For Each items In frmPricerule.newpricerule.affected_customer
+        If items = list.Text Then
+            list.Checked = True
+        Else
+            list.Checked = False
+        End If
+    Next
+End If
 End Sub
