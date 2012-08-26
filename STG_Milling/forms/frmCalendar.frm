@@ -28,9 +28,9 @@ Begin VB.Form frmCalendar
       _ExtentY        =   7964
       _StockProps     =   1
       BackColor       =   13106931
-      Year            =   2011
-      Month           =   11
-      Day             =   28
+      Year            =   2012
+      Month           =   8
+      Day             =   26
       DayLength       =   1
       MonthLength     =   1
       DayFontColor    =   0
@@ -80,11 +80,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Calendar1_Click()
-activeDateTextbox.Text = FormatDateTime(Calendar1.Value, vbLongDate)
-activeDate = Calendar1.Value
+activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbLongDate)
+activeDate = Calendar1.value
 Unload Me
 End Sub
 
 Private Sub Form_Load()
-Calendar1.Value = Date
+Calendar1.value = Date
 End Sub
