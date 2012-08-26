@@ -172,7 +172,7 @@ Function getAffectedCustomer(pricerule_id As Integer) As Collection
 End Function
 Public Sub update_price_rule()
 Dim update_tblprice_rule As String
- update_tblprice_rule = "UPDATE price_rule " & _
+ update_tblprice_rule = "UPDATE price_rule SET " & _
  "rule_type_id=" & Me.rule_type_id & "," & _
  "name ='" & Me.rule_name & "'," & _
  "description= '" & Me.description & "'," & _

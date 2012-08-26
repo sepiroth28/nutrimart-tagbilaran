@@ -520,6 +520,18 @@ End Function
 Private Sub cmdSave_Click()
 
 If edit_price_rule = True Then
+    With ToEditPriceRule
+        .rule_type_id = newruletype.ruletype_id
+        .rule_name = Me.txtName.Text
+        .description = Me.txtDescription.Text
+        .rule_type_name = cboRule_type.Text
+        .charge_type = cboChargetype.Text
+        .value = Me.txtValue.Text
+        .number_of_use = Me.txtNo_of_use.Text
+        .active = Me.chkActive.value
+        .valid_until = ToEditPriceRule.valid_until
+        .auto_apply = Me.chkAutoApply.value
+    End With
     ToEditPriceRule.update_price_rule
 Else
     With newpricerule
