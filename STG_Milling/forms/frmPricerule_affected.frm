@@ -150,8 +150,13 @@ End If
 End Sub
 
 Sub checkIfSelected(list As ListItem)
+
+
+
 If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
-    For Each items In frmPricerule.newpricerule.affected_items
+
+    If edit_price_rule Then
+        For Each items In ToEditPriceRule.affected_items
         If items = list.Text Then
             list.Checked = True
             Exit Sub
@@ -159,8 +164,21 @@ If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
             list.Checked = False
         End If
     Next
+    Else
+        For Each items In frmPricerule.newpricerule.affected_items
+        If items = list.Text Then
+            list.Checked = True
+            Exit Sub
+        Else
+            list.Checked = False
+        End If
+    Next
+    End If
+    
+    
 ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
-    For Each items In frmPricerule.newpricerule.affected_customer
+    If edit_price_rule Then
+        For Each items In ToEditPriceRule.affected_customer
         If items = list.Text Then
             list.Checked = True
             Exit Sub
@@ -168,5 +186,16 @@ ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
             list.Checked = False
         End If
     Next
+    Else
+        For Each items In frmPricerule.newpricerule.affected_customer
+        If items = list.Text Then
+            list.Checked = True
+            Exit Sub
+        Else
+            list.Checked = False
+        End If
+    Next
+    End If
+    
 End If
 End Sub

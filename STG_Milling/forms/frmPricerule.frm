@@ -488,7 +488,9 @@ End Sub
 
 
 Private Sub chkAutoApply_Click()
-picCouponCode.Visible = chkAutoApply.value
+
+    picCouponCode.Visible = chkAutoApply.value
+    
 End Sub
 
 Private Sub cmdbowseselecteditems_Click()
@@ -517,6 +519,9 @@ End Function
 
 Private Sub cmdSave_Click()
 
+If edit_price_rule = True Then
+    ToEditPriceRule.update_price_rule
+Else
     With newpricerule
          .rule_name = txtName.Text
          .description = txtDescription.Text
@@ -534,11 +539,22 @@ Private Sub cmdSave_Click()
          .save_price_rule
          MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
     End With
-    
+End If
 End Sub
 
 Private Sub Form_Load()
-Call load_rule_type(cboRule_type)
-Call load_charge_type(cboChargetype)
+If edit_price_rule = True Then
+    txtName.Text = ToEditPriceRule.rule_name
+    txtDescription.Text = ToEditPriceRule.description
+    cboRule_type.Text = ToEditPriceRule.rule_type_name
+    cboChargetype.Text = ToEditPriceRule.charge_type
+    txtValue.Text = ToEditPriceRule.value
+    txtNo_of_use.Text = ToEditPriceRule.number_of_use
+    chkActive.value = ToEditPriceRule.active
+    chkAutoApply.value = ToEditPriceRule.auto_apply
+Else
+    Call load_rule_type(cboRule_type)
+    Call load_charge_type(cboChargetype)
+End If
 End Sub
 

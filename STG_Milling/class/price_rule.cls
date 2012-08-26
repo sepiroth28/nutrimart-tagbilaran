@@ -16,6 +16,7 @@ Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 'local variable(s) to hold property value(s)
 Private mvarprice_id As Integer 'local copy
 Private mvarrule_type_id As Integer 'local copy
+Private mvarrule_type_name As String 'local copy
 Private mvarrule_name As String 'local copy
 Private mvardescription As String 'local copy
 Private mvarcharge_type As String 'local copy
@@ -24,7 +25,7 @@ Private mvarcreated_at As String 'local copy
 Private mvaruse_coupon_code As String 'local copy
 Private mvarvalid_until As String 'local copy
 Private mvarnumber_of_use As Integer 'local copy
-Private mvaractive As Boolean 'local copy
+Private mvaractive As Integer 'local copy
 'local variable(s) to hold property value(s)
 Private mvarauto_apply As Integer 'local copy
 'local variable(s) to hold property value(s)
@@ -33,8 +34,6 @@ Private mvarlast_insert_id As Integer 'local copy
 Private mvaraffected_items As New Collection 'local copy
 Private mvaraffected_customer As New Collection 'local copy
 'local variable(s) to hold property value(s)
-
-
 
 
 Public Property Set affected_customer(ByVal vData As Collection)
@@ -104,11 +103,19 @@ Public Sub load_price_rule(price_rule_id As Integer)
 Dim sql As String
 Dim rs As ADODB.Recordset
 
-sql = "SELECT * FROM price_rule WHERE price_id=" & price_rule_id
+Dim query_affected_customer As String
+Dim rs2 As ADODB.Recordset
+
+
+sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr inner join rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
 Set rs = db.execute(sql)
+
+query_affected_customer = "SELECT * FROM pricerule_customer where price_id= " & price_rule_id
+Set rs2 = db.execute(query_affected_customer)
 With Me
-    .price_id = rs.Fields("price_id").value
+    .price_id = rs.Fields("pricerule_id").value
     .rule_type_id = rs.Fields("rule_type_id").value
+    .rule_type_name = rs.Fields("rule_type_name").value
     .rule_name = rs.Fields("name").value
     .description = rs.Fields("description").value
     .charge_type = rs.Fields("charge_type").value
@@ -119,11 +126,50 @@ With Me
     .number_of_use = rs.Fields("number_of_use").value
     .active = rs.Fields("active").value
     .auto_apply = rs.Fields("auto_apply").value
+   
+    Set .affected_items = getAffectedItems(price_rule_id)
+    Set .affected_customer = getAffectedCustomer(price_rule_id)
 End With
+Set rs2 = Nothing
 Set rs = Nothing
 
 End Sub
 
+Function getAffectedItems(pricerule_id As Integer) As Collection
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    
+    sql = "SELECT * FROM `pricerule_product` where price_id = " & pricerule_id
+    Set rs = db.execute(sql)
+    
+    If rs.RecordCount Then
+    Set getAffectedItems = New Collection
+        Do Until rs.EOF
+            getAffectedItems.Add "" & rs.Fields(1).value
+        rs.MoveNext
+        Loop
+    End If
+    
+    Set rs = Nothing
+End Function
+
+Function getAffectedCustomer(pricerule_id As Integer) As Collection
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    
+    sql = "SELECT * FROM `pricerule_customer` where price_id = " & pricerule_id
+    Set rs = db.execute(sql)
+    
+    If rs.RecordCount Then
+    Set getAffectedCustomer = New Collection
+        Do Until rs.EOF
+            getAffectedCustomer.Add "" & rs.Fields(1).value
+        rs.MoveNext
+        Loop
+    End If
+    
+    Set rs = Nothing
+End Function
 Public Sub update_price_rule()
 Dim update_tblprice_rule As String
  update_tblprice_rule = "UPDATE price_rule " & _
@@ -167,27 +213,30 @@ sql = "INSERT INTO price_rule " & _
 db.execute (sql)
 
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
+
 If Me.affected_customer.Count Then
     For Each items In Me.affected_customer
         Call addThisCustomerToPriceRule(Me.last_insert_id, "" & items)
-    Next
+        Next
 End If
 
 If Me.affected_items.Count Then
-    For Each items In Me.affected_items
-        Call addThisItemToPriceRule(Me.last_insert_id, "" & items)
+    For Each items In Me.affected_customer
+        Call addThisCustomerToPriceRule(Me.last_insert_id, Val(items))
+
     Next
 End If
+
 End Sub
 
-Public Property Let active(ByVal vData As Boolean)
+Public Property Let active(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.active = 5
     mvaractive = vData
 End Property
 
 
-Public Property Get active() As Boolean
+Public Property Get active() As Integer
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.active
     active = mvaractive
@@ -323,6 +372,18 @@ Public Property Get rule_type_id() As Integer
     rule_type_id = mvarrule_type_id
 End Property
 
+Public Property Let rule_type_name(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.rule_type_id = 5
+    mvarrule_type_name = vData
+End Property
+
+
+Public Property Get rule_type_name() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.rule_type_id
+    rule_type_name = mvarrule_type_name
+End Property
 
 
 Public Property Let price_id(ByVal vData As Integer)

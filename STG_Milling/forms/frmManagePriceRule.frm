@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePriceRule 
    Caption         =   "Price Rule"
    ClientHeight    =   8385
@@ -193,6 +193,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cmdAddNewPriceRule_Click()
+    edit_price_rule = False
     frmPricerule.Show 1
 End Sub
 
@@ -228,4 +229,11 @@ If rs.RecordCount > 0 Then
     rs.MoveNext
     Loop
 End If
+End Sub
+
+
+Private Sub lsvPriceRuleList_DblClick()
+        edit_price_rule = True
+        ToEditPriceRule.load_price_rule (lsvPriceRuleList.SelectedItem.Text)
+        frmPricerule.Show 1
 End Sub
