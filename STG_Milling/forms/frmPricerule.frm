@@ -54,6 +54,32 @@ Begin VB.Form frmPricerule
          TabIndex        =   12
          Top             =   840
          Width           =   7905
+         Begin VB.CommandButton cmdGenerateCode 
+            Appearance      =   0  'Flat
+            Caption         =   "generate code"
+            Height          =   405
+            Left            =   6360
+            TabIndex        =   25
+            Top             =   2070
+            Width           =   1365
+         End
+         Begin VB.TextBox txtCouponCode 
+            Appearance      =   0  'Flat
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Left            =   3900
+            TabIndex        =   23
+            Top             =   2100
+            Width           =   2415
+         End
          Begin VB.CheckBox chkAutoApply 
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
@@ -72,7 +98,7 @@ Begin VB.Form frmPricerule
             Left            =   1980
             TabIndex        =   22
             Top             =   1980
-            Width           =   2115
+            Width           =   1845
          End
          Begin VB.CheckBox chkActive 
             Appearance      =   0  'Flat
@@ -212,6 +238,24 @@ Begin VB.Form frmPricerule
             Top             =   2850
             Width           =   672
          End
+         Begin VB.Label Label4 
+            BackStyle       =   0  'Transparent
+            Caption         =   "Coupon code"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   225
+            Left            =   3930
+            TabIndex        =   24
+            Top             =   1860
+            Width           =   1575
+         End
          Begin VB.Label txtNumberofUse 
             BackStyle       =   0  'Transparent
             Caption         =   "Number of Use:"
@@ -324,8 +368,8 @@ Begin VB.Form frmPricerule
             BorderColor     =   &H00000080&
             X1              =   150
             X2              =   7680
-            Y1              =   2400
-            Y2              =   2400
+            Y1              =   2520
+            Y2              =   2520
          End
          Begin VB.Label Label9 
             BackStyle       =   0  'Transparent
@@ -448,11 +492,14 @@ Private Sub cmdSave_Click()
          .rule_type_id = newruletype.ruletype_id
          .charge_type = cboChargetype.Text
          .value = txtValue.Text
+         .use_coupon_code = txtCouponCode.Text
          .number_of_use = txtNo_of_use.Text
          .active = chkActive.value
          .auto_apply = chkAutoApply.value
          .save_price_rule
+         MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
     End With
+    
 End Sub
 
 Private Sub Form_Load()
@@ -470,3 +517,4 @@ Else
     Call load_charge_type(cboChargetype)
 End If
 End Sub
+

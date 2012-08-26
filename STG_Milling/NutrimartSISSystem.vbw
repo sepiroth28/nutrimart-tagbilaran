@@ -119,5 +119,5 @@ rule_type = 125, 125, 877, 560, C
 frmRuleType = 175, 175, 927, 610, , 200, 200, 1135, 654, C
 Helper_ruletype = 0, 0, 0, 0, C
 frmPricerule_affected = 50, 50, 802, 485, , 0, 0, 935, 454, C
-Helper_PriceRule = 0, 0, 894, 275, Z
+Helper_PriceRule = 0, 0, 894, 275, 
 frmManagePriceRule = 125, 125, 869, 634, , 100, 100, 844, 609, C

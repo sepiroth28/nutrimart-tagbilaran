@@ -21,7 +21,7 @@ Private mvardescription As String 'local copy
 Private mvarcharge_type As String 'local copy
 Private mvarvalue As Double 'local copy
 Private mvarcreated_at As String 'local copy
-Private mvaruse_coupon_code As Boolean 'local copy
+Private mvaruse_coupon_code As String 'local copy
 Private mvarvalid_until As String 'local copy
 Private mvarnumber_of_use As Integer 'local copy
 Private mvaractive As Integer 'local copy
@@ -32,6 +32,11 @@ Private mvarlast_insert_id As Integer 'local copy
 'local variable(s) to hold property value(s)
 Private mvaraffected_items As New Collection 'local copy
 Private mvaraffected_customer As New Collection 'local copy
+'local variable(s) to hold property value(s)
+
+
+
+
 Public Property Set affected_customer(ByVal vData As Collection)
 'used when assigning an Object to the property, on the left side of a Set statement.
 'Syntax: Set x.affected_customer = Form1
@@ -146,18 +151,18 @@ End Sub
 Public Sub save_price_rule()
 Dim sql As String
 sql = "INSERT INTO price_rule " & _
-" VALUES(NULL," & _
-"" & Me.rule_type_id & "," & _
-"'" & Me.rule_name & "'," & _
-"'" & Me.description & "', " & _
-"'" & Me.charge_type & "', " & _
-"" & Me.value & "," & _
-" CURDATE()," & _
-"'" & Me.use_coupon_code & "'," & _
-"'" & Me.valid_until & "'," & _
-"" & Me.number_of_use & "," & _
-"" & Me.active & "," & _
-"" & Me.auto_apply & ")"
+            " VALUES(NULL," & _
+            "" & Me.rule_type_id & "," & _
+            "'" & Me.rule_name & "'," & _
+            "'" & Me.description & "', " & _
+            "'" & Me.charge_type & "', " & _
+            "" & Me.value & "," & _
+            " CURDATE()," & _
+            "'" & Me.use_coupon_code & "'," & _
+            "'" & Me.valid_until & "'," & _
+            "" & Me.number_of_use & "," & _
+            "" & Me.active & "," & _
+            "" & Me.auto_apply & ")"
 db.execute (sql)
 
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).value
@@ -219,14 +224,14 @@ End Property
 
 
 
-Public Property Let use_coupon_code(ByVal vData As Integer)
+Public Property Let use_coupon_code(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.use_coupon_code = 5
     mvaruse_coupon_code = vData
 End Property
 
 
-Public Property Get use_coupon_code() As Integer
+Public Property Get use_coupon_code() As String
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.use_coupon_code
     use_coupon_code = mvaruse_coupon_code
