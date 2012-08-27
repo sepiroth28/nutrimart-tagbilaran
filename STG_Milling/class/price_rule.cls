@@ -103,15 +103,9 @@ Public Sub load_price_rule(price_rule_id As Integer)
 Dim sql As String
 Dim rs As ADODB.Recordset
 
-Dim query_affected_customer As String
-Dim rs2 As ADODB.Recordset
-
-
-sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr inner join rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
+sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr left join rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
 Set rs = db.execute(sql)
 
-query_affected_customer = "SELECT * FROM pricerule_customer where price_id= " & price_rule_id
-Set rs2 = db.execute(query_affected_customer)
 With Me
     .price_id = rs.Fields("pricerule_id").value
     .rule_type_id = rs.Fields("rule_type_id").value
@@ -130,7 +124,6 @@ With Me
     Set .affected_items = getAffectedItems(price_rule_id)
     Set .affected_customer = getAffectedCustomer(price_rule_id)
 End With
-Set rs2 = Nothing
 Set rs = Nothing
 
 End Sub
