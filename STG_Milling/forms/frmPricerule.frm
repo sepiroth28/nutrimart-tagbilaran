@@ -533,6 +533,9 @@ If edit_price_rule = True Then
         .auto_apply = Me.chkAutoApply.value
     End With
     ToEditPriceRule.update_price_rule
+    MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
+    frmManagePriceRule.load_price_rule_list
+    Unload Me
 Else
     With newpricerule
          .rule_name = txtName.Text
@@ -545,16 +548,20 @@ Else
                .use_coupon_code = txtCouponCode.Text
             End If
             
-         .number_of_use = txtNo_of_use.Text
+         .number_of_use = Val(txtNo_of_use.Text)
          .active = chkActive.value
          .auto_apply = chkAutoApply.value
          .save_price_rule
          MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
+         frmManagePriceRule.load_price_rule_list
+         Unload Me
     End With
 End If
 End Sub
 
 Private Sub Form_Load()
+Call load_rule_type(cboRule_type)
+Call load_charge_type(cboChargetype)
 If edit_price_rule = True Then
     txtName.Text = ToEditPriceRule.rule_name
     txtDescription.Text = ToEditPriceRule.description
@@ -564,9 +571,6 @@ If edit_price_rule = True Then
     txtNo_of_use.Text = ToEditPriceRule.number_of_use
     chkActive.value = ToEditPriceRule.active
     chkAutoApply.value = ToEditPriceRule.auto_apply
-Else
-    Call load_rule_type(cboRule_type)
-    Call load_charge_type(cboChargetype)
 End If
 End Sub
 

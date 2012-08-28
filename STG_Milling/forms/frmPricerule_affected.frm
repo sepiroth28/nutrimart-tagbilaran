@@ -91,20 +91,39 @@ End Sub
 
 Private Sub cmdSelect_Click()
 Dim list As ListItem
-If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
-    Set frmPricerule.newpricerule.affected_items = New Collection
-    For Each list In lsvItemList.ListItems
-        If list.Checked = True Then
-                frmPricerule.newpricerule.affected_items.Add list.Text
-        End If
-    Next
-ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
-    Set frmPricerule.newpricerule.affected_customer = New Collection
-     For Each list In lsvItemList.ListItems
-        If list.Checked = True Then
-            frmPricerule.newpricerule.affected_customer.Add list.Text
-        End If
-     Next
+
+If edit_price_rule Then
+    If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
+        Set ToEditPriceRule.affected_items = New Collection
+        For Each list In lsvItemList.ListItems
+            If list.Checked = True Then
+                    ToEditPriceRule.affected_items.Add list.Text
+            End If
+        Next
+    ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
+        Set ToEditPriceRule.affected_customer = New Collection
+         For Each list In lsvItemList.ListItems
+            If list.Checked = True Then
+                ToEditPriceRule.affected_customer.Add list.Text
+            End If
+         Next
+    End If
+Else
+    If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
+        Set frmPricerule.newpricerule.affected_items = New Collection
+        For Each list In lsvItemList.ListItems
+            If list.Checked = True Then
+                    frmPricerule.newpricerule.affected_items.Add list.Text
+            End If
+        Next
+    ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
+        Set frmPricerule.newpricerule.affected_customer = New Collection
+         For Each list In lsvItemList.ListItems
+            If list.Checked = True Then
+                frmPricerule.newpricerule.affected_customer.Add list.Text
+            End If
+         Next
+    End If
 End If
 Unload Me
 End Sub
@@ -151,28 +170,26 @@ End Sub
 
 Sub checkIfSelected(list As ListItem)
 
-
-
 If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
 
     If edit_price_rule Then
         For Each items In ToEditPriceRule.affected_items
-        If items = list.Text Then
-            list.Checked = True
-            Exit Sub
-        Else
-            list.Checked = False
-        End If
-    Next
+            If items = list.Text Then
+                list.Checked = True
+                Exit Sub
+            Else
+                list.Checked = False
+            End If
+        Next
     Else
         For Each items In frmPricerule.newpricerule.affected_items
-        If items = list.Text Then
-            list.Checked = True
-            Exit Sub
-        Else
-            list.Checked = False
-        End If
-    Next
+            If items = list.Text Then
+                list.Checked = True
+                Exit Sub
+            Else
+                list.Checked = False
+            End If
+        Next
     End If
     
     

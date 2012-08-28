@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePriceRule 
    Caption         =   "Price Rule"
    ClientHeight    =   8385
    ClientLeft      =   120
-   ClientTop       =   450
+   ClientTop       =   750
    ClientWidth     =   12690
    LinkTopic       =   "Form1"
    ScaleHeight     =   8385
@@ -186,6 +186,12 @@ Begin VB.Form frmManagePriceRule
          Width           =   2115
       End
    End
+   Begin VB.Menu mnuPriceFile 
+      Caption         =   "File"
+      Begin VB.Menu mnu_pricerule_delete 
+         Caption         =   "Delete"
+      End
+   End
 End
 Attribute VB_Name = "frmManagePriceRule"
 Attribute VB_GlobalNameSpace = False
@@ -236,4 +242,14 @@ Private Sub lsvPriceRuleList_DblClick()
         edit_price_rule = True
         ToEditPriceRule.load_price_rule (lsvPriceRuleList.SelectedItem.Text)
         frmPricerule.Show 1
+End Sub
+
+Private Sub mnu_pricerule_delete_Click()
+Dim del As New price_rule
+If MsgBox("Are you sure you want to delete this rule?", vbYesNoCancel, "Delete?") = vbYes Then
+    del.load_price_rule (Val(lsvPriceRuleList.SelectedItem.Text))
+    del.delete_price_rule
+    MsgBox "Successfully deleted", vbOKOnly, "Delete price rule"
+    load_price_rule_list
+End If
 End Sub

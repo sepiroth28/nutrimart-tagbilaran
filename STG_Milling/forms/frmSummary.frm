@@ -48,6 +48,23 @@ Begin VB.Form frmSummary
       TabIndex        =   1
       Top             =   60
       Width           =   12675
+      Begin VB.CommandButton cmdRemoveSelectedRule 
+         Caption         =   "Remove selected rule"
+         Enabled         =   0   'False
+         Height          =   345
+         Left            =   2370
+         TabIndex        =   24
+         Top             =   4980
+         Width           =   2145
+      End
+      Begin VB.CommandButton cmdApplySelectedRule 
+         Caption         =   "Apply selected rule"
+         Height          =   345
+         Left            =   150
+         TabIndex        =   23
+         Top             =   4980
+         Width           =   2145
+      End
       Begin VB.CommandButton cmdDone 
          Caption         =   "DONE"
          BeginProperty Font 
@@ -93,6 +110,7 @@ Begin VB.Form frmSummary
          _ExtentX        =   21934
          _ExtentY        =   4948
          View            =   3
+         LabelEdit       =   1
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
          FullRowSelect   =   -1  'True
@@ -194,7 +212,7 @@ Begin VB.Form frmSummary
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
             Text            =   "description"
-            Object.Width           =   2540
+            Object.Width           =   4410
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
@@ -204,14 +222,14 @@ Begin VB.Form frmSummary
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
             Text            =   "value"
-            Object.Width           =   2540
+            Object.Width           =   882
          EndProperty
       End
       Begin MSComctlLib.ListView lsvAppliedRule 
          Height          =   945
          Left            =   150
          TabIndex        =   22
-         Top             =   5370
+         Top             =   5730
          Width           =   5115
          _ExtentX        =   9022
          _ExtentY        =   1667
@@ -254,7 +272,7 @@ Begin VB.Form frmSummary
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
             Text            =   "description"
-            Object.Width           =   2540
+            Object.Width           =   4410
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
@@ -264,7 +282,7 @@ Begin VB.Form frmSummary
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
             Text            =   "value"
-            Object.Width           =   2540
+            Object.Width           =   882
          EndProperty
       End
       Begin VB.Label Label10 
@@ -283,15 +301,15 @@ Begin VB.Form frmSummary
          Height          =   225
          Left            =   150
          TabIndex        =   21
-         Top             =   5130
+         Top             =   5490
          Width           =   3885
       End
       Begin VB.Line Line3 
          BorderColor     =   &H00C0C0C0&
          X1              =   150
          X2              =   5100
-         Y1              =   5040
-         Y2              =   5040
+         Y1              =   5400
+         Y2              =   5400
       End
       Begin VB.Label Label9 
          BackStyle       =   0  'Transparent
@@ -601,6 +619,26 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public done As Boolean
 Public tenderedAmount As Double
+
+Private Sub cmdApplySelectedRule_Click()
+Dim addDiscount As Double
+Dim items As cart_items
+Dim list As ListItem
+For Each list In lsvApplyRule.ListItems
+    If list.Checked = True Then
+        addDiscount = addDiscount + Val(list.SubItems(5))
+    End If
+Next
+   
+For Each items In activeSales.items_sold
+    items.discount = items.discount + addDiscount
+Next
+        
+Call prepareSalesSummary
+cmdApplySelectedRule.Enabled = False
+cmdRemoveSelectedRule.Enabled = True
+End Sub
+
 Private Sub cmdDone_Click()
 If done Then
     Dim cart As New cart
@@ -634,8 +672,30 @@ If done Then
 End If
 End Sub
 
+Private Sub cmdRemoveSelectedRule_Click()
+Dim addDiscount As Double
+Dim items As cart_items
+Dim list As ListItem
+For Each list In lsvApplyRule.ListItems
+    If list.Checked = True Then
+        addDiscount = addDiscount + Val(list.SubItems(5))
+        list.Checked = False
+    End If
+Next
+   
+For Each items In activeSales.items_sold
+    items.discount = items.discount - addDiscount
+Next
+        
+Call prepareSalesSummary
+cmdApplySelectedRule.Enabled = True
+cmdRemoveSelectedRule.Enabled = False
+End Sub
+
 Private Sub Form_Load()
+'this apply the auto apply price rule
     Call getAndApplyActiveAutoPriceRule
+    
     Call prepareSalesSummary
 End Sub
 
@@ -644,29 +704,35 @@ Sub prepareSalesSummary()
     tenderedAmount = 0
     lblReferenceNo.Caption = activeSales.transaction_id
     
-    'this apply the auto apply price rule
-   
-    
     'load applied rule to listview
     If activeSales.appliedRule.Count Then
         For Each r In activeSales.appliedRule
-          If Not isRuleDisplayAlready(Val(r)) Then
+          If Not isRuleDisplayOnAutoApplyAlready(Val(r)) Then
             Dim rule As New price_rule
             Dim list As ListItem
             rule.load_price_rule (Val(r))
             
             If rule.auto_apply Then
                 Set list = lsvAppliedRule.ListItems.Add(, , rule.price_id)
+                list.SubItems(1) = rule.rule_type_id
+                list.SubItems(2) = rule.rule_name
+                list.SubItems(3) = rule.description
+                list.SubItems(4) = rule.charge_type
+                list.SubItems(5) = rule.value
+                list.Checked = True
             Else
-                Set list = lsvApplyRule.ListItems.Add(, , rule.price_id)
+                If Not isRuleDisplayOnManualAlready(Val(r)) Then
+                    Set list = lsvApplyRule.ListItems.Add(, , rule.price_id)
+                    list.SubItems(1) = rule.rule_type_id
+                    list.SubItems(2) = rule.rule_name
+                    list.SubItems(3) = rule.description
+                    list.SubItems(4) = rule.charge_type
+                    list.SubItems(5) = rule.value
+                    'list.Checked = True
+                End If
             End If
             
-            list.SubItems(1) = rule.rule_type_id
-            list.SubItems(2) = rule.rule_name
-            list.SubItems(3) = rule.description
-            list.SubItems(4) = rule.charge_type
-            list.SubItems(5) = rule.value
-            list.Checked = True
+            
            End If
         Next
     End If
@@ -690,11 +756,20 @@ Sub prepareSalesSummary()
     End If
 End Sub
 
-Function isRuleDisplayAlready(id As Integer) As Boolean
-    isRuleDisplayAlready = False
+Function isRuleDisplayOnAutoApplyAlready(id As Integer) As Boolean
+    isRuleDisplayOnAutoApplyAlready = False
     For Each items In lsvAppliedRule.ListItems
         If items.Text = id Then
-            isRuleDisplayAlready = True
+            isRuleDisplayOnAutoApplyAlready = True
+            Exit Function
+        End If
+    Next
+End Function
+Function isRuleDisplayOnManualAlready(id As Integer) As Boolean
+    isRuleDisplayOnManualAlready = False
+    For Each items In lsvApplyRule.ListItems
+        If items.Text = id Then
+            isRuleDisplayOnManualAlready = True
             Exit Function
         End If
     Next

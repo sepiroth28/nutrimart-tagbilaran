@@ -107,30 +107,31 @@ Dim query_affected_customer As String
 Dim rs2 As ADODB.Recordset
 
 
-sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr inner join rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
+sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr LEFT JOIN rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
 Set rs = db.execute(sql)
 
-query_affected_customer = "SELECT * FROM pricerule_customer where price_id= " & price_rule_id
-Set rs2 = db.execute(query_affected_customer)
-With Me
-    .price_id = rs.Fields("pricerule_id").value
-    .rule_type_id = rs.Fields("rule_type_id").value
-    .rule_type_name = rs.Fields("rule_type_name").value
-    .rule_name = rs.Fields("name").value
-    .description = rs.Fields("description").value
-    .charge_type = rs.Fields("charge_type").value
-    .value = rs.Fields("value").value
-    .created_at = rs.Fields("created_at").value
-    .use_coupon_code = rs.Fields("use_coupon_code").value
-    .valid_until = rs.Fields("valid_until").value
-    .number_of_use = rs.Fields("number_of_use").value
-    .active = rs.Fields("active").value
-    .auto_apply = rs.Fields("auto_apply").value
-   
-    Set .affected_items = getAffectedItems(price_rule_id)
-    Set .affected_customer = getAffectedCustomer(price_rule_id)
-End With
-Set rs2 = Nothing
+On Error Resume Next
+If rs.RecordCount Then
+        With Me
+            .price_id = rs.Fields("pricerule_id").value
+            .rule_type_id = rs.Fields("rule_type_id").value
+            .rule_type_name = rs.Fields("rule_type_name").value
+            .rule_name = rs.Fields("name").value
+            .description = rs.Fields("description").value
+            .charge_type = rs.Fields("charge_type").value
+            .value = rs.Fields("value").value
+            .created_at = rs.Fields("created_at").value
+            .use_coupon_code = rs.Fields("use_coupon_code").value
+            .valid_until = rs.Fields("valid_until").value
+            .number_of_use = rs.Fields("number_of_use").value
+            .active = rs.Fields("active").value
+            .auto_apply = rs.Fields("auto_apply").value
+           
+            Set .affected_items = getAffectedItems(price_rule_id)
+            Set .affected_customer = getAffectedCustomer(price_rule_id)
+        End With
+End If
+
 Set rs = Nothing
 
 End Sub
@@ -188,12 +189,31 @@ Dim update_tblprice_rule As String
 
  
  db.execute (update_tblprice_rule)
+ 
+If Me.affected_customer.Count Then
+    clearCustomerOnThisRule (Me.price_id)
+    For Each items In Me.affected_customer
+        Call addThisCustomerToPriceRule(Me.price_id, "" & items)
+    Next
+End If
 
+If Me.affected_items.Count Then
+    clearItemsOnThisRule (Me.price_id)
+    For Each items In Me.affected_items
+        Call addThisItemToPriceRule(Me.price_id, Val(items))
+    Next
+End If
 End Sub
 
+Sub clearCustomerOnThisRule(price_id As Integer)
+    db.execute "DELETE from pricerule_customer WHERE price_id = " & price_id
+End Sub
+Sub clearItemsOnThisRule(price_id As Integer)
+    db.execute "DELETE from pricerule_product WHERE price_id = " & price_id
+End Sub
 Public Sub delete_price_rule()
 Dim delete_from_tbl_price_rule As String
-    delete_from_tbl_price_rule = "DELETE FROM price_rule where price_id=" & Me.price_id & ""
+    delete_from_tbl_price_rule = "DELETE FROM price_rule where pricerule_id=" & Me.price_id & ""
     db.execute (delete_from_tbl_price_rule)
 End Sub
 
@@ -223,8 +243,8 @@ If Me.affected_customer.Count Then
 End If
 
 If Me.affected_items.Count Then
-    For Each items In Me.affected_customer
-        Call addThisCustomerToPriceRule(Me.last_insert_id, Val(items))
+    For Each items In Me.affected_items
+        Call addThisItemToPriceRule(Me.last_insert_id, Val(items))
 
     Next
 End If
