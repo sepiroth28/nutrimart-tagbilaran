@@ -534,12 +534,12 @@ If edit_price_rule = True Then
         .auto_apply = Me.chkAutoApply.value
     End With
     ToEditPriceRule.update_price_rule
-<<<<<<< HEAD
+
     MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
     frmManagePriceRule.load_price_rule_list
-=======
+
     MsgBox "Successfully update price rule...", vbOKOnly, "price rule update"
->>>>>>> c1fa6e603b912abdc3cabc0f69f93c849d362fa2
+
     Unload Me
 Else
     With newpricerule

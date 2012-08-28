@@ -168,7 +168,7 @@ Begin VB.Form frmSummary
       End
       Begin MSComctlLib.ListView lsvApplyRule 
          Height          =   945
-         Left            =   120
+         Left            =   150
          TabIndex        =   19
          Top             =   3960
          Width           =   5115
@@ -624,6 +624,7 @@ Private Sub cmdApplySelectedRule_Click()
 Dim addDiscount As Double
 Dim items As cart_items
 Dim list As ListItem
+Dim getItemId As Integer
 For Each list In lsvApplyRule.ListItems
     If list.Checked = True Then
         addDiscount = addDiscount + Val(list.SubItems(5))
@@ -632,9 +633,11 @@ Next
    
 For Each items In activeSales.items_sold
 'to do create a function that checks if items is include in pricerule
-    If isItemsHasPriceRule("" & items.Item.item_id) Then
+    'If isItemsHasPriceRule("" & items.Item.item_id) Then
+Call check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text, getItemId)
+If getItemId > 0 Then
         items.discount = items.discount + addDiscount
-    End If
+End If
 Next
         
 Call prepareSalesSummary
@@ -673,6 +676,14 @@ If done Then
     Call prepareNewTransaction
     Unload Me
 End If
+End Sub
+
+Sub check_exist_item_in_pricerule(item_id As Integer, PriceruleId As Integer, getItemId As Integer)
+    Dim sql As String
+    Dim rs As ADODB.Recordset
+    sql = "select * from pricerule_product where item_code='" & item_id & "' and price_id='" & PriceruleId & "'"
+    Set rs = db.execute(sql)
+    getItemId = rs.RecordCount
 End Sub
 
 Private Sub cmdRemoveSelectedRule_Click()
