@@ -520,6 +520,7 @@ End Function
 Private Sub cmdSave_Click()
 
 If edit_price_rule = True Then
+    newruletype.load_rule_type_id (cboRule_type)
     With ToEditPriceRule
         .rule_type_id = newruletype.ruletype_id
         .rule_name = Me.txtName.Text
@@ -533,8 +534,12 @@ If edit_price_rule = True Then
         .auto_apply = Me.chkAutoApply.value
     End With
     ToEditPriceRule.update_price_rule
+<<<<<<< HEAD
     MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
     frmManagePriceRule.load_price_rule_list
+=======
+    MsgBox "Successfully update price rule...", vbOKOnly, "price rule update"
+>>>>>>> c1fa6e603b912abdc3cabc0f69f93c849d362fa2
     Unload Me
 Else
     With newpricerule
@@ -560,8 +565,13 @@ End If
 End Sub
 
 Private Sub Form_Load()
+
 Call load_rule_type(cboRule_type)
 Call load_charge_type(cboChargetype)
+
+    Call load_rule_type(cboRule_type)
+    Call load_charge_type(cboChargetype)
+
 If edit_price_rule = True Then
     txtName.Text = ToEditPriceRule.rule_name
     txtDescription.Text = ToEditPriceRule.description
@@ -571,6 +581,7 @@ If edit_price_rule = True Then
     txtNo_of_use.Text = ToEditPriceRule.number_of_use
     chkActive.value = ToEditPriceRule.active
     chkAutoApply.value = ToEditPriceRule.auto_apply
+
 End If
 End Sub
 

@@ -103,6 +103,7 @@ Public Sub load_price_rule(price_rule_id As Integer)
 Dim sql As String
 Dim rs As ADODB.Recordset
 
+
 Dim query_affected_customer As String
 Dim rs2 As ADODB.Recordset
 
@@ -131,6 +132,29 @@ If rs.RecordCount Then
             Set .affected_customer = getAffectedCustomer(price_rule_id)
         End With
 End If
+
+
+sql = "SELECT pr.*,rt.ruletype_id,rt.name as rule_type_name FROM price_rule pr left join rule_type rt on pr.rule_type_id=rt.ruletype_id WHERE pr.pricerule_id=" & price_rule_id
+Set rs = db.execute(sql)
+
+With Me
+    .price_id = rs.Fields("pricerule_id").value
+    .rule_type_id = rs.Fields("rule_type_id").value
+    .rule_type_name = rs.Fields("rule_type_name").value
+    .rule_name = rs.Fields("name").value
+    .description = rs.Fields("description").value
+    .charge_type = rs.Fields("charge_type").value
+    .value = rs.Fields("value").value
+    .created_at = rs.Fields("created_at").value
+    .use_coupon_code = rs.Fields("use_coupon_code").value
+    .valid_until = rs.Fields("valid_until").value
+    .number_of_use = rs.Fields("number_of_use").value
+    .active = rs.Fields("active").value
+    .auto_apply = rs.Fields("auto_apply").value
+   
+    Set .affected_items = getAffectedItems(price_rule_id)
+    Set .affected_customer = getAffectedCustomer(price_rule_id)
+End With
 
 Set rs = Nothing
 
