@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmSummary 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -631,7 +631,10 @@ For Each list In lsvApplyRule.ListItems
 Next
    
 For Each items In activeSales.items_sold
-    items.discount = items.discount + addDiscount
+'to do create a function that checks if items is include in pricerule
+    If isItemsHasPriceRule("" & items.Item.item_id) Then
+        items.discount = items.discount + addDiscount
+    End If
 Next
         
 Call prepareSalesSummary
