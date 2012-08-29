@@ -22,6 +22,8 @@ Private mvartotal_price As Double 'local copy
 Private mvardiscount As Double 'local copy
 'local variable(s) to hold property value(s)
 Private mvartracking_price As Double 'local copy
+Private mvarstockout_id As Integer 'local copy
+
 Public Property Let tracking_price(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.tracking_price = 5
@@ -50,9 +52,6 @@ Public Property Get discount() As Double
     discount = mvardiscount
 End Property
 
-
-
-
 Sub load_cart_item(stockout_id)
     Dim sql As String
     Dim rs As New ADODB.Recordset
@@ -68,6 +67,7 @@ Sub load_cart_item(stockout_id)
         Me.tracking_price = rs.Fields("tracking_price").value
         Me.qty_purchased = rs.Fields("qty_out").value
         Me.total_price = rs.Fields("amount").value
+        Me.stockout_id = rs.Fields("stockout_id").value
     End If
 End Sub
 
@@ -117,8 +117,6 @@ Public Property Get total_price() As Double
     total_price = mvartotal_price
 End Property
 
-
-
 Public Property Let item_price(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.item_price = 5
@@ -132,10 +130,18 @@ Public Property Get item_price() As Double
     item_price = mvaritem_price
 End Property
 
+Public Property Let stockout_id(ByVal vData As Integer)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.item_price = 5
+    mvarstockout_id = vData
+End Property
 
 
-
-
+Public Property Get stockout_id() As Integer
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.item_price
+    stockout_id = mvarstockout_id
+End Property
 
 Public Property Set Item(ByVal vData As items)
 'used when assigning an Object to the property, on the left side of a Set statement.
@@ -143,14 +149,11 @@ Public Property Set Item(ByVal vData As items)
     Set mvaritem = vData
 End Property
 
-
 Public Property Get Item() As items
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.item
     Set Item = mvaritem
 End Property
-
-
 
 Private Sub Class_Initialize()
 Me.discount = 0
