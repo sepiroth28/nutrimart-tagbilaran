@@ -113,10 +113,7 @@ frmItemList = 175, 175, 927, 610, C, 17, 78, 927, 594, C
 frmAssociatedProduct = 200, 200, 1110, 716, C, 175, 175, 1085, 691, C
 frmConvertInput_qty = 0, 0, 0, 0, C, 75, 75, 985, 591, C
 frmReturnQty = 0, 0, 0, 0, C, 150, 150, 1085, 604, C
-
 frmPricerule = 150, 150, 902, 585, C, 175, 175, 1110, 629, C
-
-
 price_rule = 75, 75, 827, 510, C
 rule_type = 125, 125, 877, 560, C
 frmRuleType = 175, 175, 927, 610, C, 200, 200, 1135, 654, C
