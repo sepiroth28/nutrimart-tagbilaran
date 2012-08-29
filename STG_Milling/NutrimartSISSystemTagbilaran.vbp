@@ -131,6 +131,7 @@ Form=forms\frmManagePriceRule.frm
 Object={8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0; MSCAL.OCX
 Form=forms\frmManageItem_tracking.frm
 Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX
+Form=forms\frmItemMovement.frm
 IconForm="mdi_Inventory"
 Startup="Sub Main"
 HelpFile=""

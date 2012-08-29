@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManageItem 
    Appearance      =   0  'Flat
    BackColor       =   &H00000000&
@@ -172,6 +172,12 @@ Begin VB.Form frmManageItem
    End
    Begin VB.Menu mnu_item_menu 
       Caption         =   "Item Menu"
+      Begin VB.Menu mnu_item_movement 
+         Caption         =   "Movement"
+      End
+      Begin VB.Menu mnu_item_sep 
+         Caption         =   "-"
+      End
       Begin VB.Menu mnu_delete_item 
          Caption         =   "delete"
       End
@@ -242,6 +248,11 @@ If MsgBox("Are you sure you want to delete? Item will be loss and may affect oth
         Call deleteItem(lsvItemList.SelectedItem.SubItems(1))
         Call loadAllItemsToListview(lsvItemList, "item_code")
 End If
+End Sub
+
+Private Sub mnu_item_movement_Click()
+frmItemMovement.item_id_movement = Val(lsvItemList.SelectedItem.Text)
+frmItemMovement.Show
 End Sub
 
 Private Sub txtSearchItemCode_KeyPress(KeyAscii As Integer)

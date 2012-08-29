@@ -83,7 +83,7 @@ Begin VB.Form frmViewSales
          BackColor       =   &H00C7FEF3&
          Caption         =   "..."
          Height          =   375
-         Left            =   5400
+         Left            =   5370
          Style           =   1  'Graphical
          TabIndex        =   6
          Top             =   120
