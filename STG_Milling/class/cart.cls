@@ -17,6 +17,7 @@ Attribute VB_Ext_KEY = "Member0" ,"cart_items"
 Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 'local variable to hold collection
 Private mCol As Collection
+Private mvarstockout_id_of_this_item As Integer
 Public Function get_total_amount() As Double
 End Function
 Sub load_cart(sales_order_no As String)
@@ -34,7 +35,6 @@ Sub load_cart(sales_order_no As String)
         rs.MoveNext
         Loop
     End If
-    
 End Sub
 
 Public Function Add(objNewMember As cart_items, Optional sKey As String) As cart_items

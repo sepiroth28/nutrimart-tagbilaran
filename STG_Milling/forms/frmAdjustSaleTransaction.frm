@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAdjustSaleTransaction 
    BackColor       =   &H00404040&
    BorderStyle     =   1  'Fixed Single
@@ -132,7 +132,7 @@ Begin VB.Form frmAdjustSaleTransaction
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            NumItems        =   8
+            NumItems        =   9
             BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Text            =   "Quantity"
                Object.Width           =   1764
@@ -172,6 +172,11 @@ Begin VB.Form frmAdjustSaleTransaction
             BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   7
                Text            =   "DeductableAmount"
+               Object.Width           =   2540
+            EndProperty
+            BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   8
+               Text            =   "stockout_id"
                Object.Width           =   2540
             EndProperty
          End
@@ -732,7 +737,7 @@ Dim edit_sales_order As Sales
 Dim update_values(3) As String
 
 Private Sub chkDiscount_Click()
-If chkDiscount.Value Then
+If chkDiscount.value Then
     txtDiscount.Enabled = True
 Else
     txtDiscount.Enabled = False
@@ -740,7 +745,7 @@ End If
 End Sub
 
 Private Sub chkGrandTotal_Click()
-If chkGrandTotal.Value Then
+If chkGrandTotal.value Then
     txtGrandTotal.Enabled = True
 Else
     txtGrandTotal.Enabled = False
@@ -748,7 +753,7 @@ End If
 End Sub
 
 Private Sub chkNetTotal_Click()
-If chkNetTotal.Value Then
+If chkNetTotal.value Then
     txtNetTotal.Enabled = True
 Else
     txtNetTotal.Enabled = False
@@ -756,7 +761,7 @@ End If
 End Sub
 
 Private Sub chkSoldTo_Click()
-If chkSoldTo.Value Then
+If chkSoldTo.value Then
     txtSoldTo.Enabled = True
     cmdBrowseCustomer.Enabled = True
 Else
@@ -766,7 +771,7 @@ End If
 End Sub
 
 Private Sub chkTotal_Click()
-If chkTotal.Value Then
+If chkTotal.value Then
     txtNetTotal.Enabled = True
 Else
     txtNetTotal.Enabled = False
@@ -820,22 +825,22 @@ Dim x As Integer
 Dim update As String
 
 x = 0
-If chkSoldTo.Value Then
+If chkSoldTo.value Then
     update_values(x) = "sold_to = '" & txtSoldTo.Text & "'"
     x = x + 1
 End If
 
-If chkGrandTotal.Value Then
+If chkGrandTotal.value Then
     update_values(x) = "grand_total = " & Val(txtGrandTotal.Text)
     x = x + 1
 End If
 
-If chkDiscount.Value Then
+If chkDiscount.value Then
     update_values(x) = "discount = " & Val(txtDiscount.Text)
     x = x + 1
 End If
 
-If chkNetTotal.Value Then
+If chkNetTotal.value Then
     update_values(x) = "net_total =" & Val(txtNetTotal.Text)
     x = x + 1
 End If
@@ -863,6 +868,8 @@ lsvCustomerList.ColumnHeaders(5).width = 0
 Call loadAllCustomersToListview(lsvCustomerList)
 Call loadAllCODToListview(lsvCODList)
 End Sub
+
+
 
 Private Sub lsvCODList_Click()
 On Error Resume Next
@@ -892,22 +899,24 @@ Sub loadAffectedItems()
     lsvAffectedItems.ListItems.Clear
     For Each items In cart
         Set list = lsvAffectedItems.ListItems.Add(, , items.qty_purchased)
-        list.SubItems(1) = items.item.unit_of_measure
-        list.SubItems(2) = items.item.item_name
+        list.SubItems(1) = items.Item.unit_of_measure
+        list.SubItems(2) = items.Item.item_name
         If edit_sales_order.sold_to.dealers_type = DEALER Then
-            list.SubItems(3) = items.item.dealers_price
-            list.SubItems(4) = FormatCurrency((items.item.dealers_price - items.discount) + items.tracking_price, 2)
-            list.SubItems(5) = items.item.item_code
-            list.SubItems(6) = items.item.item_id
-            list.SubItems(7) = ((items.item.dealers_price - items.discount) + items.tracking_price)
+            list.SubItems(3) = items.Item.dealers_price
+            list.SubItems(4) = FormatCurrency((items.Item.dealers_price - items.discount) + items.tracking_price, 2)
+            list.SubItems(5) = items.Item.item_code
+            list.SubItems(6) = items.Item.item_id
+            list.SubItems(7) = ((items.Item.dealers_price - items.discount) + items.tracking_price)
+            list.SubItems(8) = items.stockout_id
         Else
-            list.SubItems(3) = items.item.item_price
-            list.SubItems(4) = FormatCurrency((items.item.item_price - items.discount) + items.tracking_price, 2)
-            list.SubItems(5) = items.item.item_code
-            list.SubItems(6) = items.item.item_id
-            list.SubItems(7) = ((items.item.item_price - items.discount) + items.tracking_price)
+            list.SubItems(3) = items.Item.item_price
+            list.SubItems(4) = FormatCurrency((items.Item.item_price - items.discount) + items.tracking_price, 2)
+            list.SubItems(5) = items.Item.item_code
+            list.SubItems(6) = items.Item.item_id
+            list.SubItems(7) = ((items.Item.item_price - items.discount) + items.tracking_price)
+            list.SubItems(8) = items.stockout_id
         End If
-        
+            
     Next
 
 End Sub
