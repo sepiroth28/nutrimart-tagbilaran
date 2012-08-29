@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmSummary 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -30,12 +30,12 @@ Begin VB.Form frmSummary
          Strikethrough   =   0   'False
       EndProperty
       Height          =   975
-      Left            =   210
+      Left            =   4350
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
       TabIndex        =   17
       Top             =   7590
-      Width           =   7965
+      Width           =   4215
    End
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
@@ -48,6 +48,67 @@ Begin VB.Form frmSummary
       TabIndex        =   1
       Top             =   60
       Width           =   12675
+      Begin VB.Frame Frame1 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000018&
+         Caption         =   "SHIPPING METHOD"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H80000008&
+         Height          =   1755
+         Left            =   180
+         TabIndex        =   25
+         Top             =   6750
+         Width           =   3975
+         Begin VB.OptionButton optPickUp 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            Caption         =   "PICKUP ON STORE"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H000000C0&
+            Height          =   405
+            Left            =   150
+            TabIndex        =   27
+            Top             =   840
+            Width           =   3495
+         End
+         Begin VB.OptionButton optShippingCharge 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            Caption         =   "DELIVERY                                         ( Tracking charge base on destination )"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H000000C0&
+            Height          =   405
+            Left            =   150
+            TabIndex        =   26
+            Top             =   360
+            Value           =   -1  'True
+            Width           =   3735
+         End
+      End
       Begin VB.CommandButton cmdRemoveSelectedRule 
          Caption         =   "Remove selected rule"
          Enabled         =   0   'False
@@ -77,7 +138,7 @@ Begin VB.Form frmSummary
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1005
-         Left            =   8310
+         Left            =   8550
          TabIndex        =   9
          Top             =   7500
          Width           =   3975
@@ -96,7 +157,7 @@ Begin VB.Form frmSummary
             Strikethrough   =   0   'False
          EndProperty
          Height          =   735
-         Left            =   9330
+         Left            =   9570
          TabIndex        =   0
          Top             =   5880
          Width           =   2955
@@ -343,9 +404,9 @@ Begin VB.Form frmSummary
             Strikethrough   =   0   'False
          EndProperty
          Height          =   225
-         Left            =   150
+         Left            =   4260
          TabIndex        =   18
-         Top             =   7230
+         Top             =   7260
          Width           =   1125
       End
       Begin VB.Label lblTrackingPrice 
@@ -362,7 +423,7 @@ Begin VB.Form frmSummary
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   8250
+         Left            =   8490
          TabIndex        =   16
          Top             =   4800
          Width           =   4035
@@ -476,7 +537,7 @@ Begin VB.Form frmSummary
          EndProperty
          ForeColor       =   &H00325641&
          Height          =   495
-         Left            =   8610
+         Left            =   8850
          TabIndex        =   8
          Top             =   6780
          Width           =   3675
@@ -534,7 +595,7 @@ Begin VB.Form frmSummary
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   8250
+         Left            =   8490
          TabIndex        =   5
          Top             =   5340
          Width           =   4035
@@ -554,7 +615,7 @@ Begin VB.Form frmSummary
          EndProperty
          ForeColor       =   &H000000C0&
          Height          =   495
-         Left            =   8250
+         Left            =   8490
          TabIndex        =   4
          Top             =   4260
          Width           =   4035
@@ -573,7 +634,7 @@ Begin VB.Form frmSummary
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   8250
+         Left            =   8490
          TabIndex        =   3
          Top             =   3720
          Width           =   4035
@@ -628,21 +689,22 @@ Dim getItemId As Integer
 For Each list In lsvApplyRule.ListItems
     If list.Checked = True Then
         addDiscount = addDiscount + Val(list.SubItems(5))
+        For Each items In activeSales.items_sold
+            'to do create a function that checks if items is include in pricerule
+                'If isItemsHasPriceRule("" & items.Item.item_id) Then
+            If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text) Then
+                items.discount = items.discount + addDiscount
+                Call prepareSalesSummary
+                cmdApplySelectedRule.Enabled = False
+                cmdRemoveSelectedRule.Enabled = True
+            End If
+        Next
     End If
 Next
    
-For Each items In activeSales.items_sold
-'to do create a function that checks if items is include in pricerule
-    'If isItemsHasPriceRule("" & items.Item.item_id) Then
-Call check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text, getItemId)
-If getItemId > 0 Then
-        items.discount = items.discount + addDiscount
-End If
-Next
-        
-Call prepareSalesSummary
-cmdApplySelectedRule.Enabled = False
-cmdRemoveSelectedRule.Enabled = True
+
+
+
 End Sub
 
 Private Sub cmdDone_Click()
@@ -678,13 +740,17 @@ If done Then
 End If
 End Sub
 
-Sub check_exist_item_in_pricerule(item_id As Integer, PriceruleId As Integer, getItemId As Integer)
+Function check_exist_item_in_pricerule(item_id As Integer, PriceruleId As Integer) As Boolean
     Dim sql As String
     Dim rs As ADODB.Recordset
     sql = "select * from pricerule_product where item_code='" & item_id & "' and price_id='" & PriceruleId & "'"
     Set rs = db.execute(sql)
-    getItemId = rs.RecordCount
-End Sub
+    If rs.RecordCount Then
+        check_exist_item_in_pricerule = True
+    Else
+        check_exist_item_in_pricerule = False
+    End If
+End Function
 
 Private Sub cmdRemoveSelectedRule_Click()
 Dim addDiscount As Double
@@ -695,19 +761,17 @@ For Each list In lsvApplyRule.ListItems
     If list.Checked = True Then
         addDiscount = addDiscount + Val(list.SubItems(5))
         list.Checked = False
+        For Each items In activeSales.items_sold
+            If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text) Then
+            'If getItemId > 0 Then
+                items.discount = items.discount - addDiscount
+                Call prepareSalesSummary
+                cmdApplySelectedRule.Enabled = True
+                cmdRemoveSelectedRule.Enabled = False
+            End If
+        Next
     End If
 Next
-   
-For Each items In activeSales.items_sold
-Call check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text, getItemId)
-    If getItemId > 0 Then
-        items.discount = items.discount - addDiscount
-    End If
-Next
-        
-Call prepareSalesSummary
-cmdApplySelectedRule.Enabled = True
-cmdRemoveSelectedRule.Enabled = False
 End Sub
 
 Private Sub Form_Load()
@@ -792,6 +856,34 @@ Function isRuleDisplayOnManualAlready(id As Integer) As Boolean
         End If
     Next
 End Function
+
+Private Sub optPickUp_Click()
+
+Dim items As cart_items
+Dim list As ListItem
+
+    For Each items In activeSales.items_sold
+            items.tracking_price = 0
+            Call prepareSalesSummary
+    Next
+    Call prepareSalesSummary
+End Sub
+
+Private Sub optShippingCharge_Click()
+Dim items As cart_items
+Dim list As ListItem
+
+    For Each items In activeSales.items_sold
+       If items.Item.item_with_tracking = 1 And items.Item.item_with_half_tracking = 0 Then
+           items.tracking_price = getTrackingPriceOfCurrentCustomer(activeSales.sold_to.customers_id)
+       ElseIf items.Item.item_with_tracking = 1 And items.Item.item_with_half_tracking = 1 Then
+           items.tracking_price = getTrackingPriceOfCurrentCustomer(activeSales.sold_to.customers_id) / 2
+       Else
+           items.tracking_price = 0
+       End If
+    Next
+Call prepareSalesSummary
+End Sub
 
 Private Sub txtTenderedAmount_KeyPress(KeyAscii As Integer)
 If KeyAscii = 13 Then
