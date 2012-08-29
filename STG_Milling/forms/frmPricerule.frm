@@ -569,9 +569,6 @@ Private Sub Form_Load()
 Call load_rule_type(cboRule_type)
 Call load_charge_type(cboChargetype)
 
-    Call load_rule_type(cboRule_type)
-    Call load_charge_type(cboChargetype)
-
 If edit_price_rule = True Then
     txtName.Text = ToEditPriceRule.rule_name
     txtDescription.Text = ToEditPriceRule.description

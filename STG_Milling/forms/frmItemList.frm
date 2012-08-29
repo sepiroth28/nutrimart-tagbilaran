@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmItemList 
    Appearance      =   0  'Flat
    BackColor       =   &H80000018&
@@ -176,6 +176,7 @@ Begin VB.Form frmItemList
       FixedCols       =   0
       GridLinesFixed  =   1
       AllowUserResizing=   1
+      BandDisplay     =   1
       RowSizingMode   =   1
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
@@ -343,7 +344,7 @@ With gridItem
 .ColWidth(2) = 2000
 .ColWidth(3) = 2000
 .ColWidth(4) = 2000
-.ColWidth(5) = 1500
+.ColWidth(5) = 1200
 .FixedCols = 5
 .TextMatrix(0, 1) = "Item Code"
 .TextMatrix(0, 2) = "No.of Stocks"
@@ -369,9 +370,10 @@ overwrite = True
 End Sub
 
 Private Sub gridItem_KeyPress(KeyAscii As Integer)
+
 If gridItem.Row = 0 And gridItem.Col = 5 Then
 Else
-    If KeyAscii < 8 Or KeyAscii > 8 And KeyAscii < 46 Or KeyAscii > 46 And KeyAscii < 48 Or KeyAscii > 57 And KeyAscii < 127 Or KeyAscii > 127 Then
+    If KeyAscii < 8 Or KeyAscii > 8 And KeyAscii < 13 Or KeyAscii > 13 And KeyAscii < 46 Or KeyAscii > 46 And KeyAscii < 48 Or KeyAscii > 57 And KeyAscii < 127 Or KeyAscii > 127 Then
         MsgBox ("numeric values only")
     Else
         If KeyAscii = 8 Then
@@ -386,8 +388,15 @@ Else
         End If
         End If
 End If
-End Sub
 
+If KeyAscii = 13 Then
+    Call cmdSelect_Click
+End If
+
+End Sub
+Sub flixgridevents()
+
+End Sub
 Private Sub lsvItemList_Click()
 If lsvItemList.ListItems.Count > 0 Then
     Dim Item As New items

@@ -60,7 +60,7 @@ Begin VB.Form frmSummary
       Begin VB.CommandButton cmdApplySelectedRule 
          Caption         =   "Apply selected rule"
          Height          =   345
-         Left            =   150
+         Left            =   120
          TabIndex        =   23
          Top             =   4980
          Width           =   2145
@@ -690,6 +690,7 @@ Private Sub cmdRemoveSelectedRule_Click()
 Dim addDiscount As Double
 Dim items As cart_items
 Dim list As ListItem
+Dim getItemId As Integer
 For Each list In lsvApplyRule.ListItems
     If list.Checked = True Then
         addDiscount = addDiscount + Val(list.SubItems(5))
@@ -698,7 +699,10 @@ For Each list In lsvApplyRule.ListItems
 Next
    
 For Each items In activeSales.items_sold
-    items.discount = items.discount - addDiscount
+Call check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text, getItemId)
+    If getItemId > 0 Then
+        items.discount = items.discount - addDiscount
+    End If
 Next
         
 Call prepareSalesSummary
