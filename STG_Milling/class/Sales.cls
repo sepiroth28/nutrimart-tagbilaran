@@ -145,7 +145,7 @@ Sub printDeliveryReceipt()
     Dim sales_order_responsible As New SalesOrder_Responsible
     
     Dim rs As New ADODB.Recordset
-    Set rs = db.execute("SELECT * FROM `stock_out_transaction`")
+    Set rs = db.execute("SELECT * FROM `stock_out_transaction` limit 1")
     Set dtaSalesOrder.DataSource = rs
     Dim qty As String
     Dim unit As String
