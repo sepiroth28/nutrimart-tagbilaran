@@ -89,6 +89,9 @@ Begin VB.MDIForm mdi_Inventory
       Begin VB.Menu mnu_admin_customer_visible 
          Caption         =   "Customer Visibility"
       End
+      Begin VB.Menu mnuManage_item_tracking 
+         Caption         =   "Manage item tracking"
+      End
       Begin VB.Menu mnuRuletype 
          Caption         =   "Creat Rule type"
       End
@@ -295,6 +298,10 @@ End Sub
 
 Private Sub mnuCreditLimit_Click()
 frmCreditLimit.Show
+End Sub
+
+Private Sub mnuManage_item_tracking_Click()
+frmManageItem_tracking.Show 1
 End Sub
 
 Private Sub mnuManageDiscount_Click()
