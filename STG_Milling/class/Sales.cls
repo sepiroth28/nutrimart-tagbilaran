@@ -41,6 +41,23 @@ Public hasRecord As Boolean
 Private mvarprepared_by As String 'local copy
 'local variable(s) to hold property value(s)
 Private mvarappliedRule As Collection 'local copy
+'local variable(s) to hold property value(s)
+Private mvaruserAppliedRule As Collection 'local copy
+Public Property Set userAppliedRule(ByVal vData As Collection)
+'used when assigning an Object to the property, on the left side of a Set statement.
+'Syntax: Set x.userAppliedRule = Form1
+    Set mvaruserAppliedRule = vData
+End Property
+
+
+Public Property Get userAppliedRule() As Collection
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.userAppliedRule
+    Set userAppliedRule = mvaruserAppliedRule
+End Property
+
+
+
 Public Property Set appliedRule(ByVal vData As Collection)
 'used when assigning an Object to the property, on the left side of a Set statement.
 'Syntax: Set x.appliedRule = Form1
@@ -210,8 +227,17 @@ Sub printDeliveryReceipt()
             .Controls("lblchecked_by").Caption = sales_order_responsible.checked_by
             .Controls("lblposted_by").Caption = sales_order_responsible.posted_by
             .Controls("lbldelivered_by").Caption = sales_order_responsible.delivered_by
-            
+
+            'discount details
+                Dim discount_details As String
+                'Dim list As String
+                For Each list In Me.userAppliedRule
+                    discount_details = discount_details & list & vbCrLf
+                Next
+            .Controls("lblDiscountDetails").Caption = discount_details
     End With
+    
+
     
     dtaSalesOrder.Show 1
 End Sub

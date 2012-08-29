@@ -236,6 +236,7 @@ Begin VB.Form frmSummary
          _ExtentX        =   9022
          _ExtentY        =   1667
          View            =   3
+         LabelEdit       =   1
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
          HideColumnHeaders=   -1  'True
@@ -734,10 +735,35 @@ If done Then
     activeSales.prepared_by = activeUser.username
     activeSales.save_sales
     'activeSales.updateReferenceNo
+    
+    'discount details
+    Call addUserAppliedPriceRules
     activeSales.printDeliveryReceipt
     Call prepareNewTransaction
     Unload Me
 End If
+End Sub
+Sub addUserAppliedPriceRules()
+Dim list As ListItem
+Dim desc As String
+Set activeSales.userAppliedRule = New Collection
+
+For Each list In lsvApplyRule.ListItems
+    If list.Checked = True Then
+        desc = "Discount details" & vbCrLf
+        desc = desc & "  " & list.SubItems(2) & " - " & list.SubItems(3) & vbCrLf
+    End If
+Next
+
+For Each list In lsvAppliedRule.ListItems
+    If list.Checked = True Then
+        
+        desc = desc & "  " & list.SubItems(2) & " - " & list.SubItems(3) & vbCrLf
+
+    End If
+Next
+activeSales.userAppliedRule.Add desc
+
 End Sub
 
 Function check_exist_item_in_pricerule(item_id As Integer, PriceruleId As Integer) As Boolean
