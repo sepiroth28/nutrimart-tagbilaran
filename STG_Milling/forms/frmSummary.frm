@@ -693,7 +693,7 @@ For Each list In lsvApplyRule.ListItems
         For Each items In activeSales.items_sold
             'to do create a function that checks if items is include in pricerule
                 'If isItemsHasPriceRule("" & items.Item.item_id) Then
-            If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.list.Text) Then
+            If check_exist_item_in_pricerule(items.Item.item_id, Val(list.Text)) Then
                 items.discount = items.discount + addDiscount
                 Call prepareSalesSummary
                 cmdApplySelectedRule.Enabled = False
@@ -788,7 +788,7 @@ For Each list In lsvApplyRule.ListItems
         addDiscount = Val(list.SubItems(5))
         list.Checked = False
         For Each items In activeSales.items_sold
-            If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text) Then
+            If check_exist_item_in_pricerule(items.Item.item_id, Val(list.Text)) Then
             'If getItemId > 0 Then
                 items.discount = items.discount - addDiscount
                 Call prepareSalesSummary

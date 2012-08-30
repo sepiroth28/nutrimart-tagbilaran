@@ -104,6 +104,20 @@ Set rs = Nothing
 
 End Function
 
+Function isInludeInPriceRule(item_id As Integer, price_rule_id As Integer) As Boolean
+Dim sql As String
+Dim rs As New ADODB.Recordset
+isInludeInPriceRule = False
+sql = "SELECT * FROM `pricerule_product` WHERE item_code = '" & item_id & "' AND price_id = " & pricerule_id
+Set rs = db.execute(sql)
+If rs.RecordCount Then
+    isInludeInPriceRule = True
+End If
+
+Set rs = Nothing
+
+End Function
+
 Function getPriceRuleOfThisItem(item_id As Integer) As Collection
     Dim sql As String
     Dim rs As New ADODB.Recordset
