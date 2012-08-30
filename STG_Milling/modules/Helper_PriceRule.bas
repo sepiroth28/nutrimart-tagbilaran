@@ -57,10 +57,12 @@ If customer_rules.Count Then
             For Each id In pricerule_ids
                 Dim pricerule As New price_rule
                 pricerule.load_price_rule (Val(id))
-                If pricerule.auto_apply Then
-                   items.discount = pricerule.value
+                If isCustomerIncludeOnThisPriceRule(activeSales.sold_to.customers_id, Val(id)) Then
+                    If pricerule.auto_apply Then
+                       items.discount = pricerule.value
+                    End If
+                    activeSales.appliedRule.Add "" & id
                 End If
-                activeSales.appliedRule.Add "" & id
             Next
         End If
     Next
@@ -69,7 +71,18 @@ End If
 
 End Sub
 
+Function isCustomerIncludeOnThisPriceRule(customer_id As Integer, pricerule_id As Integer) As Boolean
+Dim sql As String
+Dim rs As New ADODB.Recordset
+isCustomerIncludeOnThisPriceRule = False
+sql = "SELECT * FROM `pricerule_customer` WHERE cutomer_id = " & customer_id & " AND price_id = " & pricerule_id
+Set rs = db.execute(sql)
+If rs.RecordCount Then
+    isCustomerIncludeOnThisPriceRule = True
+End If
 
+Set rs = Nothing
+End Function
 
 Function isCustomerHasPriceRule(customer_id As Integer) As Collection
 Dim sql As String

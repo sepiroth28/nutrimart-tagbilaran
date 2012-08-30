@@ -528,6 +528,11 @@ If edit_price_rule = True Then
         .rule_type_name = cboRule_type.Text
         .charge_type = cboChargetype.Text
         .value = Me.txtValue.Text
+        
+         If chkAutoApply.value Then
+               .use_coupon_code = txtCouponCode.Text
+         End If
+        
         .number_of_use = Me.txtNo_of_use.Text
         .active = Me.chkActive.value
         .valid_until = ToEditPriceRule.valid_until
@@ -537,9 +542,6 @@ If edit_price_rule = True Then
 
     MsgBox "Successfully saved price rule...", vbOKOnly, "price rule saved"
     frmManagePriceRule.load_price_rule_list
-
-    MsgBox "Successfully update price rule...", vbOKOnly, "price rule update"
-
     Unload Me
 Else
     With newpricerule
