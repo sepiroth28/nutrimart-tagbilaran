@@ -689,7 +689,7 @@ Dim list As ListItem
 Dim getItemId As Integer
 For Each list In lsvApplyRule.ListItems
     If list.Checked = True Then
-        addDiscount = addDiscount + Val(list.SubItems(5))
+        addDiscount = Val(list.SubItems(5))
         For Each items In activeSales.items_sold
             'to do create a function that checks if items is include in pricerule
                 'If isItemsHasPriceRule("" & items.Item.item_id) Then
@@ -785,7 +785,7 @@ Dim list As ListItem
 Dim getItemId As Integer
 For Each list In lsvApplyRule.ListItems
     If list.Checked = True Then
-        addDiscount = addDiscount + Val(list.SubItems(5))
+        addDiscount = Val(list.SubItems(5))
         list.Checked = False
         For Each items In activeSales.items_sold
             If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text) Then
