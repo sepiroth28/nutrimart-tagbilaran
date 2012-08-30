@@ -40,9 +40,9 @@ Public hasRecord As Boolean
 'local variable(s) to hold property value(s)
 Private mvarprepared_by As String 'local copy
 'local variable(s) to hold property value(s)
-Private mvarappliedRule As Collection 'local copy
+Private mvarappliedRule As New Collection 'local copy
 'local variable(s) to hold property value(s)
-Private mvaruserAppliedRule As Collection 'local copy
+Private mvaruserAppliedRule As New Collection 'local copy
 Public Property Set userAppliedRule(ByVal vData As Collection)
 'used when assigning an Object to the property, on the left side of a Set statement.
 'Syntax: Set x.userAppliedRule = Form1

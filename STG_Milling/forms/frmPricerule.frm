@@ -179,7 +179,9 @@ Begin VB.Form frmPricerule
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
+            ItemData        =   "frmPricerule.frx":0000
             Left            =   180
+            List            =   "frmPricerule.frx":0002
             TabIndex        =   2
             Top             =   1410
             Width           =   1695
@@ -195,9 +197,9 @@ Begin VB.Form frmPricerule
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            ItemData        =   "frmPricerule.frx":0000
+            ItemData        =   "frmPricerule.frx":0004
             Left            =   1980
-            List            =   "frmPricerule.frx":0002
+            List            =   "frmPricerule.frx":0006
             TabIndex        =   3
             Top             =   1440
             Width           =   1695
