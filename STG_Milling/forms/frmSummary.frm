@@ -803,7 +803,6 @@ End Sub
 Private Sub Form_Load()
 'this apply the auto apply price rule
     Call getAndApplyActiveAutoPriceRule
-    
     Call prepareSalesSummary
 End Sub
 
