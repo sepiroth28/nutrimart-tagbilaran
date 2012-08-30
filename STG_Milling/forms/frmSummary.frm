@@ -121,9 +121,9 @@ Begin VB.Form frmSummary
       Begin VB.CommandButton cmdApplySelectedRule 
          Caption         =   "Apply selected rule"
          Height          =   345
-         Left            =   120
+         Left            =   150
          TabIndex        =   23
-         Top             =   4980
+         Top             =   5010
          Width           =   2145
       End
       Begin VB.CommandButton cmdDone 
@@ -693,7 +693,7 @@ For Each list In lsvApplyRule.ListItems
         For Each items In activeSales.items_sold
             'to do create a function that checks if items is include in pricerule
                 'If isItemsHasPriceRule("" & items.Item.item_id) Then
-            If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.SelectedItem.Text) Then
+            If check_exist_item_in_pricerule(items.Item.item_id, lsvApplyRule.list.Text) Then
                 items.discount = items.discount + addDiscount
                 Call prepareSalesSummary
                 cmdApplySelectedRule.Enabled = False
