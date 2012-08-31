@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmViewStockIn 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -7,7 +7,7 @@ Begin VB.Form frmViewStockIn
    Caption         =   "Stock In Records"
    ClientHeight    =   9360
    ClientLeft      =   45
-   ClientTop       =   375
+   ClientTop       =   675
    ClientWidth     =   15135
    Icon            =   "frmViewStockIn.frx":0000
    LinkTopic       =   "Form1"
@@ -168,6 +168,12 @@ Begin VB.Form frmViewStockIn
          Y2              =   540
       End
    End
+   Begin VB.Menu mnuStockinMenu 
+      Caption         =   "Stock In menu"
+      Begin VB.Menu mnuDeleteStockIn 
+         Caption         =   "Delete Stock In"
+      End
+   End
 End
 Attribute VB_Name = "frmViewStockIn"
 Attribute VB_GlobalNameSpace = False
@@ -218,6 +224,24 @@ End Sub
 Private Sub lsvStockIn_DblClick()
 activestockId = Val(lsvStockIn.SelectedItem.Text)
 frmStockInItem.Show 1
+End Sub
+
+Private Sub lsvStockIn_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+If Button = 2 Then
+PopupMenu mnuStockinMenu
+End If
+End Sub
+
+Private Sub mnuDeleteStockIn_Click()
+Dim confirm As Byte
+Dim deleteStockIn As String
+confirm = MsgBox("Do you want to delete this Stock in?", vbQuestion + vbYesNo)
+If confirm = vbYes Then
+    deleteStockIn = "DELETE FROM stock_in_transaction WHERE stock_in_transaction_id='" & lsvStockIn.SelectedItem.Text & "'"
+    db.execute (deleteStockIn)
+MsgBox ("Successfully deleted Stock In")
+End If
+ Call loadStockInListByDate(Format(activeDate, "yyyy-mm-dd"), lsvStockIn)
 End Sub
 
 Private Sub txtDate_Click()

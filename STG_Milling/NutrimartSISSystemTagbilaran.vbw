@@ -76,17 +76,11 @@ mdi_Inventory = 100, 100, 844, 609, C, 124, 43, 1034, 559, C
 frmReprint = -29, 50, 973, 504, C, 75, 75, 985, 591, C
 frmCalendar = 100, 100, 851, 535, C, 119, 13, 1029, 529, C
 frmLogIn = 0, 0, 0, 0, C, 0, 0, 910, 516, C
-
-frmViewStockIn = 225, 225, 969, 734, C, 25, 25, 935, 541, C
-Helper_Stock_in = -4, 114, 882, 499, C
-dtaAll_Stockin = 0, 0, 0, 0, C, 25, 25, 1403, 805, C
-
-frmViewStockIn = 0, 0, 0, 0, C, 25, 25, 935, 541, C
+frmViewStockIn = 100, 100, 1035, 554, Z, 25, 25, 935, 541, C
 Helper_Stock_in = 0, 0, 0, 0, C
 dtaAll_Stockin = 0, 0, 0, 0, C, 25, 25, 1465, 925, C
-
 frmViewSalesInDetails = 0, 0, 0, 0, C, 75, 75, 985, 591, C
-frmStockInItem = 100, 100, 844, 609, C, -85, 61, 825, 577, C
+frmStockInItem = 100, 100, 844, 609, C, 70, 33, 980, 549, C
 Credit = 0, 0, 0, 0, C
 frmCreditLimit = 0, 0, 0, 0, C, 125, 125, 1035, 641, C
 Helper_Credit = 0, 0, 0, 0, C
@@ -125,15 +119,8 @@ rule_type = 125, 125, 877, 560, C
 frmRuleType = 175, 175, 927, 610, C, 200, 200, 1135, 654, C
 Helper_ruletype = 0, 0, 0, 0, C
 frmPricerule_affected = 50, 50, 802, 485, C, 0, 0, 935, 454, C
-
-Helper_PriceRule = 0, 0, 894, 427, C
-frmManagePriceRule = 125, 125, 869, 634, C, 100, 100, 844, 609, C
-frmManageItem_tracking = 0, 0, 0, 0, C, 125, 125, 869, 634, C
-frmItemMovement = 0, 0, 758, 435, C, 57, 69, 815, 504, C
-frmEditStockinItem = 175, 175, 919, 684, C, 0, 0, 744, 509, C
-
 Helper_PriceRule = 48, 31, 942, 458, C
 frmManagePriceRule = 125, 125, 869, 634, C, 100, 100, 844, 609, C
 frmManageItem_tracking = 0, 0, 0, 0, C, 100, 100, 1035, 554, C
 frmItemMovement = 0, 0, 758, 435, C, 57, 69, 815, 504, C
-
+frmEditStockinItem = 175, 175, 919, 684, , 0, 0, 744, 509, C
