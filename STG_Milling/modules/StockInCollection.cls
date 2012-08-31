@@ -47,7 +47,6 @@ Public Property Let supplier_id(ByVal vData As Integer)
     mvarsupplier_id = vData
 End Property
 
-
 Public Property Get supplier_id() As Integer
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.supplier_id
@@ -84,7 +83,6 @@ insert = "INSERT INTO stock_in_transaction " & _
 
 db.execute insert
 last_id = db.execute("select last_insert_id()").Fields(0).value
-
 End Sub
 
 Public Property Let received_by(ByVal vData As String)
