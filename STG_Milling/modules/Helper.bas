@@ -1,4 +1,43 @@
 Attribute VB_Name = "Helper_items"
+'load all items to edit stockin in this list view
+Sub loadAllItemToEditInThisListview(lsv As ListView)
+'MsgBox (lsv.Name)
+    Dim list As ListItem
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    sql = "select i.*,id.item_name from items i inner join items_description id on i.item_code=id.item_code order by i.item_code "
+    Set rs = db.execute(sql)
+    lsv.ListItems.Clear
+    Do Until rs.EOF
+            Set list = lsv.ListItems.Add(, , rs.Fields("item_id").value)
+            list.SubItems(1) = rs.Fields("item_code").value
+            list.SubItems(2) = rs.Fields("item_name").value
+            list.SubItems(3) = rs.Fields("item_qty").value
+        rs.MoveNext
+    Loop
+    Set rs = Nothing
+End Sub
+Sub loadThisItemToEditInThisListview(item_code As String, lsv As ListView)
+
+
+'MsgBox (lsv.Name)
+    Dim list As ListItem
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    sql = "select i.*,id.item_name from items i inner join items_description id on i.item_code=id.item_code where i.item_code='" & item_code & "'"
+    Set rs = db.execute(sql)
+    lsv.ListItems.Clear
+    Do Until rs.EOF
+            Set list = lsv.ListItems.Add(, , rs.Fields("item_id").value)
+            list.SubItems(1) = rs.Fields("item_code").value
+            list.SubItems(2) = rs.Fields("item_name").value
+            list.SubItems(3) = rs.Fields("item_qty").value
+        rs.MoveNext
+    Loop
+    Set rs = Nothing
+End Sub
+
+
 'getting all items returns recordset format
 Function getAllItems(Optional sortBy As String = "") As ADODB.Recordset
     Dim sql As String
@@ -431,11 +470,11 @@ Dim i As Long
 
 i = grid.Rows
 
-selectedrow0 = frmItemList.lsvItemList.SelectedItem.Text
-selectedrow1 = frmItemList.lsvItemList.SelectedItem.SubItems(1)
-selectedrow4 = frmItemList.lsvItemList.SelectedItem.SubItems(4)
-selectedrow5 = frmItemList.lsvItemList.SelectedItem.SubItems(5)
-selectedrow6 = frmItemList.lsvItemList.SelectedItem.SubItems(6)
+selectedrow0 = frmItemList.lsvItemlist.SelectedItem.Text
+selectedrow1 = frmItemList.lsvItemlist.SelectedItem.SubItems(1)
+selectedrow4 = frmItemList.lsvItemlist.SelectedItem.SubItems(4)
+selectedrow5 = frmItemList.lsvItemlist.SelectedItem.SubItems(5)
+selectedrow6 = frmItemList.lsvItemlist.SelectedItem.SubItems(6)
 
 grid.Rows = grid.Rows + 1
 

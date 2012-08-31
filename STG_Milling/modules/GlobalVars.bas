@@ -14,6 +14,7 @@ Public activeUser As New User_Account
 Public activeDateTextbox As TextBox
 Public activeDate As Date
 Public activestockId As Integer
+Public activeStockin_id_to_edit As Integer
 Public activeReprintStockIN As Integer
 Public activeSalesOrderForViewSales As String
 Public activeSalesOrderForViewSalesDetails As String

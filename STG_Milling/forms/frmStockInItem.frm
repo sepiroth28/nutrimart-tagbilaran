@@ -1,12 +1,12 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmStockInItem 
    BackColor       =   &H00325641&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Stock In Items"
    ClientHeight    =   4560
    ClientLeft      =   45
-   ClientTop       =   375
+   ClientTop       =   675
    ClientWidth     =   8235
    Icon            =   "frmStockInItem.frx":0000
    LinkTopic       =   "Form1"
@@ -54,7 +54,7 @@ Begin VB.Form frmStockInItem
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   3
+         NumItems        =   5
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "#"
             Object.Width           =   882
@@ -70,6 +70,25 @@ Begin VB.Form frmStockInItem
             Text            =   "Qty In"
             Object.Width           =   3528
          EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "stockin_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Item_id"
+            Object.Width           =   0
+         EndProperty
+      End
+   End
+   Begin VB.Menu mnuItem_menu 
+      Caption         =   "Items Menu"
+      Begin VB.Menu mnuEdit 
+         Caption         =   "Edit"
+      End
+      Begin VB.Menu mnuDelete 
+         Caption         =   "Delete"
       End
    End
 End
@@ -80,4 +99,25 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
 Call loadStockInItemsToListView(activestockId, ListView1)
+End Sub
+
+Private Sub ListView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+If Button = 2 Then
+PopupMenu mnuItem_menu
+End If
+End Sub
+
+Private Sub mnuDelete_Click()
+Dim confirm As Byte
+confirm = MsgBox("are you sure you want to delete this stock in item", vbQuestion + vbYesNo)
+If confirm = vbYes Then
+    Call deleteStockInItem(Val(ListView1.SelectedItem.SubItems(3)), Val(ListView1.SelectedItem.SubItems(2)), Val(ListView1.SelectedItem.SubItems(4)))
+    MsgBox ("Stock in items deleted")
+    Call loadStockInItemsToListView(activestockId, ListView1)
+End If
+End Sub
+
+Private Sub mnuEdit_Click()
+Call loadStockInItemsToBeEdit(Val(ListView1.SelectedItem.SubItems(3)), frmEditStockinItem.txtItemName, frmEditStockinItem.txtItem_qty)
+frmEditStockinItem.Show 1
 End Sub
