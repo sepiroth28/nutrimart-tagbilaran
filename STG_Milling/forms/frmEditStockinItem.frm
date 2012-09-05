@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmEditStockinItem 
    Caption         =   "Items"
    ClientHeight    =   3690
@@ -189,6 +189,8 @@ Private Sub cmdSave_Click()
 Call deleteStockInItem(Val(frmStockInItem.ListView1.SelectedItem.SubItems(3)), Val(frmStockInItem.ListView1.SelectedItem.SubItems(2)), Val(frmStockInItem.ListView1.SelectedItem.SubItems(4)))
 Call updateStockInItemWithNewInfo(lsvItemlist.SelectedItem.Text, Val(txtItem_qty.Text))
 MsgBox ("sucessfully updated stock in item")
+Unload Me
+Call loadStockInItemsToListView(activestockId, frmStockInItem.ListView1)
 End Sub
 
 Private Sub Form_Load()

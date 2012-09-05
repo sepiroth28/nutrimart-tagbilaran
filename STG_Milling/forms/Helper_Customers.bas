@@ -82,7 +82,7 @@ End Sub
 Function searchCustomersByName(customers_name As String) As ADODB.Recordset
     Dim sql As String
     Dim rs As New ADODB.Recordset
-    sql = "SELECT * FROM `customers` WHERE customers_name like '" & customers_name & "%' AND visible = 1"
+    sql = "SELECT * FROM `customers` WHERE customers_name like '" & Replace(customers_name, "'", "''") & "%' AND visible = 1"
             
     Set rs = db.execute(sql)
     Set searchCustomersByName = rs
