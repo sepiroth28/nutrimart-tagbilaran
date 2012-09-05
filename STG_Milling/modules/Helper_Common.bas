@@ -1,5 +1,6 @@
 Attribute VB_Name = "Helper_Common"
-Sub LoadToCombo(ByVal collectionToCombo As collection, cbo As ComboBox)
+
+Sub LoadToCombo(ByVal collectionToCombo As Collection, cbo As ComboBox)
     'Dim valuesToCombo As String
     
     cbo.Clear
@@ -27,3 +28,6 @@ Sub toogleListView(lsv As ListView)
         lsv.Visible = True
     End If
 End Sub
+
+
+

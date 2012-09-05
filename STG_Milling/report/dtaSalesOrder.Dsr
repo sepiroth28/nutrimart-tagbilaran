@@ -40,8 +40,8 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          Name            =   "Shape3"
          Object.Left            =   7776
          Object.Top             =   4824
-         Object.Width           =   3171
-         Object.Height          =   1872
+         Object.Width           =   3180
+         Object.Height          =   1860
          BorderColor     =   8421504
       EndProperty
       ItemType1       =   6
@@ -897,8 +897,8 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
          Name            =   "lblRemarkshere"
          Object.Left            =   144
          Object.Top             =   3456
-         Object.Width           =   6336
-         Object.Height          =   504
+         Object.Width           =   6330
+         Object.Height          =   510
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Arial"
             Size            =   9

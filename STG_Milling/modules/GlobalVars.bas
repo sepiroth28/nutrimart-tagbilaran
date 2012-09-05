@@ -51,6 +51,10 @@ Public active_affected_pricerule_list As String
 Public edit_price_rule As Boolean
 Public ToEditPriceRule As New price_rule
 
+'quickreports variables
+Public whichDate As String
+Public activedatelabel As Label
+
 
 
 Sub resetAllGlobalVars()

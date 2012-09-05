@@ -52,6 +52,9 @@ Begin VB.MDIForm mdi_Inventory
       Begin VB.Menu mnu_view_sales 
          Caption         =   "View Sales"
       End
+      Begin VB.Menu mnuQuickReports 
+         Caption         =   "Quick Reports"
+      End
       Begin VB.Menu mnu_view_sales_details 
          Caption         =   "Print Sales details"
          Begin VB.Menu mnu_detail_sales_all 
@@ -319,6 +322,10 @@ End Sub
 
 Private Sub mnuprice_rule_Click()
     frmManagePriceRule.Show
+End Sub
+
+Private Sub mnuQuickReports_Click()
+    frmQuickReport.Show 1
 End Sub
 
 Private Sub mnuRuletype_Click()

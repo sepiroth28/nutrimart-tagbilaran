@@ -452,7 +452,7 @@ Begin VB.Form frmPricerule
          X1              =   180
          X2              =   8040
          Y1              =   540
-         Y2              =   570
+         Y2              =   540
       End
       Begin VB.Label Label1 
          BackStyle       =   0  'Transparent

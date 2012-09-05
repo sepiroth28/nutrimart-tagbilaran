@@ -80,8 +80,14 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Calendar1_Click()
-activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbLongDate)
-activeDate = Calendar1.value
+If whichDate = STOCK_IN_DATE Then
+    activedatelabel.Caption = FormatDateTime(Calendar1.value, vbLongDate)
+    
+Else
+    activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbLongDate)
+End If
+    activeDate = Calendar1.value
+    
 Unload Me
 End Sub
 
