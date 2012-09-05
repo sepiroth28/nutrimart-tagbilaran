@@ -80,10 +80,15 @@ Function saveStockout() As Integer
 End Function
 
 Public Function get_total_price() As Double
-    get_total_price = ((Me.item_price - Me.discount) + Me.tracking_price) * Me.qty_purchased
+    'get_total_price = ((Me.item_price - Me.discount) + Me.tracking_price) * Me.qty_purchased
+get_total_price = ((Me.item_price - Me.discount) + Me.tracking_price) * Me.qty_purchased
+
 End Function
 Public Function get_dealers_total_price() As Double
-    get_dealers_total_price = ((Me.Item.dealers_price - Me.discount) + Me.tracking_price) * Me.qty_purchased
+
+    'get_dealers_total_price = ((Me.Item.dealers_price - Me.discount) + Me.tracking_price) * Me.qty_purchased
+get_dealers_total_price = ((Me.item_price - Me.discount) + Me.tracking_price) * Me.qty_purchased
+
 End Function
 Public Function get_dealers_total_price_without_discount() As Double
     get_dealers_total_price_without_discount = ((Me.Item.dealers_price) + Me.tracking_price) * Me.qty_purchased

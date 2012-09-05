@@ -178,11 +178,14 @@ Sub printDeliveryReceipt()
         unit = unit & items.Item.unit_of_measure & vbCrLf
         desc = desc & items.Item.item_name & vbCrLf
         If Me.sold_to.dealers_type = DEALER Then
-            unitPrice = unitPrice & FormatNumber((items.Item.dealers_price) + items.tracking_price, 2) & vbCrLf
-            amount = amount & FormatNumber(((items.Item.dealers_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+'            unitPrice = unitPrice & FormatNumber((items.Item.dealers_price) + items.tracking_price, 2) & vbCrLf
+'            amount = amount & FormatNumber(((items.Item.dealers_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+            unitPrice = unitPrice & FormatNumber((items.item_price) + items.tracking_price, 2) & vbCrLf
+            amount = amount & FormatNumber(((items.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+
         Else
-            unitPrice = unitPrice & FormatNumber((items.Item.item_price) + items.tracking_price, 2) & vbCrLf
-            amount = amount & FormatNumber(((items.Item.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+            unitPrice = unitPrice & FormatNumber((items.item_price) + items.tracking_price, 2) & vbCrLf
+            amount = amount & FormatNumber(((items.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
         End If
         
     Next
