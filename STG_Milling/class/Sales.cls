@@ -162,9 +162,12 @@ Sub printDeliveryReceipt()
     Dim sales_order_responsible As New SalesOrder_Responsible
     
     Dim rs As New ADODB.Recordset
+    Dim rs_store_settings As New ADODB.Recordset
+    Set rs_store_settings = db.execute("SELECT * FROM store_settings WHERE activated=1")
     Set rs = db.execute("SELECT * FROM `stock_out_transaction` limit 1")
     Set dtaSalesOrder.DataSource = rs
     Dim qty As String
+    Dim store_settings As String
     Dim unit As String
     Dim desc As String
     Dim unitPrice As String
@@ -172,17 +175,20 @@ Sub printDeliveryReceipt()
     
     Set cart = Me.items_sold
     'QTY, UNIT, DESC, UNITPRICE, AMOUNT
-
+    store_settings = rs_store_settings.Fields("store_name").value
     For Each items In cart
         qty = qty & items.qty_purchased & vbCrLf
         unit = unit & items.Item.unit_of_measure & vbCrLf
         desc = desc & items.Item.item_name & vbCrLf
         If Me.sold_to.dealers_type = DEALER Then
-            unitPrice = unitPrice & FormatNumber((items.Item.dealers_price) + items.tracking_price, 2) & vbCrLf
-            amount = amount & FormatNumber(((items.Item.dealers_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+'            unitPrice = unitPrice & FormatNumber((items.Item.dealers_price) + items.tracking_price, 2) & vbCrLf
+'            amount = amount & FormatNumber(((items.Item.dealers_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+            unitPrice = unitPrice & FormatNumber((items.item_price) + items.tracking_price, 2) & vbCrLf
+            amount = amount & FormatNumber(((items.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+
         Else
-            unitPrice = unitPrice & FormatNumber((items.Item.item_price) + items.tracking_price, 2) & vbCrLf
-            amount = amount & FormatNumber(((items.Item.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+            unitPrice = unitPrice & FormatNumber((items.item_price) + items.tracking_price, 2) & vbCrLf
+            amount = amount & FormatNumber(((items.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
         End If
         
     Next
@@ -227,6 +233,7 @@ Sub printDeliveryReceipt()
             .Controls("lblchecked_by").Caption = sales_order_responsible.checked_by
             .Controls("lblposted_by").Caption = sales_order_responsible.posted_by
             .Controls("lbldelivered_by").Caption = sales_order_responsible.delivered_by
+            .Controls("lblStore_settings").Caption = store_settings
 
             'discount details
                 Dim discount_details As String

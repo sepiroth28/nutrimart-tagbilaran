@@ -101,6 +101,9 @@ Begin VB.MDIForm mdi_Inventory
       Begin VB.Menu mnuConvertToRetail 
          Caption         =   "Convert to Retail"
       End
+      Begin VB.Menu mnuStore_seetings 
+         Caption         =   "Set Store Settings"
+      End
    End
    Begin VB.Menu mnu_print_receipt 
       Caption         =   "Print Receipt"
@@ -324,6 +327,10 @@ End Sub
 
 Private Sub mnuSOResponsible_Click()
     frmSalesOrder_Responsible.Show
+End Sub
+
+Private Sub mnuStore_seetings_Click()
+frmStoreSettings.Show 1
 End Sub
 
 Private Sub mnuUserAccount_Click()

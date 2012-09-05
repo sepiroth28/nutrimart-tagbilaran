@@ -913,10 +913,10 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
       ItemType51      =   3
       BeginProperty Item51 {1C13A8E1-A0B6-11D0-848E-00A0C90DC8A9} 
          _Version        =   393216
-         Name            =   "Label13"
+         Name            =   "lblStore_settings"
          Object.Left            =   1440
          Object.Top             =   288
-         Object.Width           =   7992
+         Object.Width           =   7995
          Object.Height          =   285
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Arial"
@@ -927,7 +927,6 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaSalesOrder
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Object.Caption         =   "NUTRIMART-CALAPE"
          Alignment       =   2
       EndProperty
       ItemType52      =   3
