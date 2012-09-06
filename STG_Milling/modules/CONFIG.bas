@@ -19,6 +19,9 @@ Public Const USER As String = "user"
 Public Const PRICERULE_ACTIVE_ITEM As String = "item"
 Public Const PRICERULE_ACTIVE_CUSTOMER As String = "customer"
 
+Public Const STOCK_IN_DATE As String = "stockindate"
+Public Const QUICK_REPORT_DATE As String = "quickreportdate"
+
 Sub initializedConfig()
 Dim file_name As String
 Dim intEmpFileNbr As Integer
@@ -42,3 +45,8 @@ Input #intEmpFileNbr, server, dba_name, dba_username, dba_pass
 Close #intEmpFileNbr
 
 End Sub
+
+
+
+
+

@@ -289,6 +289,24 @@ Set Collection = getAllItemsCollection(sort_by)
     Next
     
 End Function
+
+Function loadAllItemsToListviewforQuickReport(lsv As ListView, sort_by As String) As ListView
+Dim list As ListItem
+Dim rs As New ADODB.Recordset
+Dim Item As New items
+'items_id, item_code, item_qty, item_price, date_added, date_modified, manufacturers_id, reorder_point
+lsv.ListItems.Clear
+Set Collection = getAllItemsCollection(sort_by)
+
+    For Each Item In Collection
+            Set list = lsv.ListItems.Add(, , Item.item_id)
+            list.SubItems(1) = Item.item_code
+            list.SubItems(2) = Item.item_name
+            list.SubItems(3) = Item.item_description
+            list.SubItems(4) = Item.item_qty
+    Next
+End Function
+
 Function loadAllItemsToListviewForRebates(lsv As ListView, sort_by As String) As ListView
 Dim list As ListItem
 Dim rs As New ADODB.Recordset
@@ -470,11 +488,11 @@ Dim i As Long
 
 i = grid.Rows
 
-selectedrow0 = frmItemList.lsvItemlist.SelectedItem.Text
-selectedrow1 = frmItemList.lsvItemlist.SelectedItem.SubItems(1)
-selectedrow4 = frmItemList.lsvItemlist.SelectedItem.SubItems(4)
-selectedrow5 = frmItemList.lsvItemlist.SelectedItem.SubItems(5)
-selectedrow6 = frmItemList.lsvItemlist.SelectedItem.SubItems(6)
+selectedrow0 = frmItemList.lsvItemList.SelectedItem.Text
+selectedrow1 = frmItemList.lsvItemList.SelectedItem.SubItems(1)
+selectedrow4 = frmItemList.lsvItemList.SelectedItem.SubItems(4)
+selectedrow5 = frmItemList.lsvItemList.SelectedItem.SubItems(5)
+selectedrow6 = frmItemList.lsvItemList.SelectedItem.SubItems(6)
 
 grid.Rows = grid.Rows + 1
 

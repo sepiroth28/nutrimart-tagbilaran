@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.OCX"
+Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.ocx"
 Begin VB.Form frmCalendar 
    Appearance      =   0  'Flat
    BackColor       =   &H001ED2C5&
@@ -80,8 +80,14 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Calendar1_Click()
-activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbLongDate)
-activeDate = Calendar1.value
+If whichDate = STOCK_IN_DATE Then
+    activedatelabel.Caption = Calendar1.value
+    
+Else
+    activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbLongDate)
+End If
+    activeDate = Calendar1.value
+    
 Unload Me
 End Sub
 
