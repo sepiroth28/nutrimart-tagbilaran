@@ -281,6 +281,7 @@ Sub save_stock_out_records()
 
     For Each items In cart
         stockout_id = items.saveStockout
+        items.saveStockoutQuickReports (quick_transaction_type)
         Call Me.addThisItemToCurrentSalesOrder(stockout_id)
     Next
 End Sub

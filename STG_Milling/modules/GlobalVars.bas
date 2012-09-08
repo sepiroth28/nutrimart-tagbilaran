@@ -52,10 +52,11 @@ Public edit_price_rule As Boolean
 Public ToEditPriceRule As New price_rule
 
 'quickreports variables
+Public category As String
 Public whichDate As String
 Public activedatelabel As Label
 Public date_type_selection As Boolean
-
+Public quick_transaction_type As String
 
 
 Sub resetAllGlobalVars()

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form fmConvert 
    BackColor       =   &H80000018&
    Caption         =   "Convert to Retail"
@@ -120,6 +120,9 @@ lsvItemList.ColumnHeaders(8).width = 1900
 Call loadAllConvertableItemsToListview(lsvItemList, "item_code")
 'Call loadAllConvertable_ItemsToListview(lsvItemList)
 End Sub
+
+
+
 Private Sub txtSearchItemCode_Change()
 Call loadConvertibleSearchItemsToListview(lsvItemList, txtSearchItemCode.Text)
 End Sub
