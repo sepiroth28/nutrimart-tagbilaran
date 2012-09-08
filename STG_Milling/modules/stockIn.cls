@@ -18,6 +18,32 @@ Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 Private mvaritems As New items 'local copy
 Private mvarQtyToBeAdd As Double 'local copy
 Private last_id As Integer
+'local variable(s) to hold property value(s)
+Private mvartransaction_date As String 'local copy
+Public Property Let transaction_date(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.transaction_date = 5
+    mvartransaction_date = vData
+End Property
+
+
+Public Property Get transaction_date() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.transaction_date
+    transaction_date = mvartransaction_date
+End Property
+
+
+
+Public Sub stockInQuickReports(transaction_type As String, stockin_qty As Double, qty_standing As Double)
+    Dim sql As String
+    sql = "INSERT INTO quick_report_items VALUES( null," & _
+        "'" & Me.items.item_code & "', " & stockin_qty & "," & qty_standing & "," & _
+        "'" & quick_transaction_type & "'," & _
+        "CURDATE())"
+    db.execute (sql)
+End Sub
+
 Function get_last_id()
     get_last_id = last_id
 End Function
@@ -72,5 +98,4 @@ Sub print_stock_in(ByVal iPrintStockIn As Integer)
     End If
         dtaAll_Stockin.Show 1
 End Sub
-
 

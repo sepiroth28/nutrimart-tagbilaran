@@ -20,7 +20,6 @@ Private mvarusername As String 'local copy
 Private mvarpassword As String 'local copy
 Dim conn As New ADODB.Connection
 Public Function execute(sql As String) As ADODB.Recordset
-  
   Set execute = conn.execute(sql)
 End Function
 

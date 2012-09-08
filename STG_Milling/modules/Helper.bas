@@ -570,13 +570,30 @@ Function convertToRetails(parent_id As String, parent_qty_to_be_converted As Dou
         Set Item = getItem(associated_code)
         qty_to_add = Val(rs.Fields("qty").value) * parent_qty_to_be_converted
         Item.addStock (qty_to_add)
-        
+    Call convertToRetailsAssociatedItemsQuickReports(associated_code, qty_to_add)
         'deduct qty to parent_item
         Set Item = Nothing
         Set Item = getItem(parent_id)
         Item.stockOut (parent_qty_to_be_converted)
+    Call convertToRetailsParentItemsQuickReports(parent_id, parent_qty_to_be_converted)
     End If
     
+End Function
+Function convertToRetailsAssociatedItemsQuickReports(associate_item_code As String, item_qty As Double)
+quick_transaction_type = CONVERT_IN
+    Dim sql As String
+        sql = "INSERT INTO quick_report_items VALUES(NULL," & _
+            "'" & associate_item_code & "'," & item_qty & "," & getQuantityStandingOfThisItem(associate_item_code) & "," & _
+            "'" & quick_transaction_type & "',CURDATE())"
+        db.execute (sql)
+End Function
+Function convertToRetailsParentItemsQuickReports(parent_code As String, item_qty As Double)
+quick_transaction_type = CONVERT_OUT
+    Dim sql As String
+        sql = "INSERT INTO quick_report_items VALUES(NULL," & _
+            "'" & parent_code & "'," & item_qty & "," & getQuantityStandingOfThisItem(parent_code) & "," & _
+            "'" & quick_transaction_type & "',CURDATE())"
+        db.execute (sql)
 End Function
 
 Function loadAllConvertableItemsToListview(lsv As ListView, sort_by As String) As ListView

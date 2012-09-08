@@ -450,31 +450,7 @@ Begin VB.Form frmQuickReport
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   5
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "S.O."
-            Object.Width           =   2646
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Item Code"
-            Object.Width           =   3881
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "Item Name"
-            Object.Width           =   7232
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   3
-            Text            =   "Quantity"
-            Object.Width           =   2117
-         EndProperty
-         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   4
-            Text            =   "Amount"
-            Object.Width           =   2646
-         EndProperty
+         NumItems        =   0
       End
       Begin VB.Label Label1 
          BackStyle       =   0  'Transparent
@@ -511,9 +487,50 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cboCategory_Click()
     If cboCategory.Text = "Item" Then
+    category = ITEM
+        With lsvDetails
+            .ColumnHeaders.Clear
+            .ListItems.Clear
+            .ColumnHeaders.Add , , "ITEM CODE"
+            .ColumnHeaders.Add , , "ORIG. QTY"
+            .ColumnHeaders.Add , , "OPERATION"
+            .ColumnHeaders.Add , , "TRANSACTION QTY"
+            .ColumnHeaders.Add , , "NEW QUANTITY"
+            .ColumnHeaders.Add , , "DESCRIPTION"
+            .ColumnHeaders.Add , , "TRANSACTION DATE"
+            .ColumnHeaders(1).width = "1500"
+            .ColumnHeaders(2).width = "1400"
+            .ColumnHeaders(2).Alignment = lvwColumnCenter
+            .ColumnHeaders(3).width = "1550"
+            .ColumnHeaders(3).Alignment = lvwColumnCenter
+            .ColumnHeaders(4).width = "2400"
+            .ColumnHeaders(4).Alignment = lvwColumnCenter
+            .ColumnHeaders(5).width = "2100"
+            .ColumnHeaders(5).Alignment = lvwColumnCenter
+            .ColumnHeaders(6).width = "2200"
+            .ColumnHeaders(7).width = "2500"
+        End With
+        
         Label3.Caption = "Select Item Name"
         Call loadAllItemsToListviewforQuickReport(lsvlist, "item_code")
     Else
+    category = CUSTOMER
+        With lsvDetails
+            .ColumnHeaders.Clear
+            .ListItems.Clear
+            .ColumnHeaders.Add , , "SO"
+            .ColumnHeaders.Add , , "ITEM CODE"
+            .ColumnHeaders.Add , , "ITEM NAME"
+            .ColumnHeaders.Add , , "QUANTITY"
+            .ColumnHeaders.Add , , "AMOUNT"
+            .ColumnHeaders.Add , , "TRANSACTION DATE"
+            .ColumnHeaders(1).width = "1400"
+            .ColumnHeaders(2).width = "2000"
+            .ColumnHeaders(3).width = "4100"
+            .ColumnHeaders(4).width = "1400"
+            .ColumnHeaders(5).width = "1300"
+            .ColumnHeaders(6).width = "2500"
+        End With
         Label3.Caption = "Select Customer Name"
         Call loadAllCustomersToListview(lsvlist)
     End If
@@ -547,12 +564,43 @@ Private Sub cmdBrowse_Click()
 End Sub
 
 Private Sub cmdLoad_reports_Click()
- If cboCategory.Text = "Customer" And cboDateSelection = "Today" Then
-    date_type_selection = True
+If cboCategory.Text = "Item" Then
+    If cboDateSelection = "Today" Then
+        date_type_selection = True
+    Else
+        date_type_selection = False
+    End If
+    Call loadTransactionOfThisItem(lsvlist.SelectedItem.SubItems(1), lsvDetails, lblStarting_date, lblEnding_date)
+    
 Else
-    date_type_selection = False
- End If
- Call loadSalesOfThisCustomer(lsvlist.SelectedItem.Text, lsvDetails, lblStarting_date, lblEnding_date)
+    If cboDateSelection = "Today" Then
+        date_type_selection = True
+    Else
+        date_type_selection = False
+    End If
+     Call loadSalesOfThisCustomer(lsvlist.SelectedItem.Text, lsvDetails, lblStarting_date, lblEnding_date)
+End If
+End Sub
+
+Private Sub cmdPrint_Click()
+If cboCategory.Text = "Item" Then
+        If cboDateSelection.Text = "Today" Then
+             dtaQuickReport.Sections(1).Controls("lblDate").Caption = Format(activeDate, "yyyy/mm/dd")
+        Else
+             dtaQuickReport.Sections(1).Controls("lblDate").Caption = Format(lblStarting_date, "yyyy/mm/dd") & " - " & Format(lblEnding_date, "yyyy/mm/dd")
+        End If
+             dtaQuickReport.Sections(1).Controls("lblName").Caption = lsvlist.SelectedItem.SubItems(2)
+        dtaQuickReport.Show 1
+Else
+    
+        If cboDateSelection.Text = "Today" Then
+             dtaQuickCustomerReport.Sections(1).Controls("lblDate").Caption = Format(activeDate, "yyyy/mm/dd")
+        Else
+             dtaQuickCustomerReport.Sections(1).Controls("lblDate").Caption = Format(lblStarting_date, "yyyy/mm/dd") & " - " & Format(lblEnding_date, "yyyy/mm/dd")
+        End If
+        dtaQuickCustomerReport.Sections(1).Controls("lblName").Caption = lsvlist.SelectedItem.SubItems(1)
+        dtaQuickCustomerReport.Show 1
+End If
 End Sub
 
 Private Sub Form_Load()

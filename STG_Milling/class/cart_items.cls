@@ -70,7 +70,13 @@ Sub load_cart_item(stockout_id)
         Me.stockout_id = rs.Fields("stockout_id").value
     End If
 End Sub
-
+Sub saveStockoutQuickReports(transaction_type)
+    Dim sql As String
+        sql = "INSERT INTO quick_report_items VALUES(NULL," & _
+            "'" & Me.Item.item_code & "'," & Me.qty_purchased & "," & getQuantityStandingOfThisItem(Me.Item.item_code) & ", " & _
+            "'" & transaction_type & "',CURDATE())"
+    db.execute (sql)
+End Sub
 Function saveStockout() As Integer
 'stockout_id, item_id, qty_out, amount, discount, tracking_price,price
     Dim sql As String
@@ -162,4 +168,5 @@ End Property
 
 Private Sub Class_Initialize()
 Me.discount = 0
+quick_transaction_type = STOCK_OUT_TRANSACTION
 End Sub
