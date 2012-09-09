@@ -45,7 +45,7 @@ Begin VB.Form frmReturnQty
       Height          =   495
       Left            =   120
       TabIndex        =   1
-      Top             =   1110
+      Top             =   1140
       Width           =   1185
    End
    Begin VB.CommandButton cmdOk 
@@ -62,7 +62,7 @@ Begin VB.Form frmReturnQty
       Height          =   495
       Left            =   1380
       TabIndex        =   0
-      Top             =   1110
+      Top             =   1140
       Width           =   1185
    End
    Begin VB.Label Label4 
@@ -91,10 +91,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_sales_order As Sales
 Private Sub cmdCancel_Click()
-txtReturnQty.Text = ""
+cancelreturn = True
+Unload Me
 End Sub
 
 Private Sub cmdOk_Click()
+cancelreturn = False
 resetReturnItemsVariables
 returnQty = txtReturnQty.Text
 AmountToDeductPerItem = Val(frmAdjustSaleTransaction.lsvAffectedItems.SelectedItem.SubItems(7)) * Val(frmReturnQty.txtReturnQty.Text)

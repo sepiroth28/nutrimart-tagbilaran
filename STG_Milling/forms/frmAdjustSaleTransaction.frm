@@ -182,7 +182,7 @@ Begin VB.Form frmAdjustSaleTransaction
          End
       End
       Begin VB.CommandButton cmdDelete 
-         Caption         =   "Delete Record"
+         Caption         =   "Delete SO"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   9.75
@@ -808,12 +808,17 @@ With frmReturnQty
 .txtReturnQty = lsvAffectedItems.SelectedItem.Text
 .Show 1
 End With
-If returnQty < lsvAffectedItems.SelectedItem.Text Then
-    Call addReturnStockPartial(edit_sales_order.transaction_id, lsvAffectedItems.SelectedItem.SubItems(6)) 'get partial qty from stock out and add to item_qty then delete from stockout
+If cancelreturn = True Then
+    Exit Sub
 Else
-    Call addReturnStock(edit_sales_order.transaction_id, lsvAffectedItems.SelectedItem.SubItems(6)) 'get qty from stock out and add to item_qty then delete from stockout
+    If returnQty < lsvAffectedItems.SelectedItem.Text Then
+        Call addReturnStockPartial(edit_sales_order.transaction_id, lsvAffectedItems.SelectedItem.SubItems(6)) 'get partial qty from stock out and add to item_qty then delete from stockout
+    Else
+        Call addReturnStock(edit_sales_order.transaction_id, lsvAffectedItems.SelectedItem.SubItems(6)) 'get qty from stock out and add to item_qty then delete from stockout
+    End If
+        Call updateSONetTotal(edit_sales_order.transaction_id, AmountToDeductPerItem)
 End If
-    Call updateSONetTotal(edit_sales_order.transaction_id, AmountToDeductPerItem)
+Call quickReportReturnItems(lsvAffectedItems.SelectedItem.SubItems(5), getQuantityStandingOfThisItem(lsvAffectedItems.SelectedItem.SubItems(5)))
 End Sub
 
 Private Sub cmdSOList_Click()
@@ -953,4 +958,11 @@ txtNetTotal.Enabled = False
 End Sub
 Private Sub txtSalesOrder_Click()
 Call toogleListView(lsvCODList)
+End Sub
+
+Sub quickReportReturnItems(item_code As String, standing_qty As Double)
+quick_transaction_type = RETURN_ITEM
+Dim sql As String
+sql = "INSERT INTO quick_report_items VALUES(NULL,'" & item_code & "'," & returnQty & "," & standing_qty & ",'" & quick_transaction_type & "',CURDATE())"
+db.execute (sql)
 End Sub

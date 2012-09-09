@@ -25,8 +25,9 @@ Public Const STOCK_IN_TRANSACTION As String = "stock_in"
 Public Const STOCK_OUT_TRANSACTION As String = "stock_out"
 Public Const CONVERT_IN As String = "convert_in"
 Public Const CONVERT_OUT As String = "convert_out"
-Public Const CUSTOMER As String = "customer"
-Public Const ITEM As String = "item"
+Public Const RETURN_ITEM As String = "return_stock"
+Public Const customer As String = "customer"
+Public Const Item As String = "item"
 
 Sub initializedConfig()
 Dim file_name As String

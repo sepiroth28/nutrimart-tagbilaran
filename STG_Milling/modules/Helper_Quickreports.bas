@@ -54,11 +54,11 @@ Sub loadTransactionOfThisItem(item_code As String, lsv As ListView, begining_dat
 '            sql = "SELECT * FROM quick_report_items WHERE transaction_date='" & (Format(activeDate, "yyyy-mm-dd")) & "' AND item_code='" & item_code & "' ORDER BY id"
             sql = "select item_code,transaction_type, " & _
                     "case " & _
-                    "when transaction_type='stock_out' or transaction_type='convert_out' then item_qty_standing+item_qty " & _
+                    "when transaction_type='stock_out' or transaction_type='convert_out' or transaction_type='return_stock' then item_qty_standing+item_qty " & _
                     "when transaction_type='stock_in' or transaction_type='convert_in' then item_qty_standing-item_qty " & _
                     "end as answer, " & _
                     "case " & _
-                    "when transaction_type='stock_out' or transaction_type='convert_out' then'-' " & _
+                    "when transaction_type='stock_out' or transaction_type='convert_out' or transaction_type='return_stock' then'-' " & _
                     "when transaction_type='stock_in' or transaction_type='convert_in' then'+' " & _
                     "end as operation, " & _
                     "item_qty,item_qty_standing,transaction_date from quick_report_items WHERE transaction_date='" & (Format(activeDate, "yyyy-mm-dd")) & "' AND item_code='" & item_code & "' ORDER BY id"
@@ -68,11 +68,11 @@ Sub loadTransactionOfThisItem(item_code As String, lsv As ListView, begining_dat
 '               "AND '" & (Format(ending_date, "yyyy-mm-dd")) & "' AND item_code= '" & item_code & "' ORDER BY id"
            sql = "select item_code,transaction_type, " & _
                     "case " & _
-                    "when transaction_type='stock_out' or transaction_type='convert_out' then item_qty_standing+item_qty " & _
+                    "when transaction_type='stock_out' or transaction_type='convert_out' or transaction_type='return_stock' then item_qty_standing+item_qty " & _
                     "when transaction_type='stock_in' or transaction_type='convert_in' then item_qty_standing-item_qty " & _
                     "end as answer, " & _
                     "case " & _
-                    "when transaction_type='stock_out' or transaction_type='convert_out' then'-' " & _
+                    "when transaction_type='stock_out' or transaction_type='convert_out' or transaction_type='return_stock' then'-' " & _
                     "when transaction_type='stock_in' or transaction_type='convert_in' then'+' " & _
                     "end as operation, " & _
                     "item_qty,item_qty_standing,transaction_date from quick_report_items WHERE transaction_date BETWEEN '" & (Format(begining_date, "yyyy-mm-dd")) & "'" & _
