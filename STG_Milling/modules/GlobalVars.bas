@@ -45,6 +45,7 @@ Public quick_create_new_customer As Boolean
 'returnQty variables
 Public returnQty As Double
 Public AmountToDeductPerItem As Double
+Public cancelreturn As Boolean
 
 'price rule
 Public active_affected_pricerule_list As String

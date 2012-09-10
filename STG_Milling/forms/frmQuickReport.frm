@@ -487,7 +487,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cboCategory_Click()
     If cboCategory.Text = "Item" Then
-    category = ITEM
+    category = Item
         With lsvDetails
             .ColumnHeaders.Clear
             .ListItems.Clear
@@ -514,7 +514,7 @@ Private Sub cboCategory_Click()
         Label3.Caption = "Select Item Name"
         Call loadAllItemsToListviewforQuickReport(lsvlist, "item_code")
     Else
-    category = CUSTOMER
+    category = customer
         With lsvDetails
             .ColumnHeaders.Clear
             .ListItems.Clear
@@ -624,7 +624,7 @@ End Sub
 Private Sub lsvlist_Click()
     txtselection.Text = lsvlist.SelectedItem.SubItems(1)
      Call toogleListView(lsvlist)
-    MsgBox (lsvlist.SelectedItem.Text)
+    'MsgBox (lsvlist.SelectedItem.Text)
 End Sub
 
 

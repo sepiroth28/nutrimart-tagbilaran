@@ -6,6 +6,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaQuickCustomerReport
    ClientTop       =   450
    ClientWidth     =   12480
    StartUpPosition =   3  'Windows Default
+   WindowState     =   2  'Maximized
    _ExtentX        =   22013
    _ExtentY        =   11139
    _Version        =   393216
