@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmReprint 
    BackColor       =   &H80000009&
    BorderStyle     =   1  'Fixed Single
@@ -59,15 +59,15 @@ Begin VB.Form frmReprint
          NumItems        =   3
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "SO"
-            Object.Width           =   0
+            Object.Width           =   3528
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
-            Object.Width           =   5292
+            Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Object.Width           =   2540
+            Object.Width           =   0
          EndProperty
       End
       Begin VB.CommandButton cmdPrint 

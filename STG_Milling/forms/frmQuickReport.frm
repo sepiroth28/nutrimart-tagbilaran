@@ -2,21 +2,21 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmQuickReport 
    Caption         =   "QuickReport"
-   ClientHeight    =   9555
+   ClientHeight    =   10515
    ClientLeft      =   120
    ClientTop       =   450
    ClientWidth     =   10935
    LinkTopic       =   "Form1"
-   ScaleHeight     =   9555
+   ScaleHeight     =   10515
    ScaleWidth      =   10935
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   9705
+      Height          =   10335
       Left            =   30
-      ScaleHeight     =   9675
+      ScaleHeight     =   10305
       ScaleWidth      =   10905
       TabIndex        =   0
       Top             =   0
@@ -38,6 +38,25 @@ Begin VB.Form frmQuickReport
          TabIndex        =   4
          Top             =   720
          Width           =   10605
+         Begin VB.OptionButton optAccountreceivable 
+            BackColor       =   &H00E1FAFB&
+            Height          =   195
+            Left            =   5070
+            TabIndex        =   25
+            Top             =   390
+            Visible         =   0   'False
+            Width           =   225
+         End
+         Begin VB.OptionButton optCustomername 
+            BackColor       =   &H00E1FAFB&
+            Height          =   195
+            Left            =   5070
+            TabIndex        =   24
+            Top             =   750
+            Value           =   -1  'True
+            Visible         =   0   'False
+            Width           =   225
+         End
          Begin VB.CommandButton cmdLoad_reports 
             Caption         =   "Load Reports"
             BeginProperty Font 
@@ -52,7 +71,7 @@ Begin VB.Form frmQuickReport
             Height          =   585
             Left            =   450
             TabIndex        =   12
-            Top             =   3450
+            Top             =   3480
             Width           =   2115
          End
          Begin VB.ComboBox cboCategory 
@@ -184,6 +203,25 @@ Begin VB.Form frmQuickReport
                SubItemIndex    =   4
                Object.Width           =   2540
             EndProperty
+         End
+         Begin VB.Label lblAccountreceivable 
+            BackStyle       =   0  'Transparent
+            Caption         =   "Account Receivable"
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   345
+            Left            =   5340
+            TabIndex        =   26
+            Top             =   360
+            Visible         =   0   'False
+            Width           =   2265
          End
          Begin VB.Label Label9 
             Appearance      =   0  'Flat
@@ -343,9 +381,9 @@ Begin VB.Form frmQuickReport
                Strikethrough   =   0   'False
             EndProperty
             Height          =   345
-            Left            =   5310
+            Left            =   5340
             TabIndex        =   16
-            Top             =   750
+            Top             =   720
             Width           =   2265
          End
          Begin VB.Label Label4 
@@ -452,6 +490,43 @@ Begin VB.Form frmQuickReport
          EndProperty
          NumItems        =   0
       End
+      Begin VB.Label Label15 
+         Alignment       =   1  'Right Justify
+         BackStyle       =   0  'Transparent
+         Caption         =   "TOTAL ACCNT RECEIVABLE :"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Left            =   1590
+         TabIndex        =   28
+         Top             =   8940
+         Width           =   3495
+      End
+      Begin VB.Label lbltotalACR 
+         BackStyle       =   0  'Transparent
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H000000C0&
+         Height          =   315
+         Left            =   5130
+         TabIndex        =   27
+         Top             =   8880
+         Width           =   3255
+      End
       Begin VB.Label Label1 
          BackStyle       =   0  'Transparent
          Caption         =   "Quick Reports"
@@ -488,6 +563,12 @@ Attribute VB_Exposed = False
 Private Sub cboCategory_Click()
     If cboCategory.Text = "Item" Then
     category = Item
+        Call optAndlblForAccntReceivableDisable
+        Call enableCustomerSelection
+         With cboDateSelection
+                    .Text = "Today"
+                    .Enabled = True
+        End With
         With lsvDetails
             .ColumnHeaders.Clear
             .ListItems.Clear
@@ -515,6 +596,9 @@ Private Sub cboCategory_Click()
         Call loadAllItemsToListviewforQuickReport(lsvlist, "item_code")
     Else
     category = customer
+        Call optAndlblForAccntReceivableEnable
+        subcategory = "Select_Customer"
+        optCustomername.value = True
         With lsvDetails
             .ColumnHeaders.Clear
             .ListItems.Clear
@@ -573,14 +657,31 @@ If cboCategory.Text = "Item" Then
     Call loadTransactionOfThisItem(lsvlist.SelectedItem.SubItems(1), lsvDetails, lblStarting_date, lblEnding_date)
     
 Else
-    If cboDateSelection = "Today" Then
-        date_type_selection = True
+    If subcategory = "Select_Customer" Then
+        If cboDateSelection = "Today" Then
+            date_type_selection = True
+        Else
+            date_type_selection = False
+        End If
+         Call loadSalesOfThisCustomer(lsvlist.SelectedItem.Text, lsvDetails, lblStarting_date, lblEnding_date)
+     
     Else
-        date_type_selection = False
+        Call loadAllAccountReceivable(lsvDetails)
+        
+        lbltotalACR.Caption = "Php." & FormatNumber(ACR_value_per_cus, 2)
     End If
-     Call loadSalesOfThisCustomer(lsvlist.SelectedItem.Text, lsvDetails, lblStarting_date, lblEnding_date)
 End If
 End Sub
+
+'Function getTotalACR(lsv As ListView) As Double
+'    Dim list As ListItem
+'    Dim getsum As Double
+'        For Each list In lsv.ListItems
+'            getsum = getsum + list.SubItems(1)
+'        Next
+'
+'    getTotalACR = getsum
+'End Function
 
 Private Sub cmdPrint_Click()
 If cboCategory.Text = "Item" Then
@@ -646,3 +747,69 @@ Sub showDate_range_control()
     cmd_browse_start_date.Visible = True
 End Sub
 
+Sub optAndlblForAccntReceivableEnable()
+    optAccountreceivable.Visible = True
+    optCustomername.Visible = True
+    lblAccountreceivable.Visible = True
+End Sub
+Sub optAndlblForAccntReceivableDisable()
+    optAccountreceivable.Visible = False
+    optCustomername.Visible = False
+    lblAccountreceivable.Visible = False
+End Sub
+
+Private Sub optAccountreceivable_Click()
+    subcategory = "Account_receivable"
+    With lsvDetails
+            .ColumnHeaders.Clear
+            .ListItems.Clear
+            .ColumnHeaders.Add , , "CUSTOMER NAME"
+            .ColumnHeaders.Add , , "BALANCE"
+            .ColumnHeaders(1).width = "5000"
+            .ColumnHeaders(2).width = "5000"
+        End With
+    Call disableCustomerSelection
+    With cboDateSelection
+                    .Text = "Today"
+                    .Enabled = False
+    End With
+    Call hideDate_range_control
+End Sub
+Sub disableCustomerSelection()
+        Label3.Enabled = False
+        txtselection.Text = ""
+        txtselection.Enabled = False
+        cmdBrowse.Enabled = False
+End Sub
+Sub enableCustomerSelection()
+        Label3.Enabled = True
+        txtselection.Enabled = True
+        cmdBrowse.Enabled = True
+End Sub
+
+Private Sub optCustomername_Click()
+    subcategory = "Select_Customer"
+    With lsvDetails
+            .ColumnHeaders.Clear
+            .ListItems.Clear
+            .ColumnHeaders.Add , , "SO"
+            .ColumnHeaders.Add , , "ITEM CODE"
+            .ColumnHeaders.Add , , "ITEM NAME"
+            .ColumnHeaders.Add , , "QUANTITY"
+            .ColumnHeaders.Add , , "AMOUNT"
+            .ColumnHeaders.Add , , "TRANSACTION DATE"
+            .ColumnHeaders(1).width = "1400"
+            .ColumnHeaders(2).width = "2000"
+            .ColumnHeaders(3).width = "4100"
+            .ColumnHeaders(4).width = "1400"
+            .ColumnHeaders(5).width = "1300"
+            .ColumnHeaders(6).width = "2500"
+        End With
+        Call enableCustomerSelection
+          With cboDateSelection
+                    .Text = "Today"
+                    .Enabled = True
+          End With
+        Label3.Caption = "Select Customer Name"
+        Call loadAllCustomersToListview(lsvlist)
+End Sub

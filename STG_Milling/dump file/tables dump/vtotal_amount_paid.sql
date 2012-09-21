@@ -1,0 +1,2 @@
+﻿DROP VIEW IF EXISTS `dbinventory`.`vtotal_amount_paid`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW  `dbinventory`.`vtotal_amount_paid` AS select sum(`pr`.`amount`) AS `total_amount_paid`,`sot`.`responsible_customer` AS `responsible_customer` from (`stock_out_transaction` `sot` left join `payment_records` `pr` on((`pr`.`sales_order_no` = `sot`.`sales_order_no`))) group by `sot`.`responsible_customer`;

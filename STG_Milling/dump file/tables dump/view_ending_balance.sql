@@ -1,0 +1,2 @@
+﻿DROP VIEW IF EXISTS `dbinventory`.`view_ending_balance`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dbinventory`.`view_ending_balance` AS select `dbinventory`.`items`.`item_code` AS `item_code`,`dbinventory`.`items`.`item_qty` AS `item_qty` from `dbinventory`.`items`;

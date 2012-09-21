@@ -138,6 +138,7 @@ Module=Helper_Quickreports; modules\Helper_Quickreports.bas
 Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX
 Designer=report\dtaQuickReport.Dsr
 Designer=report\dtaQuickCustomerReport.Dsr
+Designer=report\dtaAccountReceivable.Dsr
 IconForm="mdi_Inventory"
 Startup="Sub Main"
 HelpFile=""

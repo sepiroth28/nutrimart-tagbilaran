@@ -54,10 +54,13 @@ Public ToEditPriceRule As New price_rule
 
 'quickreports variables
 Public category As String
+Public subcategory As String
 Public whichDate As String
 Public activedatelabel As Label
 Public date_type_selection As Boolean
 Public quick_transaction_type As String
+Public total_accnt_receivable As Double
+Public ACR_value_per_cus As Double
 
 
 Sub resetAllGlobalVars()
