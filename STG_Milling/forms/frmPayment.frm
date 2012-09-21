@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPayment 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -306,6 +306,45 @@ Begin VB.Form frmPayment
                Text            =   "Total"
                Object.Width           =   2540
             EndProperty
+         End
+         Begin VB.Label Label9 
+            Alignment       =   1  'Right Justify
+            BackStyle       =   0  'Transparent
+            Caption         =   "BALANCE:"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   8880
+            TabIndex        =   35
+            Top             =   2100
+            Width           =   2055
+         End
+         Begin VB.Label lblcurrentbalance 
+            Alignment       =   1  'Right Justify
+            BackStyle       =   0  'Transparent
+            Caption         =   "Label9"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H000000FF&
+            Height          =   375
+            Left            =   9960
+            TabIndex        =   34
+            Top             =   2100
+            Width           =   2205
          End
          Begin VB.Label Label8 
             Alignment       =   1  'Right Justify
@@ -804,6 +843,7 @@ Private Sub cmdProcess_Click()
     Call loadSalesInfo
     
     txtAmountPaid.Text = FormatNumber(0, 2)
+    lblcurrentbalance.Caption = FormatNumber(getTotalAmountOfAccountReceivableOfThisCustomer(Val(lsvCustomerList.SelectedItem.Text)) - getTotalAmountPaidOfAccountReceivableOfThisCustomer(Val(lsvCustomerList.SelectedItem.Text)), 2)
 End Sub
 
 Private Sub Form_Load()
@@ -837,6 +877,7 @@ If lsvCustomerList.ListItems.Count > 0 Then
     clearSalesInfo
     Call loadSalesOrderOfCustomerToListview(Val(lsvCustomerList.SelectedItem.Text), lsvSales)
     lblAmountCustomer.Caption = FormatNumber(getTotalAmountOfAccountReceivableOfThisCustomer(Val(lsvCustomerList.SelectedItem.Text)), 2)
+    lblcurrentbalance.Caption = FormatNumber(getTotalAmountOfAccountReceivableOfThisCustomer(Val(lsvCustomerList.SelectedItem.Text)) - getTotalAmountPaidOfAccountReceivableOfThisCustomer(Val(lsvCustomerList.SelectedItem.Text)), 2)
 End If
 End Sub
 Sub clearSalesInfo()

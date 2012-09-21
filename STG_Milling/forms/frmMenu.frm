@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMenu 
    Appearance      =   0  'Flat
    BackColor       =   &H80000005&
@@ -896,7 +896,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub chkWalkInCustomer_Click()
-If chkWalkInCustomer.Value Then
+If chkWalkInCustomer.value Then
     activeSales.isSoldToWalkIn = True
     picSoldTo.Enabled = False
     txtCustomers.Text = ""
@@ -974,7 +974,7 @@ End If
 End Sub
 
 Private Sub cmdBrowseItem_Click()
-If activeSales.sold_to.customers_name <> "" Or chkWalkInCustomer.Value = 1 Then
+If activeSales.sold_to.customers_name <> "" Or chkWalkInCustomer.value = 1 Then
     frmItemList.Show 1
 Else
     MsgBox "Please select customer type", vbInformation, "Customer type"
@@ -1152,9 +1152,9 @@ Private Sub mnu_delete_item_Click()
         
 End Sub
 
-Private Sub Timer1_Timer()
-lblTime.Caption = Format(Time$, "hh:mm:ss AM/PM")
-End Sub
+'Private Sub Timer1_Timer()
+'lblTime.Caption = Format(Time$, "hh:mm:ss AM/PM")
+'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 

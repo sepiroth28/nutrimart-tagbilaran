@@ -33,8 +33,6 @@ Public Property Get transaction_date() As String
     transaction_date = mvartransaction_date
 End Property
 
-
-
 Public Sub stockInQuickReports(transaction_type As String, stockin_qty As Double, qty_standing As Double)
     Dim sql As String
     sql = "INSERT INTO quick_report_items VALUES( null," & _

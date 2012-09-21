@@ -45,6 +45,40 @@ Sub loadSalesOfThisCustomer(cus_id As Integer, lsv As ListView, begining_date As
     Set rs = Nothing
 End Sub
 
+Sub loadAllAccountReceivable(lsv As ListView)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    Dim lst As ListItem
+'        sql = "SELECT sot.responsible_customer,c.customers_name,sum(sot.net_total)as TOTAL," & _
+'            "vtap.total_amount_paid,sum(sot.net_total)-vtap.total_amount_paid as balance FROM " & _
+'            "account_receivable acr left join stock_out_transaction sot on acr.sales_order_no=sot.sales_order_no " & _
+'            "left join customers c on sot.responsible_customer=c.customers_id left join `vtotal_amount_paid` vtap " & _
+'            "on c.customers_id=vtap.responsible_customer group by sot.responsible_customer order by c.customers_name "
+
+        sql = "SELECT sot.responsible_customer,c.customers_name,sum(sot.net_total)as TOTAL," & _
+            "vtap.total_amount_paid,sum(sot.net_total)-vtap.total_amount_paid as balance," & _
+            "if(sum(sot.net_total)-vtap.total_amount_paid IS null,sum(sot.net_total)," & _
+            "sum(sot.net_total)-vtap.total_amount_paid) as BAL FROM account_receivable acr " & _
+            "left join stock_out_transaction sot on acr.sales_order_no=sot.sales_order_no left join " & _
+            "customers c on sot.responsible_customer=c.customers_id left join `vtotal_amount_paid` vtap " & _
+            "on c.customers_id=vtap.responsible_customer group by sot.responsible_customer order by c.customers_name"
+        Set rs = db.execute(sql)
+        lsv.ListItems.Clear
+        ACR_value_per_cus = 0
+        
+        Do Until rs.EOF
+        On Error Resume Next
+        Set lst = lsv.ListItems.Add(, , rs.Fields("customers_name").value)
+                lst.SubItems(1) = rs.Fields("BAL").value
+                
+            ACR_value_per_cus = ACR_value_per_cus + rs.Fields("BAL").value
+            rs.MoveNext
+            Loop
+            'Set dtaAccountReceivable.DataSource = rs
+            Set rs = Nothing
+
+    
+End Sub
 Sub loadTransactionOfThisItem(item_code As String, lsv As ListView, begining_date As String, ending_date As String)
     Dim sql As String
     Dim rs As New ADODB.Recordset

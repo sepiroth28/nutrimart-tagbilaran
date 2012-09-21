@@ -138,6 +138,7 @@ Form=forms\frmQuickReport.frm
 Module=Helper_Quickreports; modules\Helper_Quickreports.bas
 Designer=report\dtaQuickReport.Dsr
 Designer=report\dtaQuickCustomerReport.Dsr
+Designer=report\dtaAccountReceivable.Dsr
 IconForm="mdi_Inventory"
 Startup="Sub Main"
 HelpFile=""

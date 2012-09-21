@@ -440,13 +440,27 @@ Function getTotalAmountOfAccountReceivableOfThisCustomer(customer_id As Integer)
           "  FROM `account_receivable` acr " & _
           "  LEFT JOIN `stock_out_transaction` sot " & _
           "  ON acr.sales_order_no = sot.sales_order_no " & _
-          "   Where sot.responsible_customer = " & customer_id & " AND acr.remarks = 'unsettled'" & _
+          "   Where sot.responsible_customer = " & customer_id & " " & _
           "  GROUP BY responsible_customer"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
         getTotalAmountOfAccountReceivableOfThisCustomer = rs.Fields(0).value
     End If
 End Function
+
+Function getTotalAmountPaidOfAccountReceivableOfThisCustomer(customer_id As Integer) As Double
+    Dim rs As New ADODB.Recordset
+    Dim sql As String
+    sql = "SELECT sum(pr.amount) as total_amount FROM `account_receivable` acr " & _
+        "LEFT JOIN `stock_out_transaction` sot   ON acr.sales_order_no = sot.sales_order_no " & _
+        "inner join `payment_records` pr on sot.sales_order_no=pr.sales_order_no " & _
+        "Where sot.responsible_customer = " & customer_id & " GROUP BY responsible_customer"
+    Set rs = db.execute(sql)
+    If rs.RecordCount > 0 Then
+        getTotalAmountPaidOfAccountReceivableOfThisCustomer = rs.Fields(0).value
+    End If
+End Function
+
 Function getReceiverRemit(sales_date As Date) As String
     Dim rs As New ADODB.Recordset
     Dim sql As String
