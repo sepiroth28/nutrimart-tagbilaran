@@ -69,15 +69,13 @@ Sub loadAllAccountReceivable(lsv As ListView)
         Do Until rs.EOF
         On Error Resume Next
         Set lst = lsv.ListItems.Add(, , rs.Fields("customers_name").value)
-                lst.SubItems(1) = rs.Fields("BAL").value
+                lst.SubItems(1) = FormatNumber(rs.Fields("BAL").value, 2)
                 
             ACR_value_per_cus = ACR_value_per_cus + rs.Fields("BAL").value
             rs.MoveNext
             Loop
-            'Set dtaAccountReceivable.DataSource = rs
+            Set dtaAccountReceivable.DataSource = rs
             Set rs = Nothing
-
-    
 End Sub
 Sub loadTransactionOfThisItem(item_code As String, lsv As ListView, begining_date As String, ending_date As String)
     Dim sql As String

@@ -693,14 +693,19 @@ If cboCategory.Text = "Item" Then
              dtaQuickReport.Sections(1).Controls("lblName").Caption = lsvlist.SelectedItem.SubItems(2)
         dtaQuickReport.Show 1
 Else
-    
-        If cboDateSelection.Text = "Today" Then
-             dtaQuickCustomerReport.Sections(1).Controls("lblDate").Caption = Format(activeDate, "yyyy/mm/dd")
+        If subcategory = "Select_Customer" Then
+            If cboDateSelection.Text = "Today" Then
+                 dtaQuickCustomerReport.Sections(1).Controls("lblDate").Caption = Format(activeDate, "yyyy/mm/dd")
+            Else
+                 dtaQuickCustomerReport.Sections(1).Controls("lblDate").Caption = Format(lblStarting_date, "yyyy/mm/dd") & " - " & Format(lblEnding_date, "yyyy/mm/dd")
+            End If
+            dtaQuickCustomerReport.Sections(1).Controls("lblName").Caption = lsvlist.SelectedItem.SubItems(1)
+            dtaQuickCustomerReport.Show 1
         Else
-             dtaQuickCustomerReport.Sections(1).Controls("lblDate").Caption = Format(lblStarting_date, "yyyy/mm/dd") & " - " & Format(lblEnding_date, "yyyy/mm/dd")
+            dtaAccountReceivable.Sections(1).Controls("lbldate").Caption = Format(activeDate, "yyyy/mm/dd")
+            dtaAccountReceivable.Sections(5).Controls("lbl").Caption = lbltotalACR.Caption
+            dtaAccountReceivable.Show 1
         End If
-        dtaQuickCustomerReport.Sections(1).Controls("lblName").Caption = lsvlist.SelectedItem.SubItems(1)
-        dtaQuickCustomerReport.Show 1
 End If
 End Sub
 
