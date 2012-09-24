@@ -13,6 +13,7 @@ Sub loadAllCustomersToListview(lsv As ListView)
             list.SubItems(4) = customer.dealers_type
         Next
 End Sub
+
 Sub loadAllCustomersToListviewHidden(lsv As ListView)
     Dim list As ListItem
     Dim rs As New ADODB.Recordset
@@ -50,6 +51,25 @@ Function getAllCustomersCollectionHidden() As CustomersCollection
    
     Set getAllCustomersCollectionHidden = customers_col
 End Function
+
+Function searchCustomer(customername As String, lsv As ListView)
+    Dim sql As String
+    Dim list As ListItem
+    Dim rs As New ADODB.Recordset
+     sql = "SELECT * FROM customers WHERE customers_name like '%" & Replace(customername, "'", "''") & "%' AND visible = 1"
+    Set rs = db.execute(sql)
+    On Error Resume Next
+    lsv.ListItems.Clear
+    Do Until rs.EOF
+    Set list = lsv.ListItems.Add(, , rs.Fields("customers_id").value)
+        list.SubItems(1) = rs.Fields("customers_name").value
+        list.SubItems(2) = rs.Fields("customers_add").value
+        list.SubItems(3) = rs.Fields("customers_number").value
+        list.SubItems(4) = rs.Fields("dealers_type").value
+    rs.MoveNext
+    Loop
+    Set rs = Nothing
+End Function
 Function getAllCustomersCollection() As CustomersCollection
     Dim sql As String
     Dim data As ADODB.Recordset
@@ -82,7 +102,7 @@ End Sub
 Function searchCustomersByName(customers_name As String) As ADODB.Recordset
     Dim sql As String
     Dim rs As New ADODB.Recordset
-    sql = "SELECT * FROM `customers` WHERE customers_name like '" & Replace(customers_name, "'", "''") & "%' AND visible = 1"
+    sql = "SELECT * FROM `customers` WHERE customers_name like '%" & Replace(customers_name, "'", "''") & "%' AND visible = 1"
             
     Set rs = db.execute(sql)
     Set searchCustomersByName = rs
