@@ -11,7 +11,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaQuickCustomerReport
    _ExtentY        =   11139
    _Version        =   393216
    _DesignerVersion=   100684101
-   ReportWidth     =   11505
+   ReportWidth     =   10980
    BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
       Name            =   "Arial"
       Size            =   8.25
@@ -23,7 +23,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaQuickCustomerReport
    EndProperty
    GridX           =   10
    GridY           =   10
-   LeftMargin      =   500
+   LeftMargin      =   400
    RightMargin     =   80
    TopMargin       =   1440
    BottomMargin    =   1440

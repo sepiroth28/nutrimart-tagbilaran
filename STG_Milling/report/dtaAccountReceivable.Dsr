@@ -1,16 +1,16 @@
 VERSION 5.00
 Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaAccountReceivable 
    Caption         =   "DataReport1"
-   ClientHeight    =   12930
+   ClientHeight    =   10950
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   21360
+   ClientWidth     =   20250
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   37677
-   _ExtentY        =   22807
+   _ExtentX        =   35719
+   _ExtentY        =   19315
    _Version        =   393216
    _DesignerVersion=   100684101
-   ReportWidth     =   11475
+   ReportWidth     =   11160
    BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
       Name            =   "Arial"
       Size            =   8.25
@@ -23,7 +23,7 @@ Begin {78E93846-85FD-11D0-8487-00A0C90DC8A9} dtaAccountReceivable
    GridX           =   10
    GridY           =   10
    LeftMargin      =   500
-   RightMargin     =   80
+   RightMargin     =   100
    TopMargin       =   1440
    BottomMargin    =   1440
    NumSections     =   5

@@ -39,11 +39,11 @@ Begin VB.Form frmViewSales
             Strikethrough   =   0   'False
          EndProperty
          Height          =   675
-         Left            =   10890
+         Left            =   11430
          TabIndex        =   16
          Top             =   6390
          Visible         =   0   'False
-         Width           =   3735
+         Width           =   3195
       End
       Begin VB.CommandButton cmdLoadRecords 
          Caption         =   "Load Records"
