@@ -39,7 +39,7 @@ Begin VB.Form frmMenu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   555
-      Left            =   5100
+      Left            =   5130
       Style           =   1  'Graphical
       TabIndex        =   45
       Top             =   6870
@@ -1026,7 +1026,8 @@ Set activeSales = New Sales
 activeSales.payment_type = PAYMENT_ACCOUNT_RECEIVABLE
 lblPaymentType.Caption = "ACCOUNT RECEIVABLE"
 activeSales.date_transact = Format(Date, "YYYY-mm-dd") & " " & intHour & ":" & intMinute & ":" & intSecond
-cmdNewCustomer.Visible = True
+cmdNewCustomer.Visible = False
+chkWalkInCustomer.Visible = False
 cmdBrowseCustomer.SetFocus
 End Sub
 

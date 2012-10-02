@@ -38,6 +38,37 @@ Private mvarcanManageCustomerVisibility As Boolean 'local copy
 Private mvarcan_accept_remit_payments As Boolean 'local copy
 'local variable(s) to hold property value(s)
 Private mvarcan_issue_rebate As Boolean 'local copy
+'local variable(s) to hold property value(s)
+Private mvarcan_create_price_rule As Boolean 'local copy
+Private mvarcan_verify_customer As Boolean
+Public Property Let can_create_price_rule(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.can_create_price_rule = 5
+    mvarcan_create_price_rule = vData
+End Property
+
+
+Public Property Get can_create_price_rule() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.can_create_price_rule
+    can_create_price_rule = mvarcan_create_price_rule
+End Property
+
+Public Property Let can_verify_customer(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.can_create_price_rule = 5
+    mvarcan_verify_customer = vData
+End Property
+
+
+Public Property Get can_verify_customer() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.can_create_price_rule
+    can_verify_customer = mvarcan_verify_customer
+End Property
+
+
+
 Public Property Let can_issue_rebate(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.can_issue_rebate = 5

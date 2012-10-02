@@ -10,7 +10,7 @@ Sub grantUserPreviliges(active_username As String)
    Set rs = db.execute(sql)
    If rs.RecordCount > 0 Then
     Do Until rs.EOF
-       Call setPrevileges(rs.Fields("previleges_description").Value, rs.Fields("status").Value)
+       Call setPrevileges(rs.Fields("previleges_description").value, rs.Fields("status").value)
     rs.MoveNext
     Loop
    End If
@@ -59,6 +59,10 @@ Sub setPrevileges(previleges, action As Boolean)
             activeUser.previliges.can_accept_remit_payments = action
         Case "can_issue_rebate":
             activeUser.previliges.can_issue_rebate = action
+        Case "can_create_price_rule"
+            activeUser.previliges.can_create_price_rule = action
+        Case "can_verify_customer"
+            activeUser.previliges.can_verify_customer = action
     End Select
 End Sub
 
@@ -82,6 +86,8 @@ Sub renderButtonBasedOnUserPreviliges()
        mdi_Inventory.mnu_sales_adjustment = .canSalesAdjustment
        mdi_Inventory.mnu_view_sales_details = .canPrintSalesDetails
        mdi_Inventory.mnu_admin_customer_visible.Enabled = .canManageCustomerVisibility
+       mdi_Inventory.mnuprice_rule = .can_create_price_rule
+       mdi_Inventory.mnuverifiedcustomers = .can_verify_customer
     
        frmMenu.cmdViewSales.Visible = .canViewSales
        

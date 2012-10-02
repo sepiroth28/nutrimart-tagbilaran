@@ -172,6 +172,7 @@ Sub printDeliveryReceipt()
     Dim desc As String
     Dim unitPrice As String
     Dim amount As String
+    Dim tBags As Double
     
     Set cart = Me.items_sold
     'QTY, UNIT, DESC, UNITPRICE, AMOUNT
@@ -189,6 +190,10 @@ Sub printDeliveryReceipt()
         Else
             unitPrice = unitPrice & FormatNumber((items.item_price) + items.tracking_price, 2) & vbCrLf
             amount = amount & FormatNumber(((items.item_price) + items.tracking_price) * items.qty_purchased, 2) & vbCrLf
+        End If
+        
+        If items.Item.unit_of_measure = "BAG" Then
+            tBags = tBags + items.qty_purchased
         End If
         
     Next
@@ -216,6 +221,8 @@ Sub printDeliveryReceipt()
             .Controls("lblCustomerName").Caption = Me.sold_to.customers_name
             .Controls("lblAddress").Caption = Me.sold_to.customers_add
             .Controls("lblTotalItems").Caption = "( " & Me.items_sold.Count & " ) Total item/s"
+        
+            .Controls("lbltotalbags").Caption = "( " & tBags & " ) Total bag/s"
             
             .Controls("lblQty").Caption = qty
             .Controls("lblUnit").Caption = unit

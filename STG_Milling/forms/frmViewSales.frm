@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmViewSales 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -57,7 +57,7 @@ Begin VB.Form frmViewSales
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   12600
+         Left            =   12570
          TabIndex        =   15
          Top             =   60
          Width           =   2115
@@ -159,7 +159,7 @@ Begin VB.Form frmViewSales
       Begin VB.Label lblAcceptedBy 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "COD Amount is already remitted to"
+         Caption         =   "received by"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   9.75
@@ -180,7 +180,7 @@ Begin VB.Form frmViewSales
       Begin VB.Label lblRemitted 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "COD Amount is already remitted by"
+         Caption         =   "COD  remitted by"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   9.75
@@ -467,6 +467,12 @@ updateTotals (activeDate)
             lblRemitted.Visible = is_cod_remitted
             lblAcceptedBy.Visible = is_cod_remitted
             If is_cod_remitted Then
+                lblRemitted.Caption = ""
+                lblAcceptedBy.Caption = ""
+                
+                 lblRemitted.Caption = "COD  remitted by"
+                lblAcceptedBy.Caption = "received by"
+                
                 lblRemitted.Caption = lblRemitted.Caption & " " & getReceiverRemit(activeDate)
                 lblAcceptedBy.Caption = lblAcceptedBy.Caption & " " & getAcceptByRemit(activeDate)
             End If
