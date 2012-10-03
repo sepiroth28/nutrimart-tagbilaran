@@ -138,6 +138,27 @@ Dim Item As ListItem
     lsvItemList.ColumnHeaders(7).width = 0
     lsvItemList.ColumnHeaders(8).width = 0
     lsvItemList.ColumnHeaders(9).width = 0
-    Call loadAllItemsToListview(lsvItemList, "item_code")
+'    Call loadAllItemsToListview(lsvItemList, "item_code")
+    Call loadAllItemFortruckingManagement(lsvItemList)
 
 End Sub
+
+
+    Sub loadAllItemFortruckingManagement(lsv As ListView)
+        Dim sql As String
+        Dim rs As New ADODB.Recordset
+        Dim lst As ListItem
+        
+        sql = "SELECT * from items i INNER JOIN items_description id on i.item_code = id.item_code"
+        Set rs = db.execute(sql)
+        On Error Resume Next
+        lsv.ListItems.Clear
+        Do Until rs.EOF
+        Set lst = lsv.ListItems.Add(, , rs.Fields("").value)
+            lst.SubItems(1) = rs.Fields("").value
+            lst.SubItems(2) = rs.Fields("").value
+            rs.MoveNext
+        Loop
+        
+        
+    End Sub

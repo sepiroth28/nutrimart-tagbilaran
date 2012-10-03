@@ -164,3 +164,26 @@ Sub loadcustomers_to_verify(lsv As ListView)
     Loop
     Set rs = Nothing
 End Sub
+
+Sub searchCus(Customer_name As String, lsv As ListView)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    Dim lst As ListItem
+    Dim temp As Integer
+        sql = "SELECT * FROM customers c inner join verified_customer vc on c.customers_id=vc.customers_id WHERE c.customers_name like '%" & Customer_name & "%' ORDER BY customers_name ASC"
+    Set rs = db.execute(sql)
+    On Error Resume Next
+    lsv.ListItems.Clear
+    Do Until rs.EOF
+    temp = rs.Fields("verefied").value
+        Set lst = lsv.ListItems.Add(, , rs.Fields("customers_id").value)
+            If temp = 1 Then
+                lst.Checked = True
+            Else
+                lst.Checked = False
+            End If
+            lst.SubItems(1) = rs.Fields("customers_name").value
+        rs.MoveNext
+    Loop
+    Set rs = Nothing
+End Sub

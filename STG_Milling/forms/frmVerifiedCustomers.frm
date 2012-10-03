@@ -10,8 +10,25 @@ Begin VB.Form frmVerifiedCustomers
    ScaleHeight     =   6960
    ScaleWidth      =   7260
    StartUpPosition =   3  'Windows Default
+   Begin VB.TextBox txtSearch 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   435
+      Left            =   2760
+      TabIndex        =   4
+      Top             =   150
+      Width           =   3915
+   End
    Begin VB.CommandButton Command1 
-      Caption         =   "Verifiy Selected Customers"
+      Caption         =   "Approved for Account Receivable"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -22,10 +39,10 @@ Begin VB.Form frmVerifiedCustomers
          Strikethrough   =   0   'False
       EndProperty
       Height          =   525
-      Left            =   4560
+      Left            =   3930
       TabIndex        =   2
       Top             =   6300
-      Width           =   2685
+      Width           =   3285
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Select All"
@@ -36,13 +53,13 @@ Begin VB.Form frmVerifiedCustomers
       Width           =   1185
    End
    Begin MSComctlLib.ListView lsvCustomerslist 
-      Height          =   6255
+      Height          =   5595
       Left            =   30
       TabIndex        =   0
-      Top             =   0
+      Top             =   630
       Width           =   7275
       _ExtentX        =   12832
-      _ExtentY        =   11033
+      _ExtentY        =   9869
       View            =   3
       LabelEdit       =   1
       LabelWrap       =   -1  'True
@@ -74,6 +91,24 @@ Begin VB.Form frmVerifiedCustomers
          Object.Width           =   11465
       EndProperty
    End
+   Begin VB.Label Label1 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Search Customer Name:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   90
+      TabIndex        =   3
+      Top             =   240
+      Width           =   2655
+   End
 End
 Attribute VB_Name = "frmVerifiedCustomers"
 Attribute VB_GlobalNameSpace = False
@@ -104,4 +139,8 @@ End Sub
 
 Private Sub Form_Load()
     Call loadcustomers_to_verify(lsvCustomerslist)
+End Sub
+
+Private Sub txtSearch_Change()
+    Call searchCus(txtSearch, lsvCustomerslist)
 End Sub

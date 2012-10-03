@@ -707,7 +707,7 @@ Begin VB.Form frmMenu
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   6
-            Text            =   "Tracking price"
+            Text            =   "Trucking price"
             Object.Width           =   2540
          EndProperty
       End

@@ -123,7 +123,7 @@ Begin VB.Form frmMunicipalities
       End
       Begin VB.Label Label3 
          BackStyle       =   0  'Transparent
-         Caption         =   "Tracking price"
+         Caption         =   "Trucking price"
          Height          =   315
          Left            =   3120
          TabIndex        =   7

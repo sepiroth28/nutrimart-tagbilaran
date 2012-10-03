@@ -8,14 +8,16 @@ Function getTotalPaymentReceiveToday(details_date As Date) As Double
           "  GROUP BY payment_date"
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
-        getTotalPaymentReceiveToday = rs.Fields(0).Value
+        getTotalPaymentReceiveToday = rs.Fields(0).value
     End If
 End Function
 'Where DATE_FORMAT(payment_date, '%Y-%m-%d') = CURDATE()
-Sub loadPaymentDetailsOnListView(lsv As ListView, details_date As Date)
+Sub loadPaymentDetailsOnListView(lsv As ListView, details_date As Date, Optional sort As String)
     Dim rs As New ADODB.Recordset
     Dim sql As String
     Dim list As ListItem
+    
+    If sort = "" Then
     
     sql = "SELECT pr.`id`, pr.`sales_order_no`,c.customers_name, pr.`amount`, pr.`balance`, pr.`payment_date`, pr.`remarks`,pr.received_by " & _
           "  FROM `payment_records` pr " & _
@@ -24,22 +26,31 @@ Sub loadPaymentDetailsOnListView(lsv As ListView, details_date As Date)
           "  LEFT JOIN customers c " & _
           "  ON sot.responsible_customer = c.customers_id " & _
           " WHERE DATE_FORMAT(pr.payment_date, '%Y-%m-%d') = '" & Format(details_date, "yyyy-mm-dd") & "'"
-          
+    Else
+    
+    sql = "SELECT pr.`id`, pr.`sales_order_no`,c.customers_name, pr.`amount`, pr.`balance`, pr.`payment_date`, pr.`remarks`,pr.received_by " & _
+          "  FROM `payment_records` pr " & _
+          "  LEFT JOIN stock_out_transaction sot " & _
+          "  ON pr.sales_order_no = sot.sales_order_no " & _
+          "  LEFT JOIN customers c " & _
+          "  ON sot.responsible_customer = c.customers_id " & _
+          " WHERE DATE_FORMAT(pr.payment_date, '%Y-%m-%d') = '" & Format(details_date, "yyyy-mm-dd") & "' order by " & sort & ""
+    End If
     Set rs = db.execute(sql)
     lsv.ListItems.Clear
     On Error Resume Next
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
-            Set list = lsv.ListItems.Add(, , rs.Fields(0).Value)
-                list.SubItems(1) = rs.Fields(1).Value
-                list.SubItems(2) = rs.Fields(2).Value
-                list.SubItems(3) = rs.Fields(3).Value
-                list.SubItems(4) = rs.Fields(4).Value
-                list.SubItems(5) = rs.Fields(5).Value
-                list.SubItems(6) = rs.Fields("remarks").Value
-                list.SubItems(7) = rs.Fields("received_by").Value
+            Set list = lsv.ListItems.Add(, , rs.Fields(0).value)
+                list.SubItems(1) = rs.Fields(1).value
+                list.SubItems(2) = rs.Fields(2).value
+                list.SubItems(3) = rs.Fields(3).value
+                list.SubItems(4) = rs.Fields(4).value
+                list.SubItems(5) = rs.Fields(5).value
+                list.SubItems(6) = rs.Fields("remarks").value
+                list.SubItems(7) = rs.Fields("received_by").value
                 Dim so As New Sales
-                so.loadSalesOrder (rs.Fields(1).Value)
+                so.loadSalesOrder (rs.Fields(1).value)
                 list.SubItems(8) = FormatDateTime(so.date_transact, vbShortDate)
                 Set so = Nothing
             rs.MoveNext
@@ -59,8 +70,8 @@ Sub loadPaymentTotalsInfoReceivedBy(lsv As ListView, payment_data As Date)
     On Error Resume Next
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
-            Set list = lsv.ListItems.Add(, , rs.Fields("received_by").Value)
-            list.SubItems(1) = FormatNumber(rs.Fields("totals").Value, 2)
+            Set list = lsv.ListItems.Add(, , rs.Fields("received_by").value)
+            list.SubItems(1) = FormatNumber(rs.Fields("totals").value, 2)
             list.ListSubItems(1).ForeColor = vbRed
         rs.MoveNext
         Loop
@@ -86,11 +97,11 @@ Sub loadSOPaymentHistory(lsv As ListView, so As String)
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
         
-            Set list = lsv.ListItems.Add(, , rs.Fields("id").Value)
+            Set list = lsv.ListItems.Add(, , rs.Fields("id").value)
               
             list.SubItems(1) = rs.Fields("sales_order_no")
-            list.SubItems(2) = FormatNumber(rs.Fields("amount").Value, 2)
-            list.SubItems(3) = FormatNumber(rs.Fields("balance").Value, 2)
+            list.SubItems(2) = FormatNumber(rs.Fields("amount").value, 2)
+            list.SubItems(3) = FormatNumber(rs.Fields("balance").value, 2)
             list.SubItems(4) = rs.Fields("payment_date")
             list.SubItems(5) = rs.Fields("remarks")
             list.SubItems(6) = rs.Fields("received_by")

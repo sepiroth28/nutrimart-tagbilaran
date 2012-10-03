@@ -180,7 +180,7 @@ Begin VB.Form frmViewSales
       Begin VB.Label lblRemitted 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "COD  remitted by"
+         Caption         =   "WALK-IN remitted by"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   9.75
@@ -417,7 +417,7 @@ End Sub
 
 Private Sub cboPaymentType_Click()
 cmdCODRemit.Visible = False
-If cboPaymentType.Text = "COD" Then
+If cboPaymentType.Text = "WALK-IN" Then
     Call loadAllSalesToListview(lsvSales, True, PAYMENT_COD)
     Call updateTotals(activeDate)
     If activeUser.previliges.can_accept_remit_payments Then
@@ -470,7 +470,7 @@ updateTotals (activeDate)
                 lblRemitted.Caption = ""
                 lblAcceptedBy.Caption = ""
                 
-                 lblRemitted.Caption = "COD  remitted by"
+                 lblRemitted.Caption = "WALK-IN remitted by"
                 lblAcceptedBy.Caption = "received by"
                 
                 lblRemitted.Caption = lblRemitted.Caption & " " & getReceiverRemit(activeDate)
@@ -511,7 +511,7 @@ lsvSales.ColumnHeaders(7).Alignment = lvwColumnRight
 lsvSales.ColumnHeaders(8).Alignment = lvwColumnRight
 
 Call loadAllSalesToListview(lsvSales, True, 3)
-txtSalesDate.Text = FormatDateTime(Date, vbLongDate)
+txtSalesDate.Text = FormatDateTime(Date, vbShortDate)
 updateTotals (Date)
 
 
