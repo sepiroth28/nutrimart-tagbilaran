@@ -23,6 +23,15 @@ Begin VB.Form frmViewList
       TabIndex        =   0
       Top             =   120
       Width           =   12735
+      Begin MSComctlLib.ImageList ImageList1 
+         Left            =   11370
+         Top             =   720
+         _ExtentX        =   1005
+         _ExtentY        =   1005
+         BackColor       =   -2147483643
+         MaskColor       =   12632256
+         _Version        =   393216
+      End
       Begin VB.ComboBox cboViewType 
          BeginProperty Font 
             Name            =   "Arial"
@@ -54,6 +63,7 @@ Begin VB.Form frmViewList
          GridLines       =   -1  'True
          HotTracking     =   -1  'True
          _Version        =   393217
+         SmallIcons      =   "ImageList1"
          ForeColor       =   -2147483640
          BackColor       =   16777215
          BorderStyle     =   1
