@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmViewSales 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -402,7 +402,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cboPaymentType_Change()
 
-If cboPaymentType.Text = "COD" Then
+If cboPaymentType.Text = "WALK-IN" Then
     Call loadAllSalesToListview(lsvSales, True, PAYMENT_COD)
     Call updateTotals(activeDate)
    
@@ -460,7 +460,7 @@ updateTotals (activeDate)
     Dim is_cod_remitted As Boolean
     is_cod_remitted = checkCODIfRemitted(activeDate)
     
-    If cboPaymentType.Text = "COD" Then
+    If cboPaymentType.Text = "WALK-IN" Then
         If activeUser.previliges.can_accept_remit_payments Then
             cmdCODRemit.Visible = Not is_cod_remitted
             'lblRemitted.Visible = is_cod_remitted
@@ -524,7 +524,7 @@ Sub updateTotals(date_to_used As Date)
         lblGrandTotal.Caption = FormatNumber(getGrandTotalAsOfTodaySales(3), 2)
         lblNetTotal.Caption = FormatNumber(getNetTotalAsOfTodaySales(3), 2)
         lblPaymentReceivedtotal.Caption = FormatNumber(getTotalPaymentReceiveToday(date_to_used))
-    ElseIf cboPaymentType.Text = "COD" Then
+    ElseIf cboPaymentType.Text = "WALK-IN" Then
         lblTotalDiscount.Caption = FormatNumber(getTotalDiscountAsOfTodaySales(PAYMENT_COD), 3)
         lblGrandTotal.Caption = FormatNumber(getGrandTotalAsOfTodaySales(PAYMENT_COD), 2)
         lblNetTotal.Caption = FormatNumber(getNetTotalAsOfTodaySales(PAYMENT_COD), 2)

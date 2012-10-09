@@ -335,7 +335,7 @@ Private Sub mnuQuickReports_Click()
 End Sub
 
 Private Sub mnurating_Click()
-    Form1.Show
+'    Form1.Show
 End Sub
 
 Private Sub mnuRuletype_Click()

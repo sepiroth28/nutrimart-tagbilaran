@@ -30,17 +30,23 @@ Function customerIsVerified(customer_id As Integer) As Boolean
     End If
 End Function
 
-Function getTotalDebtOfThisCustomer(customer_id) As Double
+Function getTotalDebtOfThisCustomer(customer_id As Integer) As Double
 Dim sql As String
 Dim rs As New ADODB.Recordset
+Dim gettotalAcr As Double
+Dim gettotalpayment As Double
 
-sql = "SELECT SUM(net_total) as total FROM `stock_out_transaction` sot " & _
-      "  inner join account_receivable acr " & _
-      "  ON acr.sales_order_no = sot.sales_order_no " & _
-      "  where sot.responsible_customer = " & customer_id & " AND acr.remarks = 'unsettled' " & _
-      "  GROUP BY responsible_customer"
-Set rs = db.execute(sql)
-If rs.RecordCount > 0 Then
-    getTotalDebtOfThisCustomer = rs.Fields(0).value
-End If
+gettotalAcr = getTotalAmountOfAccountReceivableOfThisCustomer(customer_id)
+gettotalpayment = getTotalAmountPaidOfAccountReceivableOfThisCustomer(customer_id)
+
+
+'sql = "SELECT SUM(net_total) as total FROM `stock_out_transaction` sot " & _
+'      "  inner join account_receivable acr " & _
+'      "  ON acr.sales_order_no = sot.sales_order_no " & _
+'      "  where sot.responsible_customer = " & customer_id & " AND acr.remarks = 'unsettled' " & _
+'      "  GROUP BY responsible_customer"
+'Set rs = db.execute(sql)
+'If rs.RecordCount > 0 Then
+    getTotalDebtOfThisCustomer = gettotalAcr - gettotalpayment 'rs.Fields(0).value
+'End If
 End Function

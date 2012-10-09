@@ -281,7 +281,7 @@ End Function
 Sub save_stock_out_records()
     Dim cart As New cart
     Dim items As New cart_items
-    Dim stockout_id As Integer
+    Dim stockout_id As Long
     
     Set cart = Me.items_sold
     'QTY, UNIT, DESC, UNITPRICE, AMOUNT
@@ -510,7 +510,7 @@ End Function
 
 Sub printSalesReport(strpayment_type As String)
 
-    If strpayment_type = "COD" Then
+    If strpayment_type = "WALK-IN" Then
     
         Set dtaSales.DataSource = getAllCODTodaySales
             dtaSales.Sections(1).Controls("lblpaymenttype").Caption = "CASH ON DELIVERY"
