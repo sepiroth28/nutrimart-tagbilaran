@@ -988,6 +988,7 @@ End If
 End Sub
 
 Private Sub cmdCancelTransaction_Click()
+    amount_to_be_debt = 0
     Call prepareNewTransaction
     cmdNewAccountReceivable.SetFocus
     cmdNewCustomer.Visible = False
