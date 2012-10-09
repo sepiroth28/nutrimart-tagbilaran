@@ -126,6 +126,7 @@ Private Sub cmdSelect_Click()
                 'checkProcessButton r
                 Unload Me
             End If
+        frmMenu.cmdBrowseItem.SetFocus
     Else
         MsgBox ("Customer not verified, COD transaction only")
     End If
@@ -137,9 +138,11 @@ ElseIf activeSales.payment_type = PAYMENT_COD Then
         frmMenu.lblAgent.Caption = activeSales.sold_to.mvaragent.agent_name
         frmMenu.lblDealerType.Caption = activeSales.sold_to.dealers_type
         'checkProcessButton
+        
         Unload Me
+        frmMenu.cmdBrowseItem.SetFocus
 End If
-frmMenu.cmdBrowseItem.SetFocus
+    
 
 ' If activeSales.payment_type = PAYMENT_ACCOUNT_RECEIVABLE Then
 '    If isInLimit(Val(lsvCustomerList.SelectedItem.Text)) Then

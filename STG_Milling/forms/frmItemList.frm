@@ -258,6 +258,7 @@ If confirm = vbYes Then
         Else
                 If isInLimit(activeSales.sold_to.customers_id) Then
                     MsgBox "Customers reach his/her credit limit...Please refer to the SO history of this customer", vbInformation, "Credit Limit reached"
+                     
                 Else
                     'put loop here base on grid items
                     
@@ -267,6 +268,7 @@ If confirm = vbYes Then
                             amount_to_be_debt = activeSales.get_total_amount + items.item_price
                         If isInLimit(activeSales.sold_to.customers_id) Then
                             MsgBox "Customers reach his/her credit limit...Please refer to the SO history of this customer", vbInformation, "Credit Limit reached"
+                            
                         Else
                             'items.qty_purchased = Val(txtQty.Text)
                             items.qty_purchased = Val(gridItem.TextMatrix(r, 5))
@@ -286,6 +288,7 @@ If confirm = vbYes Then
                                 amount_to_be_debt = activeSales.get_total_amount
                                     If isInLimit(activeSales.sold_to.customers_id) Then
                                         MsgBox "Customers reach his/her credit limit...Please refer to the SO history of this customer", vbInformation, "Credit Limit reached"
+                                        
                                     Else
                                 
                                         Call loadActiveCartItems(frmMenu.lsvItemsInCart)
