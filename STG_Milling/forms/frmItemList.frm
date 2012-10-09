@@ -283,8 +283,14 @@ If confirm = vbYes Then
                             'checking the remaining stocks
                             If items.Item.item_qty >= items.qty_purchased Then
                                 Call activeSales.items_sold.Add(items)
-                                Call loadActiveCartItems(frmMenu.lsvItemsInCart)
-                                Call updateTotalAmount
+                                amount_to_be_debt = activeSales.get_total_amount
+                                    If isInLimit(activeSales.sold_to.customers_id) Then
+                                        MsgBox "Customers reach his/her credit limit...Please refer to the SO history of this customer", vbInformation, "Credit Limit reached"
+                                    Else
+                                
+                                        Call loadActiveCartItems(frmMenu.lsvItemsInCart)
+                                        Call updateTotalAmount
+                                    End If
                                 
                                 'Unload Me
                             Else
@@ -321,19 +327,19 @@ Private Sub Form_Load()
 'Call loadAllItemsToListview(lsvItemList, "item_code")
 'cmdSelect.Enabled = False
 
-lsvItemList.Visible = False
+lsvItemlist.Visible = False
 
-Call setItemsDescriptionColumns(lsvItemList)
-lsvItemList.ColumnHeaders(1).width = 0
-lsvItemList.ColumnHeaders(2).width = 4000
-lsvItemList.ColumnHeaders(3).width = 0
-lsvItemList.ColumnHeaders(4).width = 0
-lsvItemList.ColumnHeaders(5).width = 2000
-lsvItemList.ColumnHeaders(6).width = 2000
-lsvItemList.ColumnHeaders(7).width = 2000
-lsvItemList.ColumnHeaders(8).width = 0
-lsvItemList.ColumnHeaders(9).width = 0
-Call loadAllItemsToListview(lsvItemList, "item_code")
+Call setItemsDescriptionColumns(lsvItemlist)
+lsvItemlist.ColumnHeaders(1).width = 0
+lsvItemlist.ColumnHeaders(2).width = 4000
+lsvItemlist.ColumnHeaders(3).width = 0
+lsvItemlist.ColumnHeaders(4).width = 0
+lsvItemlist.ColumnHeaders(5).width = 2000
+lsvItemlist.ColumnHeaders(6).width = 2000
+lsvItemlist.ColumnHeaders(7).width = 2000
+lsvItemlist.ColumnHeaders(8).width = 0
+lsvItemlist.ColumnHeaders(9).width = 0
+Call loadAllItemsToListview(lsvItemlist, "item_code")
 'cmdSelect.Enabled = False
 
 
@@ -397,12 +403,12 @@ End Sub
 Sub flixgridevents()
 
 End Sub
-Private Sub lsvItemList_Click()
-If lsvItemList.ListItems.Count > 0 Then
+Private Sub lsvItemlist_Click()
+If lsvItemlist.ListItems.Count > 0 Then
     Dim Item As New items
-    lblSelectedItem.Caption = lsvItemList.SelectedItem.SubItems(2)
+    lblSelectedItem.Caption = lsvItemlist.SelectedItem.SubItems(2)
     
-    Item.load_item (Val(lsvItemList.SelectedItem.Text))
+    Item.load_item (Val(lsvItemlist.SelectedItem.Text))
     lblAvailability.Caption = Item.displayAvailability
         If Item.checkStockQty Then
             cmdSelect.Enabled = True
@@ -416,7 +422,7 @@ End Sub
 Private Sub lsvItemList_DblClick()
 
     Dim items As New cart_items
-    Call items.Item.load_item(Val(lsvItemList.SelectedItem.Text))
+    Call items.Item.load_item(Val(lsvItemlist.SelectedItem.Text))
     items.item_price = items.Item.item_price
     items.qty_purchased = Val(txtQty.Text)
     
@@ -436,11 +442,11 @@ End Sub
 Private Sub lsvItemList_KeyPress(KeyAscii As Integer)
 If KeyAscii = 13 Then
         'to do: put function here that transfer record from listview to grid
-        If lsvItemList.ListItems.Count < 1 Or txtSearchItem.Text = "" Then
+        If lsvItemlist.ListItems.Count < 1 Or txtSearchItem.Text = "" Then
             MsgBox "Item Code not found", vbCritical, "No Item Code Found"
             txtSearchItem.Text = ""
         Else
-           Call addItemToGrid(lsvItemList.ListItems(1), gridItem)
+           Call addItemToGrid(lsvItemlist.ListItems(1), gridItem)
         End If
     End If
 With txtSearchItem
@@ -461,15 +467,15 @@ Private Sub txtSearchItem_Change()
 'Set rs = searchItemsByItemCode(txtSearchItem.Text)
 'Call loadItemRSToListCiew(lsvItemList, rs)
 Dim rs As New ADODB.Recordset
-lsvItemList.Visible = True
+lsvItemlist.Visible = True
 Dim i As ListItem
 Set rs = searchItemsByItemCode(txtSearchItem.Text)
-Call loadItemRSToListCiew(lsvItemList, rs)
+Call loadItemRSToListCiew(lsvItemlist, rs)
 
 If txtSearchItem.Text = "" Then
-    lsvItemList.DropHighlight = Nothing
+    lsvItemlist.DropHighlight = Nothing
 Else
-    lsvItemList.DropHighlight = lsvItemList.GetFirstVisible()
+    lsvItemlist.DropHighlight = lsvItemlist.GetFirstVisible()
 End If
 End Sub
 
@@ -481,23 +487,23 @@ If KeyCode = vbKeyEscape Then
     Unload Me
 End If
 If KeyCode = 40 Then
-lsvItemList.DropHighlight = Nothing
-lsvItemList.SetFocus
+lsvItemlist.DropHighlight = Nothing
+lsvItemlist.SetFocus
 End If
 End Sub
 
 Private Sub txtSearchItem_KeyPress(KeyAscii As Integer)
    If KeyAscii = 13 Then
         'to do: put function here that transfer record from listview to grid
-        If lsvItemList.ListItems.Count < 1 Or txtSearchItem.Text = "" Then
+        If lsvItemlist.ListItems.Count < 1 Or txtSearchItem.Text = "" Then
             MsgBox "Item Code not found", vbCritical, "No Item Code Found"
             txtSearchItem.Text = ""
         Else
-            If lsvItemList.SelectedItem.SubItems(4) < 1 Then
+            If lsvItemlist.SelectedItem.SubItems(4) < 1 Then
                 MsgBox "cannot transact,Insufficient Stock remaining", vbInformation, "Insufficient Stock"
                 txtSearchItem.Text = ""
             Else
-                Call addItemToGrid(lsvItemList.ListItems(1), gridItem)
+                Call addItemToGrid(lsvItemlist.ListItems(1), gridItem)
             End If
         End If
     End If
