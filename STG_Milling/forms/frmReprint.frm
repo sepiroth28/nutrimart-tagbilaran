@@ -388,8 +388,12 @@ Call toogleListView(lsvCODList)
 End Sub
 
 Private Sub cmdLoadSalesOrder_Click()
+Set print_sale = New Sales
 If txtSalesOrder.Text <> "" Then
-    print_sale.loadSalesOrder (txtSalesOrder.Text)
+'    print_sale.loadSalesOrder (txtSalesOrder)
+MsgBox (lsvCODList.SelectedItem.Text)
+'    print_sale.loadSalesOrder (txtSalesOrder)
+    print_sale.loadSalesOrder (lsvCODList.SelectedItem.Text)
     Set activeSales = print_sale
     lblSOFound.Caption = print_sale.transaction_id & " is ready to print..."
 End If
