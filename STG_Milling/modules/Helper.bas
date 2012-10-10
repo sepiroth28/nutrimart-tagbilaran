@@ -195,7 +195,7 @@ Function getAllConvertableItemsCollection(Optional sortBy As String = "") As Ite
     'items_id, item_code, item_qty, item_price, date_added, date_modified, manufacturers_id, reorder_point
     
     If sortBy <> "" Then
-        sql = "SELECT * from item_conversion_details icd LEFT JOIN items i ON icd.parent_id=i.item_code  LEFT JOIN items_description id on i.item_code = id.item_code ORDER BY i." & sortBy
+        sql = "SELECT * from item_conversion_details icd inner JOIN items i ON icd.parent_id=i.item_code  LEFT JOIN items_description id on i.item_code = id.item_code ORDER BY i." & sortBy
     Else
         sql = "SELECT * from item_conversion_details icd LEFT JOIN items i ON icd.parent_id=id.item_code LEFT JOIN items_description id on i.item_code = id.item_code"
     End If
@@ -488,11 +488,11 @@ Dim i As Long
 
 i = grid.Rows
 
-selectedrow0 = frmItemList.lsvItemList.SelectedItem.Text
-selectedrow1 = frmItemList.lsvItemList.SelectedItem.SubItems(1)
-selectedrow4 = frmItemList.lsvItemList.SelectedItem.SubItems(4)
-selectedrow5 = frmItemList.lsvItemList.SelectedItem.SubItems(5)
-selectedrow6 = frmItemList.lsvItemList.SelectedItem.SubItems(6)
+selectedrow0 = frmItemList.lsvItemlist.SelectedItem.Text
+selectedrow1 = frmItemList.lsvItemlist.SelectedItem.SubItems(1)
+selectedrow4 = frmItemList.lsvItemlist.SelectedItem.SubItems(4)
+selectedrow5 = frmItemList.lsvItemlist.SelectedItem.SubItems(5)
+selectedrow6 = frmItemList.lsvItemlist.SelectedItem.SubItems(6)
 
 grid.Rows = grid.Rows + 1
 
@@ -603,7 +603,7 @@ Dim Item As New items
 'items_id, item_code, item_qty, item_price, date_added, date_modified, manufacturers_id, reorder_point
 lsv.ListItems.Clear
 Set Collection = getAllConvertableItemsCollection(sort_by)
-
+On Error Resume Next
     For Each Item In Collection
             Set list = lsv.ListItems.Add(, , Item.item_id)
             list.SubItems(1) = Item.item_code

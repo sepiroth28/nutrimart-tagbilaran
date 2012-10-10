@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmSummary 
    Appearance      =   0  'Flat
    BackColor       =   &H00C8761C&
@@ -90,7 +90,7 @@ Begin VB.Form frmSummary
          Begin VB.OptionButton optShippingCharge 
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
-            Caption         =   "DELIVERY                                         ( Tracking charge base on destination )"
+            Caption         =   "DELIVERY                                         ( Trucking charge base on destination )"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   8.25
@@ -223,7 +223,7 @@ Begin VB.Form frmSummary
          EndProperty
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   6
-            Text            =   "Tracking price"
+            Text            =   "Trucking price"
             Object.Width           =   2540
          EndProperty
       End
@@ -432,7 +432,7 @@ Begin VB.Form frmSummary
       Begin VB.Label Label7 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "Tracking price total : "
+         Caption         =   "Trucking price total : "
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   13.5

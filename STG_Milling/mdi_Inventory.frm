@@ -31,6 +31,9 @@ Begin VB.MDIForm mdi_Inventory
       Begin VB.Menu mnu_exit 
          Caption         =   "Exit"
       End
+      Begin VB.Menu mnurating 
+         Caption         =   "rating"
+      End
    End
    Begin VB.Menu mnu_setting 
       Caption         =   "Settings"
@@ -106,6 +109,9 @@ Begin VB.MDIForm mdi_Inventory
       End
       Begin VB.Menu mnuStore_seetings 
          Caption         =   "Set Store Settings"
+      End
+      Begin VB.Menu mnuverifiedcustomers 
+         Caption         =   "Verify Customer"
       End
    End
    Begin VB.Menu mnu_print_receipt 
@@ -328,6 +334,10 @@ Private Sub mnuQuickReports_Click()
     frmQuickReport.Show 1
 End Sub
 
+Private Sub mnurating_Click()
+'    Form1.Show
+End Sub
+
 Private Sub mnuRuletype_Click()
   frmRuleType.Show 1
 End Sub
@@ -342,6 +352,10 @@ End Sub
 
 Private Sub mnuUserAccount_Click()
     frmManageUserAccount.Show 1
+End Sub
+
+Private Sub mnuverifiedcustomers_Click()
+    frmVerifiedCustomers.Show 1
 End Sub
 
 Private Sub mnuViewStockIn_Click()

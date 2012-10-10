@@ -36,6 +36,15 @@ Begin VB.Form frmPricerule_affected
       End
       Begin VB.CommandButton cmdSelect 
          Caption         =   "SELECT"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   525
          Left            =   5250
          TabIndex        =   2
@@ -83,7 +92,7 @@ Attribute VB_Exposed = False
 Private Sub chkSelectAll_Click()
 Dim list As ListItem
 
-For Each list In lsvItemList.ListItems
+For Each list In lsvItemlist.ListItems
     list.Checked = chkSelectAll.value
 Next
 
@@ -95,14 +104,14 @@ Dim list As ListItem
 If edit_price_rule Then
     If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
         Set ToEditPriceRule.affected_items = New Collection
-        For Each list In lsvItemList.ListItems
+        For Each list In lsvItemlist.ListItems
             If list.Checked = True Then
                     ToEditPriceRule.affected_items.Add list.Text
             End If
         Next
     ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
         Set ToEditPriceRule.affected_customer = New Collection
-         For Each list In lsvItemList.ListItems
+         For Each list In lsvItemlist.ListItems
             If list.Checked = True Then
                 ToEditPriceRule.affected_customer.Add list.Text
             End If
@@ -111,14 +120,14 @@ If edit_price_rule Then
 Else
     If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
         Set frmPricerule.newpricerule.affected_items = New Collection
-        For Each list In lsvItemList.ListItems
+        For Each list In lsvItemlist.ListItems
             If list.Checked = True Then
                     frmPricerule.newpricerule.affected_items.Add list.Text
             End If
         Next
     ElseIf active_affected_pricerule_list = PRICERULE_ACTIVE_CUSTOMER Then
         Set frmPricerule.newpricerule.affected_customer = New Collection
-         For Each list In lsvItemList.ListItems
+         For Each list In lsvItemlist.ListItems
             If list.Checked = True Then
                 frmPricerule.newpricerule.affected_customer.Add list.Text
             End If
@@ -131,36 +140,36 @@ End Sub
 Private Sub Form_Load()
 Dim Item As ListItem
 If active_affected_pricerule_list = PRICERULE_ACTIVE_ITEM Then
-    Call setItemsDescriptionColumns(lsvItemList)
-    lsvItemList.ColumnHeaders(1).width = 300
-    lsvItemList.ColumnHeaders(1).Text = ""
+    Call setItemsDescriptionColumns(lsvItemlist)
+    lsvItemlist.ColumnHeaders(1).width = 300
+    lsvItemlist.ColumnHeaders(1).Text = ""
     
-    lsvItemList.ColumnHeaders(2).width = 2500
-    lsvItemList.ColumnHeaders(3).width = 4000
-    lsvItemList.ColumnHeaders(4).width = 0
-    lsvItemList.ColumnHeaders(5).width = 0
-    lsvItemList.ColumnHeaders(6).width = 0
-    lsvItemList.ColumnHeaders(7).width = 0
-    lsvItemList.ColumnHeaders(8).width = 0
-    lsvItemList.ColumnHeaders(9).width = 0
-    Call loadAllItemsToListview(lsvItemList, "item_code")
+    lsvItemlist.ColumnHeaders(2).width = 2500
+    lsvItemlist.ColumnHeaders(3).width = 4000
+    lsvItemlist.ColumnHeaders(4).width = 0
+    lsvItemlist.ColumnHeaders(5).width = 0
+    lsvItemlist.ColumnHeaders(6).width = 0
+    lsvItemlist.ColumnHeaders(7).width = 0
+    lsvItemlist.ColumnHeaders(8).width = 0
+    lsvItemlist.ColumnHeaders(9).width = 0
+    Call loadAllItemsToListview(lsvItemlist, "item_code")
     
     
-    For Each Item In lsvItemList.ListItems
+    For Each Item In lsvItemlist.ListItems
         Call checkIfSelected(Item)
     Next
 Else
-    Call setCustomersColumns(lsvItemList)
-    lsvItemList.ColumnHeaders(1).width = 300
-    lsvItemList.ColumnHeaders(1).Text = ""
+    Call setCustomersColumns(lsvItemlist)
+    lsvItemlist.ColumnHeaders(1).width = 300
+    lsvItemlist.ColumnHeaders(1).Text = ""
     
-    lsvItemList.ColumnHeaders(2).width = 3000
-    lsvItemList.ColumnHeaders(3).width = 5000
-    lsvItemList.ColumnHeaders(4).width = 2000
+    lsvItemlist.ColumnHeaders(2).width = 3000
+    lsvItemlist.ColumnHeaders(3).width = 5000
+    lsvItemlist.ColumnHeaders(4).width = 2000
 
-    Call loadAllCustomersToListview(lsvItemList)
+    Call loadAllCustomersToListview(lsvItemlist)
 
-    For Each Item In lsvItemList.ListItems
+    For Each Item In lsvItemlist.ListItems
         Call checkIfSelected(Item)
     Next
 

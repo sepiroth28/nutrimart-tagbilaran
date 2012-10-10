@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmStockInPreview 
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
@@ -534,7 +534,7 @@ End With
         stock_in.insert
         activeStockInList.insertStockInRecordToThisTransaction stock_in.get_last_id()
         stock_in.items.addStock stock_in.QtyToBeAdd
-        MsgBox (itemToBeStock.items.item_qty)
+'        MsgBox (itemToBeStock.items.item_qty)
         stock_in.stockInQuickReports quick_transaction_type, stock_in.QtyToBeAdd, getQuantityStandingOfThisItem(stock_in.items.item_code)
     Next
     

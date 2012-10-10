@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePriceRule 
    Caption         =   "Price Rule"
    ClientHeight    =   8385
-   ClientLeft      =   120
-   ClientTop       =   750
+   ClientLeft      =   225
+   ClientTop       =   855
    ClientWidth     =   12690
    LinkTopic       =   "Form1"
    ScaleHeight     =   8385
@@ -242,6 +242,12 @@ Private Sub lsvPriceRuleList_DblClick()
         edit_price_rule = True
         ToEditPriceRule.load_price_rule (lsvPriceRuleList.SelectedItem.Text)
         frmPricerule.Show 1
+End Sub
+
+Private Sub lsvPriceRuleList_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+    If Button = 2 Then
+        PopupMenu mnuPriceFile
+    End If
 End Sub
 
 Private Sub mnu_pricerule_delete_Click()

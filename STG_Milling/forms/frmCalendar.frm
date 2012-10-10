@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.ocx"
+Object = "{8E27C92E-1264-101C-8A2F-040224009C02}#7.0#0"; "MSCAL.OCX"
 Begin VB.Form frmCalendar 
    Appearance      =   0  'Flat
    BackColor       =   &H001ED2C5&
@@ -29,10 +29,10 @@ Begin VB.Form frmCalendar
       _StockProps     =   1
       BackColor       =   13106931
       Year            =   2012
-      Month           =   8
-      Day             =   26
+      Month           =   10
+      Day             =   2
       DayLength       =   1
-      MonthLength     =   1
+      MonthLength     =   2
       DayFontColor    =   0
       FirstDay        =   7
       GridCellEffect  =   1
@@ -44,7 +44,7 @@ Begin VB.Form frmCalendar
       ShowTitle       =   -1  'True
       ShowVerticalGrid=   -1  'True
       TitleFontColor  =   10485760
-      ValueIsNull     =   0   'False
+      ValueIsNull     =   -1  'True
       BeginProperty DayFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Arial"
          Size            =   8.25
@@ -84,7 +84,7 @@ If whichDate = STOCK_IN_DATE Then
     activedatelabel.Caption = Calendar1.value
     
 Else
-    activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbLongDate)
+    activeDateTextbox.Text = FormatDateTime(Calendar1.value, vbShortDate)
 End If
     activeDate = Calendar1.value
     
@@ -92,5 +92,13 @@ Unload Me
 End Sub
 
 Private Sub Form_Load()
-Calendar1.value = Date
+    Dim temp As String
+    Dim a As String
+        a = frmViewSales.txtSalesDate.Text
+    If frmViewSales.txtSalesDate.Text <> "" Then
+        Calendar1.ValueIsNull = False
+        Calendar1.value = a
+    Else
+        Calendar1.value = Date
+    End If
 End Sub

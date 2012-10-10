@@ -39,7 +39,7 @@ Begin VB.Form frmMenu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   555
-      Left            =   5100
+      Left            =   5130
       Style           =   1  'Graphical
       TabIndex        =   45
       Top             =   6870
@@ -707,7 +707,7 @@ Begin VB.Form frmMenu
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   6
-            Text            =   "Tracking price"
+            Text            =   "Trucking price"
             Object.Width           =   2540
          EndProperty
       End
@@ -988,6 +988,7 @@ End If
 End Sub
 
 Private Sub cmdCancelTransaction_Click()
+    amount_to_be_debt = 0
     Call prepareNewTransaction
     cmdNewAccountReceivable.SetFocus
     cmdNewCustomer.Visible = False
@@ -1026,7 +1027,8 @@ Set activeSales = New Sales
 activeSales.payment_type = PAYMENT_ACCOUNT_RECEIVABLE
 lblPaymentType.Caption = "ACCOUNT RECEIVABLE"
 activeSales.date_transact = Format(Date, "YYYY-mm-dd") & " " & intHour & ":" & intMinute & ":" & intSecond
-cmdNewCustomer.Visible = True
+cmdNewCustomer.Visible = False
+chkWalkInCustomer.Visible = False
 cmdBrowseCustomer.SetFocus
 End Sub
 

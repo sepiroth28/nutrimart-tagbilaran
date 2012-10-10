@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmCustomersList 
    BackColor       =   &H00404040&
    BorderStyle     =   1  'Fixed Single
@@ -112,26 +112,37 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cmdSelect_Click()
+
  If activeSales.payment_type = PAYMENT_ACCOUNT_RECEIVABLE Then
-    If isInLimit(Val(lsvCustomerList.SelectedItem.Text)) Then
-        MsgBox "Customers reach his/her credit limit...Please refer to the SO history of this customer", vbInformation, "Credit Limit reached"
+'    MsgBox (lsvCustomerList.SelectedItem.Text)
+     If customerIsVerified(lsvCustomerList.SelectedItem.Text) = True Then
+            If isInLimit(Val(lsvCustomerList.SelectedItem.Text)) Then
+                MsgBox "Customers reach his/her credit limit...Please refer to the SO history of this customer", vbInformation, "Credit Limit reached"
+            Else
+                Call activeSales.sold_to.load_customers(Val(lsvCustomerList.SelectedItem.Text))
+                frmMenu.txtCustomers.Text = activeSales.sold_to.customers_name
+                frmMenu.lblAgent.Caption = activeSales.sold_to.mvaragent.agent_name
+                frmMenu.lblDealerType.Caption = activeSales.sold_to.dealers_type
+                'checkProcessButton r
+                Unload Me
+            End If
+        frmMenu.cmdBrowseItem.SetFocus
     Else
-        Call activeSales.sold_to.load_customers(Val(lsvCustomerList.SelectedItem.Text))
-        frmMenu.txtCustomers.Text = activeSales.sold_to.customers_name
-        frmMenu.lblAgent.Caption = activeSales.sold_to.mvaragent.agent_name
-        frmMenu.lblDealerType.Caption = activeSales.sold_to.dealers_type
-        'checkProcessButton r
-        Unload Me
+        MsgBox ("Customer not verified, COD transaction only")
     End If
+    Exit Sub
+    
 ElseIf activeSales.payment_type = PAYMENT_COD Then
     Call activeSales.sold_to.load_customers(Val(lsvCustomerList.SelectedItem.Text))
         frmMenu.txtCustomers.Text = activeSales.sold_to.customers_name
         frmMenu.lblAgent.Caption = activeSales.sold_to.mvaragent.agent_name
         frmMenu.lblDealerType.Caption = activeSales.sold_to.dealers_type
         'checkProcessButton
+        
         Unload Me
+        frmMenu.cmdBrowseItem.SetFocus
 End If
-frmMenu.cmdBrowseItem.SetFocus
+    
 
 ' If activeSales.payment_type = PAYMENT_ACCOUNT_RECEIVABLE Then
 '    If isInLimit(Val(lsvCustomerList.SelectedItem.Text)) Then
