@@ -4,7 +4,7 @@ Begin VB.Form frmCustomer
    BackColor       =   &H00E1A00B&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Customer"
-   ClientHeight    =   6615
+   ClientHeight    =   7575
    ClientLeft      =   4470
    ClientTop       =   2565
    ClientWidth     =   7440
@@ -12,7 +12,7 @@ Begin VB.Form frmCustomer
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6615
+   ScaleHeight     =   7575
    ScaleWidth      =   7440
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdSelectAgent 
@@ -28,21 +28,89 @@ Begin VB.Form frmCustomer
       EndProperty
       Height          =   495
       Left            =   3600
-      TabIndex        =   11
-      Top             =   4800
+      TabIndex        =   10
+      Top             =   5370
       Width           =   615
    End
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   6375
+      Height          =   7365
       Left            =   120
-      ScaleHeight     =   6345
+      ScaleHeight     =   7335
       ScaleWidth      =   7185
       TabIndex        =   0
-      Top             =   120
+      Top             =   90
       Width           =   7215
+      Begin VB.TextBox txtstorename 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   3630
+         TabIndex        =   23
+         Top             =   2490
+         Width           =   3375
+      End
+      Begin VB.TextBox txtcompleteaddress 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   240
+         TabIndex        =   21
+         Top             =   2490
+         Width           =   3375
+      End
+      Begin VB.TextBox txtwork 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   3630
+         TabIndex        =   19
+         Top             =   1620
+         Width           =   3375
+      End
+      Begin VB.TextBox txtreference 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   240
+         TabIndex        =   17
+         Top             =   1620
+         Width           =   3375
+      End
       Begin VB.ComboBox cboMunicipalities 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -55,9 +123,9 @@ Begin VB.Form frmCustomer
          EndProperty
          ForeColor       =   &H00000000&
          Height          =   360
-         Left            =   1740
-         TabIndex        =   15
-         Top             =   2460
+         Left            =   240
+         TabIndex        =   14
+         Top             =   3300
          Width           =   2895
       End
       Begin VB.TextBox txtCustomersAddress 
@@ -74,8 +142,8 @@ Begin VB.Form frmCustomer
          Height          =   615
          Left            =   240
          MultiLine       =   -1  'True
-         TabIndex        =   14
-         Top             =   6300
+         TabIndex        =   13
+         Top             =   7290
          Width           =   6675
       End
       Begin VB.ComboBox cboDealersType 
@@ -88,19 +156,19 @@ Begin VB.Form frmCustomer
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   336
+         Height          =   360
          ItemData        =   "frmCustomer.frx":058A
          Left            =   3420
          List            =   "frmCustomer.frx":058C
-         TabIndex        =   13
-         Top             =   3720
+         TabIndex        =   12
+         Top             =   4230
          Width           =   3492
       End
       Begin MSComctlLib.ListView lsvAgent 
          Height          =   1095
          Left            =   240
-         TabIndex        =   10
-         Top             =   5160
+         TabIndex        =   9
+         Top             =   5760
          Visible         =   0   'False
          Width           =   3855
          _ExtentX        =   6800
@@ -141,7 +209,7 @@ Begin VB.Form frmCustomer
          Height          =   495
          Left            =   240
          TabIndex        =   3
-         Top             =   4680
+         Top             =   5280
          Width           =   3255
       End
       Begin VB.TextBox txtContactNumber 
@@ -158,7 +226,7 @@ Begin VB.Form frmCustomer
          Height          =   495
          Left            =   240
          TabIndex        =   2
-         Top             =   3720
+         Top             =   4230
          Width           =   3015
       End
       Begin VB.TextBox txtCustomersName 
@@ -175,7 +243,7 @@ Begin VB.Form frmCustomer
          Height          =   495
          Left            =   240
          TabIndex        =   1
-         Top             =   1200
+         Top             =   810
          Width           =   6735
       End
       Begin VB.CommandButton cmdAddNewItem 
@@ -192,8 +260,84 @@ Begin VB.Form frmCustomer
          Height          =   675
          Left            =   4290
          TabIndex        =   4
-         Top             =   5520
+         Top             =   6120
          Width           =   2655
+      End
+      Begin VB.Label Label11 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Store Name:"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   3690
+         TabIndex        =   24
+         Top             =   2220
+         Width           =   1185
+      End
+      Begin VB.Label Label8 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Complete Address"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   240
+         TabIndex        =   22
+         Top             =   2220
+         Width           =   1725
+      End
+      Begin VB.Label Label7 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Work"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   3690
+         TabIndex        =   20
+         Top             =   1350
+         Width           =   495
+      End
+      Begin VB.Label Label6 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Reference"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   240
+         TabIndex        =   18
+         Top             =   1350
+         Width           =   975
       End
       Begin VB.Label Label5 
          AutoSize        =   -1  'True
@@ -209,9 +353,9 @@ Begin VB.Form frmCustomer
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Left            =   4740
-         TabIndex        =   17
-         Top             =   2520
+         Left            =   3240
+         TabIndex        =   16
+         Top             =   3360
          Width           =   735
       End
       Begin VB.Label Label4 
@@ -227,9 +371,9 @@ Begin VB.Form frmCustomer
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   300
-         TabIndex        =   16
-         Top             =   2520
+         Left            =   270
+         TabIndex        =   15
+         Top             =   3000
          Width           =   2055
       End
       Begin VB.Label Label3 
@@ -245,11 +389,11 @@ Begin VB.Form frmCustomer
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   228
+         Height          =   225
          Left            =   3420
-         TabIndex        =   12
-         Top             =   3420
-         Width           =   1140
+         TabIndex        =   11
+         Top             =   3930
+         Width           =   1200
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
@@ -266,8 +410,8 @@ Begin VB.Form frmCustomer
          EndProperty
          Height          =   240
          Left            =   240
-         TabIndex        =   9
-         Top             =   4320
+         TabIndex        =   8
+         Top             =   4920
          Width           =   1365
       End
       Begin VB.Label lblRequiredMsg 
@@ -286,28 +430,9 @@ Begin VB.Form frmCustomer
          ForeColor       =   &H000000C0&
          Height          =   315
          Left            =   240
-         TabIndex        =   8
+         TabIndex        =   7
          Top             =   120
          Width           =   6735
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Address "
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   240
-         Left            =   240
-         TabIndex        =   7
-         Top             =   1860
-         Width           =   855
       End
       Begin VB.Label Label10 
          AutoSize        =   -1  'True
@@ -325,7 +450,7 @@ Begin VB.Form frmCustomer
          Height          =   240
          Left            =   240
          TabIndex        =   6
-         Top             =   840
+         Top             =   540
          Width           =   1755
       End
       Begin VB.Label Label9 
@@ -344,7 +469,7 @@ Begin VB.Form frmCustomer
          Height          =   240
          Left            =   240
          TabIndex        =   5
-         Top             =   3420
+         Top             =   3930
          Width           =   1605
       End
    End
@@ -355,17 +480,19 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_customer As New Customers
+Dim edit_customer_reference As New cutomer_reference
 Dim agent_id As Integer
+Dim getlastinsertedID As String
 
 Private Sub cboMunicipalities_Click()
 Call auto_detect_agent_of_this_municipality(cboMunicipalities, txtAgentName, lsvAgent)
 End Sub
 
 Private Sub cmdAddNewItem_Click()
-    Dim getlastinsertedID As String
+    
     If newcustomer Then
         saveData
-        getlastinsertedID = db.execute("select last_insert_id()").Fields(0).Value
+        getlastinsertedID = db.execute("select last_insert_id()").Fields(0).value
             editmode = False
             Call activeSales.sold_to.load_customers(Val(getlastinsertedID))
                 frmMenu.txtCustomers.Text = activeSales.sold_to.customers_name
@@ -387,6 +514,7 @@ Dim customer As New Customers
 Dim agent As New agent
 Dim mvarcustomers_id As Integer
 Dim mvarcustomers_name, mvarcustomers_add, mvarcustomers_number, mvardealers_type As String
+Dim newcus_reference As New cutomer_reference
 
 'mvarcustomers_id = Val(txtCustomersID.Text)
 mvarcustomers_name = txtCustomersName.Text
@@ -406,7 +534,7 @@ If editmode = True Then
               If .mvaragent.agent_id <> Val(lsvAgent.SelectedItem.Text) Then
                Call .mvaragent.removeCustomerOnThisAgent(.customers_id)
 '               agent.agent_id = Val(lsvAgent.SelectedItem.Text)
-                agent.agent_id = agent_id
+                agent.agent_id = getagentID(txtAgentName)
                 
                Call agent.addCustomerToThisAgent(.customers_id)
                     .updateData
@@ -420,10 +548,18 @@ If editmode = True Then
                
             Call agent.addCustomerToThisAgent(.customers_id)
                 .updateData
-            
-          
         End If
    End With
+   'update customer reference
+'   Call clearReferencefields
+    With edit_customer_reference
+         .loadCustomerReference (edit_customer.customers_id)
+         .address = txtcompleteaddress.Text
+         .reference = txtreference.Text
+         .work = txtwork.Text
+         .store_name = txtstorename.Text
+         .editCustomerReference
+    End With
 
     'MsgBox "Record successfully updated."
 Else
@@ -440,6 +576,15 @@ Else
         'MsgBox .customers_id & " " & .customers_name & " " & .customers_add & " " & .customers_number
     
     End With
+    
+    With newcus_reference
+                        .address = txtcompleteaddress.Text
+                        .reference = txtreference.Text
+                        .work = txtwork.Text
+                        .store_name = txtstorename.Text
+                        .cus_id = newCustomerID
+                        .saveCustomerReference
+    End With
 End If
 End Sub
 
@@ -447,6 +592,17 @@ Private Sub cmdSelectAgent_Click()
     Call toogleListView(lsvAgent)
 
 End Sub
+
+Private Function getagentID(agentName As String) As Integer
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    Dim holder As Integer
+    
+        sql = "SELECT * FROM agent WHERE Name='" & agentName & "'"
+    Set rs = db.execute(sql)
+    holder = rs.Fields("agent_id").value
+    getagentID = holder
+End Function
 
 Private Sub Form_Activate()
 txtCustomersName.SetFocus
@@ -478,6 +634,15 @@ Call loadAgentToListview(lsvAgent)
             txtContactNumber.Text = .customers_number
             txtAgentName.Text = .mvaragent.agent_name
             cboDealersType.Text = .dealers_type
+       End With
+       Set edit_customer_reference = Nothing
+       With edit_customer_reference
+            .loadCustomerReference (activecustomer)
+            txtcompleteaddress.Text = .address
+            txtreference.Text = .reference
+            txtwork.Text = .work
+            txtstorename.Text = .store_name
+            .editCustomerReference
        End With
        
        txtAgentName.Enabled = False

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmReprint 
    BackColor       =   &H80000009&
    BorderStyle     =   1  'Fixed Single
@@ -378,7 +378,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim print_sale As Sales
+Dim print_sale As New Sales
 Private Sub cmdBrowse_Click()
 Call toogleListView(lsvCustomerList)
 End Sub

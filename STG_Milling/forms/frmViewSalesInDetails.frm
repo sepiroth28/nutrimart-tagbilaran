@@ -357,7 +357,7 @@ Dim s As New Sales
      
     With s
         .loadSalesOrder (activeSalesOrderForViewSalesDetails)
-        lblSo.Caption = activeSalesOrderForViewSalesDetails
+        lblSO.Caption = activeSalesOrderForViewSalesDetails
         lblCustomerName.Caption = s.sold_to.customers_name
         lblAddress.Caption = s.sold_to.customers_add
         
@@ -373,7 +373,7 @@ Dim s As New Sales
             For Each items In cart
                 Set list = lsvDetailSales.ListItems.Add(, , items.qty_purchased)
                 list.SubItems(1) = items.Item.unit_of_measure
-                list.SubItems(2) = items.Item.item_description
+                list.SubItems(2) = items.Item.item_name
                 If .sold_to.dealers_type = DEALER Then
                     'list.SubItems(3) = FormatNumber(items.Item.dealers_price, 2)
                     'modified, should not be based on items price...

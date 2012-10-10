@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManageCustomer 
    BackColor       =   &H00000000&
    BorderStyle     =   1  'Fixed Single
@@ -26,7 +26,7 @@ Begin VB.Form frmManageCustomer
       TabIndex        =   0
       Top             =   60
       Width           =   11655
-      Begin VB.TextBox txtSearchItemCode 
+      Begin VB.TextBox txtSearchCustomer 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -40,9 +40,7 @@ Begin VB.Form frmManageCustomer
          Height          =   435
          Left            =   180
          TabIndex        =   2
-         Text            =   "Text1"
          Top             =   1200
-         Visible         =   0   'False
          Width           =   5055
       End
       Begin VB.CommandButton cmdAddNewCustomer 
@@ -133,7 +131,6 @@ Begin VB.Form frmManageCustomer
          Left            =   180
          TabIndex        =   4
          Top             =   900
-         Visible         =   0   'False
          Width           =   2115
       End
    End
@@ -231,4 +228,8 @@ If lsvCustomer.ListItems.Count > 0 Then
     customer_id_for_list_of_account_receivable = Val(lsvCustomer.SelectedItem.Text)
     frmCustomerAccountReceivable.Show 1
 End If
+End Sub
+
+Private Sub txtSearchCustomer_Change()
+    Call searchCustomer(txtSearchCustomer, lsvCustomer)
 End Sub

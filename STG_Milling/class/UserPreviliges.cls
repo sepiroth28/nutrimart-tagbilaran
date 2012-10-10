@@ -35,6 +35,37 @@ Private mvarcanDeleteCustomer As Boolean 'local copy
 Private mvarUser_Previleges As User_Previleges
 'local variable(s) to hold property value(s)
 Private mvarcanManageCustomerVisibility As Boolean 'local copy
+'local variable(s) to hold property value(s)
+Private mvarcanCreatePriceRule As Boolean 'local copy
+Private mvarcanVerifyCustomer As Boolean
+
+Public Property Let canCreatePriceRule(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canCreatePriceRule = 5
+    mvarcanCreatePriceRule = vData
+End Property
+
+
+Public Property Get canCreatePriceRule() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canCreatePriceRule
+    canCreatePriceRule = mvarcanCreatePriceRule
+End Property
+
+Public Property Let canVerifyCustomer(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canCreatePriceRule = 5
+    mvarcanVerifyCustomer = vData
+End Property
+
+
+Public Property Get canVerifyCustomer() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canCreatePriceRule
+    canVerifyCustomer = mvarcanVerifyCustomer
+End Property
+
+
 Public Property Let canManageCustomerVisibility(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.canManageCustomerVisibility = 5
@@ -48,20 +79,14 @@ Public Property Get canManageCustomerVisibility() As Boolean
     canManageCustomerVisibility = mvarcanManageCustomerVisibility
 End Property
 
-
-
-
-
 Private Sub Class_Initialize()
     'create the mUser_Previleges object when the UserPreviliges class is created
     Set mvarUser_Previleges = New User_Previleges
 End Sub
 
-
 Public Property Get User_Previleges() As User_Previleges
     Set User_Previleges = mvarUser_Previleges
 End Property
-
 
 Public Property Set User_Previleges(vData As User_Previleges)
     Set mvarUser_Previleges = vData
@@ -69,8 +94,6 @@ End Property
 Private Sub Class_Terminate()
     Set mvarUser_Previleges = Nothing
 End Sub
-
-
 
 Public Property Let canDeleteCustomer(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
@@ -130,8 +153,6 @@ Public Property Get canManageUserAccount() As Boolean
     canManageUserAccount = mvarcanManageUserAccount
 End Property
 
-
-
 Public Sub grantAll()
     Me.canManageAgent = True
     Me.canManageCustomer = True
@@ -144,6 +165,8 @@ Public Sub grantAll()
     Me.canManageSalesRepresentative = True
     Me.canManageUserAccount = True
     Me.canViewSales = True
+    Me.canCreatePriceRule = True
+    Me.canVerifyCustomer = True
 End Sub
 Public Sub clearPreviliges()
     Me.canManageAgent = False
@@ -154,6 +177,8 @@ Public Sub clearPreviliges()
     Me.canProcessSales = False
     Me.canStockIn = False
     Me.canView = False
+    Me.canCreatePriceRule = False
+    Me.canVerifyCustomer = False
 End Sub
 Public Property Let usertype(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.

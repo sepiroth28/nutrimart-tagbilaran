@@ -39,11 +39,11 @@ Begin VB.Form frmViewSales
             Strikethrough   =   0   'False
          EndProperty
          Height          =   675
-         Left            =   10890
+         Left            =   11430
          TabIndex        =   16
          Top             =   6390
          Visible         =   0   'False
-         Width           =   3735
+         Width           =   3195
       End
       Begin VB.CommandButton cmdLoadRecords 
          Caption         =   "Load Records"
@@ -57,7 +57,7 @@ Begin VB.Form frmViewSales
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   12600
+         Left            =   12570
          TabIndex        =   15
          Top             =   60
          Width           =   2115
@@ -159,7 +159,7 @@ Begin VB.Form frmViewSales
       Begin VB.Label lblAcceptedBy 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "COD Amount is already remitted to"
+         Caption         =   "received by"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   9.75
@@ -180,7 +180,7 @@ Begin VB.Form frmViewSales
       Begin VB.Label lblRemitted 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "COD Amount is already remitted by"
+         Caption         =   "WALK-IN remitted by"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   9.75
@@ -402,7 +402,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cboPaymentType_Change()
 
-If cboPaymentType.Text = "COD" Then
+If cboPaymentType.Text = "WALK-IN" Then
     Call loadAllSalesToListview(lsvSales, True, PAYMENT_COD)
     Call updateTotals(activeDate)
    
@@ -417,7 +417,7 @@ End Sub
 
 Private Sub cboPaymentType_Click()
 cmdCODRemit.Visible = False
-If cboPaymentType.Text = "COD" Then
+If cboPaymentType.Text = "WALK-IN" Then
     Call loadAllSalesToListview(lsvSales, True, PAYMENT_COD)
     Call updateTotals(activeDate)
     If activeUser.previliges.can_accept_remit_payments Then
@@ -460,13 +460,19 @@ updateTotals (activeDate)
     Dim is_cod_remitted As Boolean
     is_cod_remitted = checkCODIfRemitted(activeDate)
     
-    If cboPaymentType.Text = "COD" Then
+    If cboPaymentType.Text = "WALK-IN" Then
         If activeUser.previliges.can_accept_remit_payments Then
             cmdCODRemit.Visible = Not is_cod_remitted
             'lblRemitted.Visible = is_cod_remitted
             lblRemitted.Visible = is_cod_remitted
             lblAcceptedBy.Visible = is_cod_remitted
             If is_cod_remitted Then
+                lblRemitted.Caption = ""
+                lblAcceptedBy.Caption = ""
+                
+                 lblRemitted.Caption = "WALK-IN remitted by"
+                lblAcceptedBy.Caption = "received by"
+                
                 lblRemitted.Caption = lblRemitted.Caption & " " & getReceiverRemit(activeDate)
                 lblAcceptedBy.Caption = lblAcceptedBy.Caption & " " & getAcceptByRemit(activeDate)
             End If
@@ -505,7 +511,7 @@ lsvSales.ColumnHeaders(7).Alignment = lvwColumnRight
 lsvSales.ColumnHeaders(8).Alignment = lvwColumnRight
 
 Call loadAllSalesToListview(lsvSales, True, 3)
-txtSalesDate.Text = FormatDateTime(Date, vbLongDate)
+txtSalesDate.Text = FormatDateTime(Date, vbShortDate)
 updateTotals (Date)
 
 
@@ -518,7 +524,7 @@ Sub updateTotals(date_to_used As Date)
         lblGrandTotal.Caption = FormatNumber(getGrandTotalAsOfTodaySales(3), 2)
         lblNetTotal.Caption = FormatNumber(getNetTotalAsOfTodaySales(3), 2)
         lblPaymentReceivedtotal.Caption = FormatNumber(getTotalPaymentReceiveToday(date_to_used))
-    ElseIf cboPaymentType.Text = "COD" Then
+    ElseIf cboPaymentType.Text = "WALK-IN" Then
         lblTotalDiscount.Caption = FormatNumber(getTotalDiscountAsOfTodaySales(PAYMENT_COD), 3)
         lblGrandTotal.Caption = FormatNumber(getGrandTotalAsOfTodaySales(PAYMENT_COD), 2)
         lblNetTotal.Caption = FormatNumber(getNetTotalAsOfTodaySales(PAYMENT_COD), 2)

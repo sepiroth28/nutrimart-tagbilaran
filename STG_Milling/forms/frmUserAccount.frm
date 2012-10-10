@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmUserAccount 
    BackColor       =   &H00E1A00B&
    BorderStyle     =   3  'Fixed Dialog
@@ -239,9 +239,9 @@ Set rs = db.execute(sql)
 lsvPrevileges.ListItems.Clear
 If rs.RecordCount > 0 Then
     Do Until rs.EOF
-        Set list = lsvPrevileges.ListItems.Add(, , rs.Fields(0).Value)
-        list.SubItems(1) = rs.Fields(1).Value
-        If rs.Fields(2).Value = True Then
+        Set list = lsvPrevileges.ListItems.Add(, , rs.Fields(0).value)
+        list.SubItems(1) = rs.Fields(1).value
+        If rs.Fields(2).value = True Then
             list.Checked = True
         Else
             list.Checked = False
@@ -261,8 +261,8 @@ Set rs = db.execute(sql)
 lsvPrevileges.ListItems.Clear
 If rs.RecordCount > 0 Then
     Do Until rs.EOF
-        Set list = lsvPrevileges.ListItems.Add(, , rs.Fields(0).Value)
-        list.SubItems(1) = rs.Fields(1).Value
+        Set list = lsvPrevileges.ListItems.Add(, , rs.Fields(0).value)
+        list.SubItems(1) = rs.Fields(1).value
     rs.MoveNext
     Loop
 End If
@@ -281,7 +281,7 @@ Sub saveData()
     Dim mvarusername, mvarpassword, mvaruser_type As String
     
     mvarusername = txtusername.Text
-    mvarpassword = txtPassword.Text
+    mvarpassword = txtpassword.Text
     mvaruser_type = cbouser_type.Text
    
         If editmode = True Then
@@ -326,7 +326,7 @@ End Sub
 
 Private Sub cmdChangePassword_Click()
 useraccount.loadUserAccount (activeaseraccount_name)
-useraccount.changePassword (txtPassword.Text)
+useraccount.changePassword (txtpassword.Text)
 End Sub
 
 Private Sub Form_Load()
@@ -350,3 +350,4 @@ Private Sub Form_Load()
     End With
    
 End Sub
+

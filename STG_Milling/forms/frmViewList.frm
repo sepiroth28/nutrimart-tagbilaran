@@ -1,11 +1,11 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmViewList 
    BackColor       =   &H80000007&
    Caption         =   "View List"
    ClientHeight    =   8700
    ClientLeft      =   120
-   ClientTop       =   450
+   ClientTop       =   750
    ClientWidth     =   13005
    Icon            =   "frmViewList.frx":0000
    LinkTopic       =   "Form3"
@@ -23,6 +23,15 @@ Begin VB.Form frmViewList
       TabIndex        =   0
       Top             =   120
       Width           =   12735
+      Begin MSComctlLib.ImageList ImageList1 
+         Left            =   11370
+         Top             =   720
+         _ExtentX        =   1005
+         _ExtentY        =   1005
+         BackColor       =   -2147483643
+         MaskColor       =   12632256
+         _Version        =   393216
+      End
       Begin VB.ComboBox cboViewType 
          BeginProperty Font 
             Name            =   "Arial"
@@ -54,6 +63,7 @@ Begin VB.Form frmViewList
          GridLines       =   -1  'True
          HotTracking     =   -1  'True
          _Version        =   393217
+         SmallIcons      =   "ImageList1"
          ForeColor       =   -2147483640
          BackColor       =   16777215
          BorderStyle     =   1
@@ -111,6 +121,12 @@ Begin VB.Form frmViewList
          TabIndex        =   3
          Top             =   960
          Width           =   1800
+      End
+   End
+   Begin VB.Menu mnuFile 
+      Caption         =   "File"
+      Begin VB.Menu mnuMonitorVolume 
+         Caption         =   "Monitor Volume"
       End
    End
 End
@@ -176,6 +192,22 @@ Private Sub Form_Resize()
 Picture1.width = Me.ScaleWidth - 250
 Picture1.Height = Me.ScaleHeight - 200
 
+End Sub
+
+Private Sub lsv_ViewList_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+    If cboViewType.Text = "Customers" Then
+        If Button = 2 Then
+            PopupMenu mnuFile
+        End If
+    End If
+End Sub
+
+Private Sub mnuMonitorVolume_Click()
+    customer_id_monitored = lsv_ViewList.SelectedItem.Text
+    With frmStockout_monitoring
+                .txtCustomername = lsv_ViewList.SelectedItem.SubItems(1)
+                .Show 1
+    End With
 End Sub
 
 Private Sub Picture1_Resize()

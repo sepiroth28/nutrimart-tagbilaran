@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPaymentReceivedDetails 
    BackColor       =   &H00000000&
    BorderStyle     =   1  'Fixed Single
@@ -153,7 +153,7 @@ Begin VB.Form frmPaymentReceivedDetails
          Height          =   6135
          Left            =   60
          TabIndex        =   1
-         Top             =   600
+         Top             =   630
          Width           =   15495
          _ExtentX        =   27331
          _ExtentY        =   10821
@@ -300,12 +300,23 @@ Sub loadRemittedStatus(list As ListItem)
     Set rs = db.execute(sql)
     If rs.RecordCount > 0 Then
         list.SubItems(2) = "Done"
-        list.SubItems(3) = "Accepted by  " & rs.Fields("accepted_by").Value
+        list.SubItems(3) = "Accepted by  " & rs.Fields("accepted_by").value
     Else
         list.SubItems(2) = ""
     End If
 
 End Sub
+
+Private Sub lsvPaymentReceived_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    'put code hr for sorting received by
+    Dim sorting As String
+'    MsgBox (ColumnHeader)
+    If ColumnHeader = "received_by" Then
+    sorting = "received_by"
+    Call loadPaymentDetailsOnListView(lsvPaymentReceived, activeDate, sorting)
+    End If
+End Sub
+
 Private Sub lsvPaymentReceived_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
 If Button = 2 Then
     PopupMenu mnu_Payment_details_file
