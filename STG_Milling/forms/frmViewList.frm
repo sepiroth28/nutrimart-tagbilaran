@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmViewList 
    BackColor       =   &H80000007&
    Caption         =   "View List"
@@ -29,8 +29,37 @@ Begin VB.Form frmViewList
          _ExtentX        =   1005
          _ExtentY        =   1005
          BackColor       =   -2147483643
+         ImageWidth      =   120
+         ImageHeight     =   18
          MaskColor       =   12632256
          _Version        =   393216
+         BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+            NumListImages   =   6
+            BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmViewList.frx":058A
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmViewList.frx":60D5
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmViewList.frx":C475
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmViewList.frx":12F6E
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmViewList.frx":1A21A
+               Key             =   ""
+            EndProperty
+            BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+               Picture         =   "frmViewList.frx":21BE5
+               Key             =   ""
+            EndProperty
+         EndProperty
       End
       Begin VB.ComboBox cboViewType 
          BeginProperty Font 
@@ -163,7 +192,7 @@ Sub loadToItems()
             Call setItemsDescriptionColumns(lsv_ViewList)
             Call loadAllItemsToListview(lsv_ViewList, "item_code")
             
-            lsv_ViewList.ColumnHeaders(1).width = 1000
+            lsv_ViewList.ColumnHeaders(1).width = 0
             lsv_ViewList.ColumnHeaders(2).width = 1500
             lsv_ViewList.ColumnHeaders(3).width = 4000
             lsv_ViewList.ColumnHeaders(4).width = 4000
@@ -180,12 +209,13 @@ Sub loadToCustomers()
             lsv_ViewList.ListItems.Clear
             
             Call setCustomersColumns(lsv_ViewList)
-            Call loadAllCustomersToListview(lsv_ViewList)
+            Call loadAllCustomersToListviewWithRatings(lsv_ViewList)
             
-            lsv_ViewList.ColumnHeaders(1).width = 1500
-            lsv_ViewList.ColumnHeaders(2).width = 5000
+            lsv_ViewList.ColumnHeaders(1).width = 2000
+            lsv_ViewList.ColumnHeaders(2).width = 1500
             lsv_ViewList.ColumnHeaders(3).width = 5000
-            lsv_ViewList.ColumnHeaders(4).width = 2000
+            lsv_ViewList.ColumnHeaders(4).width = 5000
+            lsv_ViewList.ColumnHeaders(5).width = 2000
 End Sub
 
 Private Sub Form_Resize()

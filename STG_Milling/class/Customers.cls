@@ -23,6 +23,22 @@ Private mvardealers_type As String 'local copy
 Public credit_limit As Double
 'local variable(s) to hold property value(s)
 Private mvarlast_insert_id As Integer 'local copy
+Private mvarratings As Integer
+
+
+Public Property Let ratings(ByVal vData As Integer)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.last_insert_id = 5
+    mvarratings = vData
+End Property
+
+
+Public Property Get ratings() As Integer
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.last_insert_id
+    ratings = mvarratings
+End Property
+
 Public Property Let last_insert_id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.last_insert_id = 5
@@ -87,6 +103,7 @@ End Property
 Function insert() As Integer
     Dim tbl_insert_customer As String
     Dim sql As String
+    Dim rating As String
     'customers_id, customers_name, customers_add, customers_number, dealers_type, credit_limit, visible
     tbl_insert_customer = "INSERT INTO customers VALUES(" & Me.customers_id & ",'" & Replace(Me.customers_name, "'", "''") & "', " & _
                             "'" & Me.customers_add & "', '" & Me.customers_number & "','" & Me.dealers_type & "',0,1)"
@@ -94,6 +111,8 @@ Function insert() As Integer
     insert = db.execute("select last_insert_id()").Fields(0).value
     sql = "INSERT INTO verified_customer values(" & insert & ",'0')"
     db.execute (sql)
+    rating = "INSERT INTO ratings values(" & insert & ",'0')"
+    db.execute (rating)
 End Function
 
 Public Sub updateData()

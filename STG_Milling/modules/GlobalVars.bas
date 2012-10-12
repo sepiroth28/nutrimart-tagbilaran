@@ -43,6 +43,9 @@ Public amount_to_be_debt As Double
 Public quick_create_new_customer As Boolean
 Public customer_id_monitored As Integer
 
+'ratings variables
+Public rated_customer As New Customers
+
 'returnQty variables
 Public returnQty As Double
 Public AmountToDeductPerItem As Double

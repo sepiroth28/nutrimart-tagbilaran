@@ -14,6 +14,35 @@ Sub loadAllCustomersToListview(lsv As ListView)
         Next
 End Sub
 
+Sub loadAllCustomersToListviewWithRatings(lsv As ListView)
+    Dim list As ListItem
+    Dim rs As New ADODB.Recordset
+    Dim customer As New Customers
+    lsv.ListItems.Clear
+    Set Collection = getAllCustomersCollectionwithRatings
+        For Each customer In Collection
+            If customer.ratings = 0 Then
+            
+            Set list = lsv.ListItems.Add(, , , , 1)
+            ElseIf customer.ratings = 1 Then
+            Set list = lsv.ListItems.Add(, , , , 2)
+            ElseIf customer.ratings = 2 Then
+            Set list = lsv.ListItems.Add(, , , , 3)
+            ElseIf customer.ratings = 3 Then
+            Set list = lsv.ListItems.Add(, , , , 4)
+            ElseIf customer.ratings = 4 Then
+            Set list = lsv.ListItems.Add(, , , , 5)
+            Else
+            Set list = lsv.ListItems.Add(, , , , 6)
+            End If
+            list.SubItems(1) = customer.customers_id
+            list.SubItems(2) = customer.customers_name
+            list.SubItems(3) = customer.customers_add
+            list.SubItems(4) = customer.customers_number
+            list.SubItems(5) = customer.dealers_type
+        Next
+End Sub
+
 Sub loadAllCustomersToListviewHidden(lsv As ListView)
     Dim list As ListItem
     Dim rs As New ADODB.Recordset
@@ -93,6 +122,32 @@ Function getAllCustomersCollection() As CustomersCollection
    
     Set getAllCustomersCollection = customers_col
 End Function
+Function getAllCustomersCollectionwithRatings() As CustomersCollection
+    Dim sql As String
+    Dim data As ADODB.Recordset
+    Dim customers_col As New CustomersCollection
+    Dim temp_customers As New Customers
+    
+    sql = "SELECT * FROM customers c inner join ratings r on c.customers_id=r.customer_id WHERE visible = 1 ORDER BY customers_name ASC"
+    Set data = db.execute(sql)
+    On Error Resume Next
+    Do Until data.EOF
+        With temp_customers
+            .customers_id = data.Fields("customers_id").value
+            .customers_name = data.Fields("customers_name").value
+            .customers_add = data.Fields("customers_add").value
+            .customers_number = data.Fields("customers_number").value
+            .dealers_type = data.Fields("dealers_type").value
+            .ratings = data.Fields("rating").value
+        End With
+         customers_col.Add temp_customers, data.Fields("customers_id").value
+         data.MoveNext
+    Loop
+   
+    Set getAllCustomersCollectionwithRatings = customers_col
+End Function
+
+
 
 Sub deleteCustomer(customer_id As Integer)
     

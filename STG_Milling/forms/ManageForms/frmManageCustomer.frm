@@ -156,6 +156,12 @@ Begin VB.Form frmManageCustomer
          Enabled         =   0   'False
          Visible         =   0   'False
       End
+      Begin VB.Menu mnuSept2 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuratecustomer 
+         Caption         =   "Rate Customer"
+      End
    End
 End
 Attribute VB_Name = "frmManageCustomer"
@@ -228,6 +234,13 @@ If lsvCustomer.ListItems.Count > 0 Then
     customer_id_for_list_of_account_receivable = Val(lsvCustomer.SelectedItem.Text)
     frmCustomerAccountReceivable.Show 1
 End If
+End Sub
+
+Private Sub mnuratecustomer_Click()
+    If lsvCustomer.ListItems.Count > 0 Then
+        rated_customer.load_customers (lsvCustomer.SelectedItem.Text)
+        frmRatings.Show 1
+    End If
 End Sub
 
 Private Sub txtSearchCustomer_Change()

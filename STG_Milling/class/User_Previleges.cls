@@ -41,6 +41,23 @@ Private mvarcan_issue_rebate As Boolean 'local copy
 'local variable(s) to hold property value(s)
 Private mvarcan_create_price_rule As Boolean 'local copy
 Private mvarcan_verify_customer As Boolean
+Private mvarcan_rate_customer As Boolean
+
+
+Public Property Let can_rate_customer(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.can_create_price_rule = 5
+    mvarcan_rate_customer = vData
+End Property
+
+
+Public Property Get can_rate_customer() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.can_create_price_rule
+    can_rate_customer = mvarcan_rate_customer
+End Property
+
+
 Public Property Let can_create_price_rule(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.can_create_price_rule = 5

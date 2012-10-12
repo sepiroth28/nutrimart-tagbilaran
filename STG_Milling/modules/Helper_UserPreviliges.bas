@@ -63,6 +63,8 @@ Sub setPrevileges(previleges, action As Boolean)
             activeUser.previliges.can_create_price_rule = action
         Case "can_verify_customer"
             activeUser.previliges.can_verify_customer = action
+        Case "can_rate_customer"
+            activeUser.previliges.can_rate_customer = action
     End Select
 End Sub
 
@@ -88,6 +90,7 @@ Sub renderButtonBasedOnUserPreviliges()
        mdi_Inventory.mnu_admin_customer_visible.Enabled = .canManageCustomerVisibility
        mdi_Inventory.mnuprice_rule = .can_create_price_rule
        mdi_Inventory.mnuverifiedcustomers = .can_verify_customer
+       mdi_Inventory.mnurating = .can_rate_customer
     
        frmMenu.cmdViewSales.Visible = .canViewSales
        

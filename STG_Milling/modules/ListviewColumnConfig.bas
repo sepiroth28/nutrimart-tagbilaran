@@ -156,6 +156,7 @@ Sub setCustomersColumns(lsv As ListView)
     Dim customer_column As New Collection
     
     With customer_column
+        .Add "Ratings"
         .Add "CustomerID"
         .Add "Customer name"
         .Add "Address"
@@ -184,15 +185,15 @@ End Sub
 'this function assign all the values in the collection to column header of the listview
 Public Function setListviewColumn(ByVal lsv As ListView, column As Collection, Optional width As Integer = 1500)
     
-    For Each col In column
-        lsv.ColumnHeaders.Add , , col, width
+    For Each Col In column
+        lsv.ColumnHeaders.Add , , Col, width
     Next
 
 End Function
 
 Public Function setListviewColumnWidth(ByVal lsv As ListView, columnWidth As Collection, Optional width As Integer = 1500)
     lsv.ColumnHeaders.Clear
-    For Each col In columnWidth
+    For Each Col In columnWidth
         Dim x As Integer
         x = 0
         lsv.ColumnHeaders(x).width = width

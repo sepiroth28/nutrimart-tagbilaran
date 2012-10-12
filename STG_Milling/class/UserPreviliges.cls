@@ -38,6 +38,21 @@ Private mvarcanManageCustomerVisibility As Boolean 'local copy
 'local variable(s) to hold property value(s)
 Private mvarcanCreatePriceRule As Boolean 'local copy
 Private mvarcanVerifyCustomer As Boolean
+Private mvarcanRateCustomer As Boolean
+
+
+Public Property Let canRateCustomer(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canCreatePriceRule = 5
+    mvarcanRateCustomer = vData
+End Property
+
+
+Public Property Get canRateCustomer() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canCreatePriceRule
+    canRateCustomer = mvarcanRateCustomer
+End Property
 
 Public Property Let canCreatePriceRule(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
