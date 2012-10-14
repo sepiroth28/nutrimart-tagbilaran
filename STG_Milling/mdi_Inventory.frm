@@ -101,6 +101,9 @@ Begin VB.MDIForm mdi_Inventory
       Begin VB.Menu mnuprice_rule 
          Caption         =   "Price rule"
       End
+      Begin VB.Menu mnuCustomerpricerule 
+         Caption         =   "Customer Price rule list"
+      End
       Begin VB.Menu mnuConvertToRetail 
          Caption         =   "Convert to Retail"
       End
@@ -310,6 +313,10 @@ End Sub
 
 Private Sub mnuCreditLimit_Click()
 frmCreditLimit.Show
+End Sub
+
+Private Sub mnuCustomerpricerule_Click()
+    frmCustomer_price_rule.Show 1
 End Sub
 
 Private Sub mnuManage_item_tracking_Click()
