@@ -134,3 +134,4 @@ cutomer_reference = 0, 0, 926, 303, C
 frmStockout_monitoring = 175, 175, 986, 600, C, 75, 75, 886, 500, C
 frmVerifiedCustomers = 75, 75, 886, 500, C, 50, 50, 861, 475, C
 frmRatings = 0, 0, 773, 464, C, 168, 168, 941, 632, C
+frmCustomer_price_rule = 200, 200, 1008, 717, C, 125, 125, 933, 642, C
