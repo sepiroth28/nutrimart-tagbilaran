@@ -208,7 +208,7 @@ Sub loadToCustomers()
             lsv_ViewList.ColumnHeaders.Clear
             lsv_ViewList.ListItems.Clear
             
-            Call setCustomersColumns(lsv_ViewList)
+            Call setCustomersColumnsforratings(lsv_ViewList)
             Call loadAllCustomersToListviewWithRatings(lsv_ViewList)
             
             lsv_ViewList.ColumnHeaders(1).width = 2000
@@ -233,7 +233,7 @@ Private Sub lsv_ViewList_MouseDown(Button As Integer, Shift As Integer, x As Sin
 End Sub
 
 Private Sub mnuMonitorVolume_Click()
-    customer_id_monitored = lsv_ViewList.SelectedItem.Text
+    customer_id_monitored = lsv_ViewList.SelectedItem.SubItems(1)
     With frmStockout_monitoring
                 .txtCustomername = lsv_ViewList.SelectedItem.SubItems(1)
                 .Show 1

@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmCustomer_price_rule 
+   BackColor       =   &H80000018&
    Caption         =   "Form1"
    ClientHeight    =   7740
    ClientLeft      =   120

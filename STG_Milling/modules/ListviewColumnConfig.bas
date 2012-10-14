@@ -156,7 +156,22 @@ Sub setCustomersColumns(lsv As ListView)
     Dim customer_column As New Collection
     
     With customer_column
-        .Add "Ratings"
+        .Add "CustomerID"
+        .Add "Customer name"
+        .Add "Address"
+        .Add "Conctact Number"
+        .Add "Dealers type"
+    End With
+    setListviewColumn lsv, customer_column
+    
+   Set setCustomersColumn = Nothing
+End Sub
+
+Sub setCustomersColumnsforratings(lsv As ListView)
+    Dim customer_column As New Collection
+    
+    With customer_column
+        .Add "Rating"
         .Add "CustomerID"
         .Add "Customer name"
         .Add "Address"
